@@ -19,6 +19,8 @@ export async function POST(request) {
         japanese: (r.japanese || '').toString().trim(),
         english: (r.english || '').toString().trim(),
         phonetic: (r.phonetic || '').toString().trim() || null,
+        example_en: (r.example_en || '').toString().trim() || null,
+        example_ja: (r.example_ja || '').toString().trim() || null,
       }))
       .filter((r) => r.japanese && r.english);
 

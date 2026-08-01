@@ -222,6 +222,24 @@ export default function Home() {
                       >
                         🔊 {speaking ? '再生中…' : '発音を聞く'}
                       </button>
+                      {(current.example_en || current.example_ja) && (
+                        <div className="example-box" onClick={(e) => e.stopPropagation()}>
+                          {current.example_en && (
+                            <p className="example-en">
+                              {current.example_en}{' '}
+                              <button
+                                className="example-speak-btn"
+                                disabled={speaking}
+                                aria-label="例文の発音を聞く"
+                                onClick={() => speak(current.example_en)}
+                              >
+                                🔊
+                              </button>
+                            </p>
+                          )}
+                          {current.example_ja && <p className="example-ja">{current.example_ja}</p>}
+                        </div>
+                      )}
                     </div>
                   </>
                 )}

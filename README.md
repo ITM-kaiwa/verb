@@ -96,13 +96,17 @@ git push origin main
 ## CSVフォーマット
 
 ```csv
-category,japanese,english,phonetic
-動物,ねこ,cat,[kæt]
-食べ物,りんご,apple,[ˈæpəl]
+category,japanese,english,phonetic,example_en,example_ja
+動物,ねこ,cat,[kæt],The cat is sleeping.,その猫は眠っています。
+食べ物,りんご,apple,[ˈæpəl],She ate a red apple.,彼女は赤いりんごを食べました。
 ```
 
-- `category` と `phonetic` は空欄でも登録できます。
+- `category` / `phonetic` / `example_en` / `example_ja` は空欄でも登録できます。
 - ヘッダー行は必須です。
+
+## 例文列を後から追加する場合
+
+すでにSupabaseで `words` テーブルを作成済みの場合は、SQL Editorで `supabase/migration_add_examples.sql` の内容を実行してください（既存データは保持されたまま `example_en` / `example_ja` 列が追加されます）。新規セットアップの場合は `supabase/schema.sql` に最初から含まれています。
 
 ---
 

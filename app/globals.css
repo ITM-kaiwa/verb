@@ -206,6 +206,41 @@ input:focus-visible {
   cursor: progress;
 }
 
+.example-box {
+  margin-top: 4px;
+  background: #fff3e2;
+  border: 1px solid #f0d3a3;
+  border-radius: 14px;
+  padding: 12px 16px;
+  max-width: 480px;
+  text-align: left;
+}
+
+.example-en {
+  margin: 0 0 4px;
+  font-size: 0.95rem;
+  color: var(--ink);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.example-speak-btn {
+  border: none;
+  background: none;
+  color: var(--accent);
+  cursor: pointer;
+  font-size: 0.9rem;
+  padding: 0 2px;
+}
+
+.example-ja {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
 .card-footer {
   display: flex;
   justify-content: space-between;

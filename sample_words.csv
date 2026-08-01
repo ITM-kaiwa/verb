@@ -1,9 +1,9 @@
-category,japanese,english,phonetic
-動物,とり,bird,[bɜːrd]
-動物,さかな,fish,[fɪʃ]
-食べ物,みず,water,[ˈwɔːtər]
-食べ物,たまご,egg,[eg]
-人・職業,いしゃ,doctor,[ˈdɒktər]
-人・職業,がくせい,student,[ˈstuːdənt]
-自然,そら,sky,[skaɪ]
-自然,うみ,sea,[siː]
+category,japanese,english,phonetic,example_en,example_ja
+動物,とり,bird,[bɜːrd],A small bird landed on the fence.,小さな鳥が柵にとまりました。
+動物,さかな,fish,[fɪʃ],We saw many fish in the river.,川でたくさんの魚を見ました。
+食べ物,みず,water,[ˈwɔːtər],Please drink more water every day.,毎日もっと水を飲んでください。
+食べ物,たまご,egg,[eg],I had a boiled egg for lunch.,昼食にゆで卵を食べました。
+人・職業,いしゃ,doctor,[ˈdɒktər],The doctor checked my temperature.,医者は私の体温を測りました。
+人・職業,がくせい,student,[ˈstuːdənt],The student is studying English hard.,その学生は英語を一生懸命勉強しています。
+自然,そら,sky,[skaɪ],The sky turned orange at sunset.,夕暮れに空がオレンジ色になりました。
+自然,うみ,sea,[siː],We swam in the sea last summer.,去年の夏、私たちは海で泳ぎました。

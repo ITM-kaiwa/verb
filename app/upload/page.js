@@ -59,9 +59,12 @@ export default function UploadPage() {
         </Link>
         <h1>CSVで単語を一括登録</h1>
         <p>
-          次の4列を持つCSVファイルを用意してください: <code>category,japanese,english,phonetic</code>
+          次の6列を持つCSVファイルを用意してください:{' '}
+          <code>category,japanese,english,phonetic,example_en,example_ja</code>
           <br />
-          例: <code>動物,ねこ,cat,[kæt]</code>（category と phonetic は空欄でも構いません）
+          例: <code>動物,ねこ,cat,[kæt],The cat is sleeping.,その猫は眠っています。</code>
+          <br />
+          （category / phonetic / example_en / example_ja は空欄でも構いません）
         </p>
 
         <div className="file-drop">
@@ -79,6 +82,8 @@ export default function UploadPage() {
                   <th>japanese</th>
                   <th>english</th>
                   <th>phonetic</th>
+                  <th>example_en</th>
+                  <th>example_ja</th>
                 </tr>
               </thead>
               <tbody>
@@ -88,6 +93,8 @@ export default function UploadPage() {
                     <td>{r.japanese}</td>
                     <td>{r.english}</td>
                     <td>{r.phonetic}</td>
+                    <td>{r.example_en}</td>
+                    <td>{r.example_ja}</td>
                   </tr>
                 ))}
               </tbody>
