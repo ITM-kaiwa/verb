@@ -33,19 +33,36 @@ export default function UploadPage() {
     if (rows.length === 0) return;
     setBusy(true);
     setStatus('');
+    const CHUNK_SIZE = 1000;
+    let successCount = 0;
     try {
-      const res = await fetch('/api/upload', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ rows }),
-      });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error || 'アップロードに失敗しました');
-      setStatus(`✅ ${data.inserted}件の単語を登録しました。トップページで確認できます。`);
+      for (let i = 0; i < rows.length; i += CHUNK_SIZE) {
+        const chunk = rows.slice(i, i + CHUNK_SIZE);
+        setStatus(`⏳ 登録中… (${i} / ${rows.length}件完了)`);
+        const res = await fetch('/api/upload', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ rows: chunk }),
+        });
+        if (!res.ok) {
+          let errorMsg = 'アップロードに失敗しました';
+          try {
+            const data = await res.json();
+            errorMsg = data.error || errorMsg;
+          } catch (e) {
+            const text = await res.text();
+            errorMsg = text || errorMsg;
+          }
+          throw new Error(errorMsg);
+        }
+        const data = await res.json();
+        successCount += data.inserted;
+      }
+      setStatus(`✅ ${successCount}件の単語を登録しました。トップページで確認できます。`);
       setRows([]);
       setFileName('');
     } catch (err) {
-      setStatus(`❌ ${err.message}`);
+      setStatus(`❌ ${err.message} (すでに ${successCount}件の登録が完了しています)`);
     } finally {
       setBusy(false);
     }
