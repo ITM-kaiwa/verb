@@ -10,9 +10,33 @@ export async function GET() {
       { status: 500 }
     );
   }
-  const { data, error } = await supabaseAdmin.from('words').select('*').order('id', { ascending: true });
-  if (error) return NextResponse.json({ error: error.message }, { status: 500 });
-  return NextResponse.json({ words: data });
+
+  let allWords = [];
+  let from = 0;
+  const step = 1000;
+  let hasMore = true;
+
+  while (hasMore) {
+    const { data, error } = await supabaseAdmin
+      .from('words')
+      .select('*')
+      .order('id', { ascending: true })
+      .range(from, from + step - 1);
+
+    if (error) {
+      return NextResponse.json({ error: error.message }, { status: 500 });
+    }
+
+    allWords = allWords.concat(data);
+
+    if (data.length < step) {
+      hasMore = false;
+    } else {
+      from += step;
+    }
+  }
+
+  return NextResponse.json({ words: allWords });
 }
 
 export async function PATCH(request) {
