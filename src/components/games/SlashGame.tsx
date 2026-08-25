@@ -66,14 +66,18 @@ function buildRound(dataSource: DataSourceSetting): RoundData {
     wrongTexts.push(ans);
   }
 
-  const items: Candidate[] = shuffle([
+  const shuffledItems = shuffle([
     { text: correctAnswer, correct: true },
     ...wrongTexts.map((text) => ({ text, correct: false })),
-  ]).map((c, i) => ({
+  ]);
+  // Fixed, evenly-spaced lanes (rather than random left%) so falling cards
+  // never overlap and hide one another behind an unclickable stack.
+  const laneWidth = 100 / shuffledItems.length;
+  const items: Candidate[] = shuffledItems.map((c, i) => ({
     id: `${i}-${c.text}`,
     text: c.text,
     correct: c.correct,
-    left: 8 + Math.random() * 80,
+    left: laneWidth * (i + 0.5),
     duration: BASE_DURATION_MS + Math.random() * 1400,
     delay: Math.random() * 900,
   }));

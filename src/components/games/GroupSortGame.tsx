@@ -1,10 +1,9 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { conjugate, kanjiForForm } from "@/lib/conjugate";
+import { conjugate } from "@/lib/conjugate";
 import { pickRandomVerbs, sourceFilter } from "@/lib/verbData";
 import HelpButton from "@/components/HelpButton";
-import Furigana from "@/components/Furigana";
 import type { DataSourceSetting, VerbEntry, VerbGroup } from "@/lib/types";
 
 const HELP_BODY = [
@@ -17,9 +16,9 @@ const TOTAL_ROUNDS = 8;
 const FALL_DURATION_MS = 5500;
 
 const LANES: { group: VerbGroup; label: string }[] = [
-  { group: 1, label: "Nhóm I\n（godan）" },
-  { group: 2, label: "Nhóm II\n（ichidan）" },
-  { group: 3, label: "Nhóm III\n（bất quy tắc）" },
+  { group: 1, label: "Nhóm I" },
+  { group: 2, label: "Nhóm II" },
+  { group: 3, label: "Nhóm III" },
 ];
 
 interface ResultInfo {
@@ -143,9 +142,6 @@ export default function GroupSortGame({ dataSource }: { dataSource: DataSourceSe
           style={{ top: `${fallTop}%`, transition: phase === "falling" ? "none" : "top 0.2s ease-out" }}
         >
           <span className="font-kyokasho text-2xl text-kanjibrown">{conjugate(verb).dictionary}</span>
-          <span className="text-[10px] text-sand-500">
-            <Furigana kanji={kanjiForForm(verb, conjugate(verb).dictionary)} reading={conjugate(verb).dictionary} />
-          </span>
         </div>
       </div>
 
