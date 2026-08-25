@@ -14,7 +14,7 @@ type Mode = "practice" | "game" | "memory";
 export default function Home() {
   const [mode, setMode] = useState<Mode>("practice");
   const [showVietnamese, setShowVietnamese] = useState(true);
-  const [dataSource, setDataSource] = useState<DataSourceSetting>("both");
+  const [dataSource, setDataSource] = useState<DataSourceSetting>("minna");
   const [settingsOpen, setSettingsOpen] = useState(false);
 
   return (
