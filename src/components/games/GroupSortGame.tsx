@@ -1,14 +1,15 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { conjugate, kanjiMasuForm } from "@/lib/conjugate";
+import { conjugate, kanjiForForm } from "@/lib/conjugate";
 import { pickRandomVerbs, sourceFilter } from "@/lib/verbData";
 import HelpButton from "@/components/HelpButton";
+import Furigana from "@/components/Furigana";
 import type { DataSourceSetting, VerbEntry, VerbGroup } from "@/lib/types";
 
 const HELP_BODY = [
   "Một động từ (thể từ điển) sẽ rơi xuống.",
-  "Hãy nhấn đúng nhóm của nó: Nhóm I（五段）, Nhóm II（一段）, hoặc Nhóm III（bất quy tắc）trước khi nó rơi tới đáy.",
+  "Hãy nhấn đúng nhóm của nó: Nhóm I (godan), Nhóm II (ichidan), hoặc Nhóm III (bất quy tắc) trước khi nó rơi tới đáy.",
   "Biết đúng nhóm động từ là bước đầu tiên để chia đúng mọi thể!",
 ];
 
@@ -16,9 +17,9 @@ const TOTAL_ROUNDS = 8;
 const FALL_DURATION_MS = 5500;
 
 const LANES: { group: VerbGroup; label: string }[] = [
-  { group: 1, label: "Nhóm I\n（五段 godan）" },
-  { group: 2, label: "Nhóm II\n（一段 ichidan）" },
-  { group: 3, label: "Nhóm III\n（不規則 bất quy tắc）" },
+  { group: 1, label: "Nhóm I\n（godan）" },
+  { group: 2, label: "Nhóm II\n（ichidan）" },
+  { group: 3, label: "Nhóm III\n（bất quy tắc）" },
 ];
 
 interface ResultInfo {
@@ -142,7 +143,9 @@ export default function GroupSortGame({ dataSource }: { dataSource: DataSourceSe
           style={{ top: `${fallTop}%`, transition: phase === "falling" ? "none" : "top 0.2s ease-out" }}
         >
           <span className="font-kyokasho text-2xl text-kanjibrown">{conjugate(verb).dictionary}</span>
-          <span className="text-[10px] text-sand-500">{kanjiMasuForm(verb)}</span>
+          <span className="text-[10px] text-sand-500">
+            <Furigana kanji={kanjiForForm(verb, conjugate(verb).dictionary)} reading={conjugate(verb).dictionary} />
+          </span>
         </div>
       </div>
 

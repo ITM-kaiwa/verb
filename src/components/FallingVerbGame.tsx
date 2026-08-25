@@ -5,6 +5,7 @@ import { CONJUGATION_FORMS } from "@/lib/forms";
 import { conjugate, kanjiMasuForm } from "@/lib/conjugate";
 import { pickRandomVerbs, sourceFilter } from "@/lib/verbData";
 import HelpButton from "@/components/HelpButton";
+import Furigana from "@/components/Furigana";
 import type { ConjugationFormId, DataSourceSetting } from "@/lib/types";
 
 const HELP_BODY = [
@@ -197,7 +198,9 @@ export default function FallingVerbGame({ dataSource }: { dataSource: DataSource
             }}
           >
             <span className="font-kyokasho text-2xl text-kanjibrown">{roundData.masuForm}</span>
-            <span className="text-[10px] text-sand-500">{roundData.kanji}</span>
+            <span className="text-[10px] text-sand-500">
+              <Furigana kanji={roundData.kanji} reading={roundData.masuForm} />
+            </span>
           </div>
           <div className="absolute bottom-6 left-2 right-2 border-t-2 border-dashed border-leaf-400/70" />
         </div>

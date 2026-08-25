@@ -118,18 +118,26 @@ const HIRAGANA_RE = /[぀-ゟ]/;
 
 /**
  * The source data's `kanji` field is the dictionary-form headword (e.g. 分別する
- * for ぶんべつします). The UI displays the ます形, so this reconstructs a kanji
- * version aligned to the ます形 instead of the dictionary form, by finding the
- * trailing hiragana (okurigana) common to both the kanji and hiragana headwords
- * and re-attaching the ます形's own tail after the same kanji stem.
+ * for ぶんべつします). The UI often displays other conjugated forms, so this
+ * reconstructs a kanji version aligned to any target hiragana form, by finding
+ * the trailing hiragana (okurigana) common to both the kanji and hiragana
+ * headwords and re-attaching the target form's own tail after the same kanji
+ * stem.
  */
-export function kanjiMasuForm(entry: VerbEntry): string {
+export function kanjiForForm(entry: VerbEntry, targetHiragana: string): string {
   const { kanji, hiragana, masuForm, group, naiForm } = entry;
 
-  // 来る/来ます etc: 来 changes reading (くる/きます/こない...), so the general
-  // okurigana-alignment approach below would wrongly keep it read as く.
+  // 来る/来て/来ない/来られる etc: 来 changes reading (くる/きて/こない/こられる…)
+  // but it's always exactly the target form's first post-prefix mora, with the
+  // rest of the okurigana unchanged — so swap in "来" at that one position
+  // rather than using the general trailing-okurigana alignment below (which
+  // would wrongly keep it read as く for every form).
   if (group === 3 && naiForm.endsWith("こない") && kanji.endsWith("来る")) {
-    return kanji.slice(0, -2) + "来ます";
+    const kanjiPrefix = kanji.slice(0, -2);
+    const prefixReadingLen = stripSuffix(masuForm, "きます").length;
+    if (prefixReadingLen < targetHiragana.length) {
+      return kanjiPrefix + "来" + targetHiragana.slice(prefixReadingLen + 1);
+    }
   }
 
   let okuriLen = 0;
@@ -139,8 +147,12 @@ export function kanjiMasuForm(entry: VerbEntry): string {
   }
   const stem = kanji.slice(0, kanji.length - okuriLen);
   const boundary = hiragana.length - okuriLen;
-  if (boundary < 0 || boundary > masuForm.length) return masuForm;
-  return stem + masuForm.slice(boundary);
+  if (boundary < 0 || boundary > targetHiragana.length) return targetHiragana;
+  return stem + targetHiragana.slice(boundary);
+}
+
+export function kanjiMasuForm(entry: VerbEntry): string {
+  return kanjiForForm(entry, entry.masuForm);
 }
 
 // The ichidan (一段) ending for each form — wrongly applying these to a godan

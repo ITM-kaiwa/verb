@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { CONJUGATION_FORMS } from "@/lib/forms";
 import { conjugate, kanjiMasuForm } from "@/lib/conjugate";
 import { alreadyLearnedFilter, combineFilters, pickRandomVerbs, sourceFilter } from "@/lib/verbData";
+import Furigana from "@/components/Furigana";
 import type { ConjugationFormId, DataSourceSetting, VerbEntry } from "@/lib/types";
 
 const ROWS = 5;
@@ -214,7 +215,9 @@ function VerbRow({
     <div className="flex items-center gap-3 rounded-2xl border border-sand-200 bg-sand-50 p-3 sm:gap-4">
       <div className="w-1/2 min-w-0 sm:w-2/5">
         <p className="truncate font-kyokasho text-xl text-kanjibrown sm:text-2xl">{verb.masuForm}</p>
-        <p className="truncate text-xs text-sand-500 sm:text-sm">{kanjiMasuForm(verb)}</p>
+        <p className="truncate text-xs text-sand-500 sm:text-sm">
+          <Furigana kanji={kanjiMasuForm(verb)} reading={verb.masuForm} />
+        </p>
         {showVietnamese && (
           <p className="truncate font-vietnamese text-xs italic text-sand-500 sm:text-sm">{verb.meaningVn}</p>
         )}

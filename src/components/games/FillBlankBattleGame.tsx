@@ -6,6 +6,7 @@ import { CONJUGATION_FORMS } from "@/lib/forms";
 import { conjugate } from "@/lib/conjugate";
 import { findVerb } from "@/lib/verbData";
 import HelpButton from "@/components/HelpButton";
+import Furigana from "@/components/Furigana";
 import type { ConjugationFormId } from "@/lib/types";
 
 const HELP_BODY = [
@@ -166,7 +167,9 @@ export default function FillBlankBattleGame() {
             </span>
             {roundData.sentence.after}
           </p>
-          <p className="mt-2 text-xs text-sand-500">（{roundData.sentence.dictHint}）</p>
+          <p className="mt-2 text-xs text-sand-500">
+            （<Furigana kanji={roundData.sentence.dictHint} reading={roundData.sentence.hiragana} />）
+          </p>
           <p className="mt-1 font-vietnamese text-xs italic text-sand-500">{roundData.sentence.translationVn}</p>
         </div>
 

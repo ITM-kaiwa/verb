@@ -187,8 +187,8 @@ export default function ComboRelayGame({ dataSource }: { dataSource: DataSourceS
       <div className="rounded-3xl border border-lemon-300/70 bg-lemon-100 p-5 shadow-card">
         <div className="mb-3 h-2 overflow-hidden rounded-full bg-sand-200">
           <div
-            className={`h-full transition-[width] ${timeLeftPct < 30 ? "bg-wrong" : "bg-leaf-400"}`}
-            style={{ width: `${timeLeftPct}%`, transitionDuration: "80ms" }}
+            className={`h-full ${timeLeftPct < 30 ? "bg-wrong" : "bg-leaf-400"}`}
+            style={{ width: `${timeLeftPct}%` }}
           />
         </div>
 

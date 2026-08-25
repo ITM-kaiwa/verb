@@ -5,6 +5,7 @@ import { CONJUGATION_FORMS } from "@/lib/forms";
 import { conjugate, kanjiMasuForm } from "@/lib/conjugate";
 import { pickRandomVerbs, sourceFilter } from "@/lib/verbData";
 import HelpButton from "@/components/HelpButton";
+import Furigana from "@/components/Furigana";
 import type { ConjugationFormId, DataSourceSetting, VerbEntry } from "@/lib/types";
 
 const HELP_BODY = [
@@ -279,7 +280,7 @@ export default function MemoryMatchGame({
               <>
                 <p className="font-kyokasho text-2xl text-kanjibrown">{target.verb.masuForm}</p>
                 <p className="text-xs text-sand-500">
-                  {kanjiMasuForm(target.verb)}
+                  <Furigana kanji={kanjiMasuForm(target.verb)} reading={target.verb.masuForm} />
                   {showVietnamese && ` ／ ${target.verb.meaningVn}`}
                 </p>
               </>
