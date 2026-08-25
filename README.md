@@ -1,124 +1,59 @@
-# 英単語フラッシュカード (日本語 ⇄ 英語)
+# 動詞活用練習アプリ
 
-添付いただいた日本語⇄ベトナム語カードと同じ操作感の、日本語⇄英語フラッシュカードアプリです。
+「みんなの日本語 初級1」と「いろどり」の一般動詞データを使った、動詞活用練習アプリです。
+Next.js 14 + TailwindCSS で実装（外部DBなし、データはアプリに同梱）。
 
-- 表面: 日本語　/　裏面: 英語 + 発音記号 + 発音ボタン
-- 左右ボタン（または ← → キー）で前後のカードに移動
-- 「覚えた / まだ覚えていない」で習熟度を記録（Supabaseに保存）
-- カテゴリー・習熟度でフィルター
-- CSVアップロードで単語を一括登録
-- 発音はブラウザ標準の音声合成 (Web Speech API / `speechSynthesis`) を使用。追加のAPIキーや課金は不要です
+- ローカル作業フォルダ: `C:\Users\Admin\.gemini\antigravity\VERB`
+- GitHub: `https://github.com/ITM-kaiwa/verb`
+- Vercel: `https://verb-ashen-tau.vercel.app/`
 
-## 技術構成
+## 機能
 
-- Next.js 14 (App Router) + React
-- Supabase (Postgres) … 単語データの保存先
-- Web Speech API (ブラウザ標準) … テキスト読み上げ
-- デプロイ先: Vercel
+### 1. 活用練習（メイン画面）
+- 画面左上のドロップダウンで活用形を選択：
+  て形（第14課）／ない形（第17課）／辞書形（第18課）／た形（第19課）／
+  可能形（第27課）／意向形（第31課）／命令形（第33課）／禁止形（第33課）／条件形（ば形）
+- 中央に動詞が5つ表示され、左側に「ます形」（ひらがな）、その下に漢字表記とベトナム語訳。
+- 右側の入力欄に選んだ活用形をひらがなで入力し、Enterまたはフォーカスを外すと自動採点。
+  正解は緑の「レ」、不正解は赤の「×」を表示。
+- 左右の「≪／≫」ボタンで前の5問に戻る／次の5問に進む。
 
----
+### 2. ミニゲーム（活用形当てゲーム）
+- 「ます形」の動詞がゆっくり落ちてくる。
+- 右側に、様々な動詞を指定の活用形（画面上部にベトナム語で表示）に活用したものが10個表示される。
+- 落ちてくる動詞と一致する活用形を、落下し終わる前にクリックする（全5問）。
 
-## 1. ローカルでセットアップ
+### 3. 神経衰弱（動詞版・対コンピュータ）
+- 1プレイにつき動詞5個を選出。その9つの活用形（て・ない・辞書・た・可能・意向・命令・禁止・条件）
+  カード計45枚を場に裏向きに並べる。
+- 上部の山札から「ます形」カードを1枚引き、それが今回のお題になる。
+- お題の動詞と一致する活用形カードを場から1枚ずつめくって探す（神経衰弱と同じ、正解が続く限り
+  同じプレイヤーの番が継続、外れると相手の番に交代）。対戦相手はコンピュータ（一定の記憶力あり）。
+  お題の9枚すべてが取られたら次のお題（山札の次のカード）に進む。山札を使い切ったら終了、
+  獲得枚数の多い方が勝ち。
 
-作業フォルダ例: `C:\Users\Admin\.Claude`
+## データ
+
+- `data/minna_shokyu1.json` … みんなの日本語 初級1（156語、ベトナム語訳あり）
+- `data/irodori.json` … いろどり（614語、原本は英語の意味のみ）
+- `data/irodori_vn.json` … いろどり語彙のベトナム語訳（Claudeが英語の意味から翻訳・生成）
+- `scripts/gen-verb-data.mjs` … 上記3ファイルをマージし、重複除去した上で
+  `src/lib/verbData.generated.json`（アプリが実際に読み込むデータ、482語）を生成するスクリプト。
+  データを更新した場合は `node scripts/gen-verb-data.mjs` を再実行してください。
+
+「て形・ない形・た形」は原本データの値をそのまま使用し、「辞書形・可能形・意向形・命令形・
+禁止形・条件形」は原本にないため `src/lib/conjugate.ts`内の活用ロジック（五段・一段・
+サ変／カ変を判別し語幹＋活用語尾を組み立てる）で自動生成しています。
+
+## ローカルで動かす
 
 ```bash
-cd C:\Users\Admin\.Claude
-git clone https://github.com/ITM-kaiwa/ENG.git
-cd ENG
-# このプロジェクトの中身(package.json など)をこのフォルダにコピーしてください
 npm install
-```
-
-`.env.local.example` を `.env.local` にコピーし、下記の手順で取得した値を入力します。
-
-```bash
-copy .env.local.example .env.local
-```
-
----
-
-## 2. Supabaseのセットアップ
-
-1. https://supabase.com にログインし、新規プロジェクトを作成します。
-2. 左メニュー「SQL Editor」を開き、`supabase/schema.sql` の中身を貼り付けて実行します。
-   - `words` テーブルが作成され、サンプル単語が5件登録されます。
-3. 左メニュー「Project Settings」→「API」を開き、以下を `.env.local` にコピーします。
-   - `Project URL` → `SUPABASE_URL`
-   - `service_role` キー（**secret**と書かれている方。anonキーではありません）→ `SUPABASE_SERVICE_ROLE_KEY`
-
-> service_role キーは強い権限を持つため、サーバー側のAPIルート (`app/api/*`) からのみ使用しています。ブラウザに公開される `NEXT_PUBLIC_*` の変数には入れていません。
-
----
-
-## 3. 発音について
-
-発音ボタンを押すと、ブラウザ標準の音声合成 (Web Speech API) で英単語を読み上げます。
-追加のAPIキーや設定は不要ですが、以下の点にご注意ください。
-
-- 対応状況・音質はブラウザやOS、インストールされている音声パックによって異なります（Chrome / Edge / Safari で利用可能。英語の音声が入っていない環境では読み上げない場合があります）。
-- スマートフォンではブラウザの言語設定によって発音が変わることがあります。
-
----
-
-## 4. ローカルで起動して確認
-
-```bash
 npm run dev
+# http://localhost:3000
 ```
 
-http://localhost:3000 を開いて動作を確認してください。
-単語がまだ無い場合は「+ CSVで単語を追加」から `sample_words.csv` をアップロードしてみてください。
+## デプロイ
 
----
-
-## 5. GitHubにpush
-
-```bash
-git add .
-git commit -m "英単語フラッシュカードアプリ 初期版"
-git push origin main
-```
-
----
-
-## 6. Vercelにデプロイ
-
-1. https://vercel.com にログインし、「Add New... → Project」からGitHubリポジトリ `ITM-kaiwa/ENG` をインポートします。
-2. Framework Preset は自動で `Next.js` が選択されます。
-3. 「Environment Variables」で以下を登録します（`.env.local` と同じ内容）。
-   - `SUPABASE_URL`
-   - `SUPABASE_SERVICE_ROLE_KEY`
-4. 「Deploy」をクリックすればデプロイ完了です。以後、`main` ブランチにpushするたびに自動で再デプロイされます。
-
----
-
-## CSVフォーマット
-
-```csv
-category,japanese,english,phonetic,example_en,example_ja
-動物,ねこ,cat,[kæt],The cat is sleeping.,その猫は眠っています。
-食べ物,りんご,apple,[ˈæpəl],She ate a red apple.,彼女は赤いりんごを食べました。
-```
-
-- `category` / `phonetic` / `example_en` / `example_ja` は空欄でも登録できます。
-- ヘッダー行は必須です。
-
-## 例文列を後から追加する場合
-
-すでにSupabaseで `words` テーブルを作成済みの場合は、SQL Editorで `supabase/migration_add_examples.sql` の内容を実行してください（既存データは保持されたまま `example_en` / `example_ja` 列が追加されます）。新規セットアップの場合は `supabase/schema.sql` に最初から含まれています。
-
----
-
-## フォルダ構成
-
-```
-app/
-  page.js            … カード表示のメイン画面
-  upload/page.js     … CSVアップロード画面
-  api/words/route.js … 単語一覧の取得・習熟度の更新
-  api/upload/route.js… CSV一括登録
-lib/supabaseAdmin.js … Supabaseサーバークライアント
-supabase/schema.sql  … テーブル作成SQL
-sample_words.csv      … アップロード確認用サンプル
-```
+GitHubの `main` ブランチにpushすると、Vercel連携により自動的に
+`https://verb-ashen-tau.vercel.app/` にデプロイされます（Supabase等の環境変数は不要）。

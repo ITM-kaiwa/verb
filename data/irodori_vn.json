@@ -1,0 +1,4300 @@
+[
+  {
+    "kanji": "間をあける",
+    "hiragana": "あいだをあける",
+    "lesson": 15,
+    "meaning_en": "to take at a time interval",
+    "meaning_vn": "giãn cách thời gian"
+  },
+  {
+    "kanji": "会う",
+    "hiragana": "あう",
+    "lesson": 18,
+    "meaning_en": "to meet",
+    "meaning_vn": "gặp"
+  },
+  {
+    "kanji": "会う",
+    "hiragana": "あう",
+    "lesson": 15,
+    "meaning_en": "to meet",
+    "meaning_vn": "gặp"
+  },
+  {
+    "kanji": "上がる",
+    "hiragana": "あがる",
+    "lesson": 17,
+    "meaning_en": "to come in",
+    "meaning_vn": "vào nhà"
+  },
+  {
+    "kanji": "あきらめる",
+    "hiragana": "あきらめる",
+    "lesson": 6,
+    "meaning_en": "to give up",
+    "meaning_vn": "từ bỏ"
+  },
+  {
+    "kanji": "開く",
+    "hiragana": "あく",
+    "lesson": 13,
+    "meaning_en": "to open",
+    "meaning_vn": "mở ra"
+  },
+  {
+    "kanji": "あける",
+    "hiragana": "あける",
+    "lesson": 12,
+    "meaning_en": "to empty into / onto",
+    "meaning_vn": "đổ vào"
+  },
+  {
+    "kanji": "開ける",
+    "hiragana": "あける",
+    "lesson": 13,
+    "meaning_en": "to open",
+    "meaning_vn": "mở"
+  },
+  {
+    "kanji": "あける",
+    "hiragana": "あける",
+    "lesson": 13,
+    "meaning_en": "to make room",
+    "meaning_vn": "nhường chỗ"
+  },
+  {
+    "kanji": "開ける",
+    "hiragana": "あける",
+    "lesson": 16,
+    "meaning_en": "to open",
+    "meaning_vn": "mở"
+  },
+  {
+    "kanji": "あげる",
+    "hiragana": "あげる",
+    "lesson": 18,
+    "meaning_en": "to give",
+    "meaning_vn": "cho, tặng"
+  },
+  {
+    "kanji": "揚げる",
+    "hiragana": "あげる",
+    "lesson": 4,
+    "meaning_en": "to deep-fry",
+    "meaning_vn": "chiên (ngập dầu)"
+  },
+  {
+    "kanji": "あげる",
+    "hiragana": "あげる",
+    "lesson": 6,
+    "meaning_en": "to give",
+    "meaning_vn": "cho, tặng"
+  },
+  {
+    "kanji": "味わう",
+    "hiragana": "あじわう",
+    "lesson": 10,
+    "meaning_en": "to taste / to savor",
+    "meaning_vn": "nếm, thưởng thức"
+  },
+  {
+    "kanji": "味わう",
+    "hiragana": "あじわう",
+    "lesson": 9,
+    "meaning_en": "to taste",
+    "meaning_vn": "nếm"
+  },
+  {
+    "kanji": "足をくずす",
+    "hiragana": "あしをくずす",
+    "lesson": 17,
+    "meaning_en": "to sit at ease",
+    "meaning_vn": "ngồi thoải mái"
+  },
+  {
+    "kanji": "預かる",
+    "hiragana": "あずかる",
+    "lesson": 14,
+    "meaning_en": "to receive",
+    "meaning_vn": "nhận"
+  },
+  {
+    "kanji": "預ける",
+    "hiragana": "あずける",
+    "lesson": 13,
+    "meaning_en": "to leave",
+    "meaning_vn": "gửi lại"
+  },
+  {
+    "kanji": "遊びに来る",
+    "hiragana": "あそびにくる",
+    "lesson": 17,
+    "meaning_en": "to come see me",
+    "meaning_vn": "đến chơi"
+  },
+  {
+    "kanji": "遊ぶ",
+    "hiragana": "あそぶ",
+    "lesson": 3,
+    "meaning_en": "to play",
+    "meaning_vn": "chơi"
+  },
+  {
+    "kanji": "遊ぶ",
+    "hiragana": "あそぶ",
+    "lesson": 5,
+    "meaning_en": "to have fun",
+    "meaning_vn": "vui chơi"
+  },
+  {
+    "kanji": "温める",
+    "hiragana": "あたためる",
+    "lesson": 16,
+    "meaning_en": "to warm up",
+    "meaning_vn": "hâm nóng"
+  },
+  {
+    "kanji": "温める",
+    "hiragana": "あたためる",
+    "lesson": 16,
+    "meaning_en": "to warm up",
+    "meaning_vn": "hâm nóng"
+  },
+  {
+    "kanji": "集まる",
+    "hiragana": "あつまる",
+    "lesson": 9,
+    "meaning_en": "to get together",
+    "meaning_vn": "tụ họp"
+  },
+  {
+    "kanji": "集まる",
+    "hiragana": "あつまる",
+    "lesson": 16,
+    "meaning_en": "to get together",
+    "meaning_vn": "tụ họp"
+  },
+  {
+    "kanji": "油を差す",
+    "hiragana": "あぶらをさす",
+    "lesson": 14,
+    "meaning_en": "to oil",
+    "meaning_vn": "tra dầu"
+  },
+  {
+    "kanji": "洗う",
+    "hiragana": "あらう",
+    "lesson": 16,
+    "meaning_en": "to wash",
+    "meaning_vn": "rửa"
+  },
+  {
+    "kanji": "洗う",
+    "hiragana": "あらう",
+    "lesson": 14,
+    "meaning_en": "to wash",
+    "meaning_vn": "rửa"
+  },
+  {
+    "kanji": "ある",
+    "hiragana": "ある",
+    "lesson": 6,
+    "meaning_en": "to have",
+    "meaning_vn": "có (sở hữu)"
+  },
+  {
+    "kanji": "ある",
+    "hiragana": "ある",
+    "lesson": 6,
+    "meaning_en": "to be present in　(e.g. things that are present in town)",
+    "meaning_vn": "ở (tồn tại, dùng cho đồ vật)"
+  },
+  {
+    "kanji": "歩く",
+    "hiragana": "あるく",
+    "lesson": 16,
+    "meaning_en": "to walk",
+    "meaning_vn": "đi bộ"
+  },
+  {
+    "kanji": "歩く",
+    "hiragana": "あるく",
+    "lesson": 6,
+    "meaning_en": "to walk",
+    "meaning_vn": "đi bộ"
+  },
+  {
+    "kanji": "あわてる",
+    "hiragana": "あわてる",
+    "lesson": 16,
+    "meaning_en": "to panic",
+    "meaning_vn": "hoảng hốt"
+  },
+  {
+    "kanji": "案内する",
+    "hiragana": "あんないする",
+    "lesson": 7,
+    "meaning_en": "to show / to guide",
+    "meaning_vn": "hướng dẫn, dẫn đường"
+  },
+  {
+    "kanji": "言う",
+    "hiragana": "いう",
+    "lesson": 9,
+    "meaning_en": "to say / to tell",
+    "meaning_vn": "nói"
+  },
+  {
+    "kanji": "行く",
+    "hiragana": "いく",
+    "lesson": 9,
+    "meaning_en": "to go",
+    "meaning_vn": "đi"
+  },
+  {
+    "kanji": "行く",
+    "hiragana": "いく",
+    "lesson": 18,
+    "meaning_en": "to go",
+    "meaning_vn": "đi"
+  },
+  {
+    "kanji": "急ぐ",
+    "hiragana": "いそぐ",
+    "lesson": 7,
+    "meaning_en": "to hurry",
+    "meaning_vn": "vội, gấp"
+  },
+  {
+    "kanji": "いただく",
+    "hiragana": "いただく",
+    "lesson": 8,
+    "meaning_en": "to receive (polite expression for もらう)",
+    "meaning_vn": "nhận (khiêm nhường)"
+  },
+  {
+    "kanji": "いためる",
+    "hiragana": "いためる",
+    "lesson": 4,
+    "meaning_en": "to fry",
+    "meaning_vn": "xào"
+  },
+  {
+    "kanji": "行って来る",
+    "hiragana": "いってくる",
+    "lesson": 14,
+    "meaning_en": "to go (and come back after)",
+    "meaning_vn": "đi rồi quay lại"
+  },
+  {
+    "kanji": "行ってみる",
+    "hiragana": "いってみる",
+    "lesson": 5,
+    "meaning_en": "to try to go",
+    "meaning_vn": "thử đi xem"
+  },
+  {
+    "kanji": "移動する",
+    "hiragana": "いどうする",
+    "lesson": 11,
+    "meaning_en": "to move to",
+    "meaning_vn": "di chuyển"
+  },
+  {
+    "kanji": "いなくなる",
+    "hiragana": "いなくなる",
+    "lesson": 18,
+    "meaning_en": "to leave",
+    "meaning_vn": "biến mất, rời đi"
+  },
+  {
+    "kanji": "嫌になる",
+    "hiragana": "いやになる",
+    "lesson": 4,
+    "meaning_en": "to be annoying",
+    "meaning_vn": "trở nên chán ghét"
+  },
+  {
+    "kanji": "いる",
+    "hiragana": "いる",
+    "lesson": 8,
+    "meaning_en": "to be present",
+    "meaning_vn": "ở, có mặt"
+  },
+  {
+    "kanji": "いる",
+    "hiragana": "いる",
+    "lesson": 14,
+    "meaning_en": "to require",
+    "meaning_vn": "cần"
+  },
+  {
+    "kanji": "入れる",
+    "hiragana": "いれる",
+    "lesson": 7,
+    "meaning_en": "to turn on / ON",
+    "meaning_vn": "bật"
+  },
+  {
+    "kanji": "入れる",
+    "hiragana": "いれる",
+    "lesson": 12,
+    "meaning_en": "to put in",
+    "meaning_vn": "cho vào"
+  },
+  {
+    "kanji": "入れる",
+    "hiragana": "いれる",
+    "lesson": 13,
+    "meaning_en": "to input",
+    "meaning_vn": "nhập (dữ liệu)"
+  },
+  {
+    "kanji": "入れる",
+    "hiragana": "いれる",
+    "lesson": 4,
+    "meaning_en": "to put in / to add",
+    "meaning_vn": "cho vào, thêm vào"
+  },
+  {
+    "kanji": "祝う",
+    "hiragana": "いわう",
+    "lesson": 9,
+    "meaning_en": "to celebrate",
+    "meaning_vn": "chúc mừng, ăn mừng"
+  },
+  {
+    "kanji": "引退する",
+    "hiragana": "いんたいする",
+    "lesson": 2,
+    "meaning_en": "to retire",
+    "meaning_vn": "nghỉ hưu, giải nghệ"
+  },
+  {
+    "kanji": "ウォーキングする",
+    "hiragana": "ウォーキングする",
+    "lesson": 16,
+    "meaning_en": "to go for a walk",
+    "meaning_vn": "đi bộ (thể dục)"
+  },
+  {
+    "kanji": "受け取る",
+    "hiragana": "うけとる",
+    "lesson": 14,
+    "meaning_en": "to receive",
+    "meaning_vn": "nhận"
+  },
+  {
+    "kanji": "受ける",
+    "hiragana": "うける",
+    "lesson": 16,
+    "meaning_en": "to receive",
+    "meaning_vn": "nhận"
+  },
+  {
+    "kanji": "受ける",
+    "hiragana": "うける",
+    "lesson": 13,
+    "meaning_en": "to receive",
+    "meaning_vn": "nhận"
+  },
+  {
+    "kanji": "動かす",
+    "hiragana": "うごかす",
+    "lesson": 12,
+    "meaning_en": "to move around",
+    "meaning_vn": "di chuyển, vận động"
+  },
+  {
+    "kanji": "動く",
+    "hiragana": "うごく",
+    "lesson": 13,
+    "meaning_en": "to work / to move",
+    "meaning_vn": "hoạt động, chuyển động"
+  },
+  {
+    "kanji": "歌う",
+    "hiragana": "うたう",
+    "lesson": 18,
+    "meaning_en": "to sing",
+    "meaning_vn": "hát"
+  },
+  {
+    "kanji": "歌う",
+    "hiragana": "うたう",
+    "lesson": 9,
+    "meaning_en": "to sing",
+    "meaning_vn": "hát"
+  },
+  {
+    "kanji": "打ち合わせをする",
+    "hiragana": "うちあわせをする",
+    "lesson": 8,
+    "meaning_en": "to do meeting",
+    "meaning_vn": "họp bàn"
+  },
+  {
+    "kanji": "うつす",
+    "hiragana": "うつす",
+    "lesson": 16,
+    "meaning_en": "to pass on",
+    "meaning_vn": "lây, truyền"
+  },
+  {
+    "kanji": "うまくいく",
+    "hiragana": "うまくいく",
+    "lesson": 18,
+    "meaning_en": "to go well",
+    "meaning_vn": "suôn sẻ, thuận lợi"
+  },
+  {
+    "kanji": "生まれる",
+    "hiragana": "うまれる",
+    "lesson": 18,
+    "meaning_en": "to be born",
+    "meaning_vn": "sinh ra, chào đời"
+  },
+  {
+    "kanji": "売る",
+    "hiragana": "うる",
+    "lesson": 11,
+    "meaning_en": "to sell",
+    "meaning_vn": "bán"
+  },
+  {
+    "kanji": "売れる",
+    "hiragana": "うれる",
+    "lesson": 12,
+    "meaning_en": "to be able to sell",
+    "meaning_vn": "bán được"
+  },
+  {
+    "kanji": "運転する",
+    "hiragana": "うんてんする",
+    "lesson": 15,
+    "meaning_en": "to drive",
+    "meaning_vn": "lái xe"
+  },
+  {
+    "kanji": "運動する",
+    "hiragana": "うんどうする",
+    "lesson": 17,
+    "meaning_en": "to exercise",
+    "meaning_vn": "tập thể dục"
+  },
+  {
+    "kanji": "営業する",
+    "hiragana": "えいぎょうする",
+    "lesson": 11,
+    "meaning_en": "to open / to do business",
+    "meaning_vn": "mở cửa kinh doanh"
+  },
+  {
+    "kanji": "選ぶ",
+    "hiragana": "えらぶ",
+    "lesson": 18,
+    "meaning_en": "to choose",
+    "meaning_vn": "chọn"
+  },
+  {
+    "kanji": "延期する",
+    "hiragana": "えんきする",
+    "lesson": 7,
+    "meaning_en": "to postpone",
+    "meaning_vn": "hoãn lại"
+  },
+  {
+    "kanji": "延長する",
+    "hiragana": "えんちょうする",
+    "lesson": 11,
+    "meaning_en": "to extend",
+    "meaning_vn": "kéo dài, gia hạn"
+  },
+  {
+    "kanji": "遠慮する",
+    "hiragana": "えんりょする",
+    "lesson": 8,
+    "meaning_en": "to be asked not to",
+    "meaning_vn": "kiêng, tránh"
+  },
+  {
+    "kanji": "お祝いする",
+    "hiragana": "おいわいする",
+    "lesson": 9,
+    "meaning_en": "to celebrate",
+    "meaning_vn": "chúc mừng, ăn mừng"
+  },
+  {
+    "kanji": "応募する",
+    "hiragana": "おうぼする",
+    "lesson": 18,
+    "meaning_en": "to apply for",
+    "meaning_vn": "ứng tuyển, đăng ký"
+  },
+  {
+    "kanji": "お金を取る",
+    "hiragana": "おかねをとる",
+    "lesson": 10,
+    "meaning_en": "to charge money",
+    "meaning_vn": "thu tiền, tính phí"
+  },
+  {
+    "kanji": "起きる",
+    "hiragana": "おきる",
+    "lesson": 9,
+    "meaning_en": "to wake up",
+    "meaning_vn": "thức dậy"
+  },
+  {
+    "kanji": "起きる",
+    "hiragana": "おきる",
+    "lesson": 16,
+    "meaning_en": "to wake up",
+    "meaning_vn": "thức dậy"
+  },
+  {
+    "kanji": "置く",
+    "hiragana": "おく",
+    "lesson": 13,
+    "meaning_en": "to place",
+    "meaning_vn": "đặt"
+  },
+  {
+    "kanji": "送る",
+    "hiragana": "おくる",
+    "lesson": 6,
+    "meaning_en": "to take someone home",
+    "meaning_vn": "đưa về"
+  },
+  {
+    "kanji": "送る",
+    "hiragana": "おくる",
+    "lesson": 4,
+    "meaning_en": "to send",
+    "meaning_vn": "gửi"
+  },
+  {
+    "kanji": "遅れる",
+    "hiragana": "おくれる",
+    "lesson": 4,
+    "meaning_en": "to be late",
+    "meaning_vn": "trễ, muộn"
+  },
+  {
+    "kanji": "遅れる",
+    "hiragana": "おくれる",
+    "lesson": 7,
+    "meaning_en": "to be late",
+    "meaning_vn": "trễ, muộn"
+  },
+  {
+    "kanji": "起こす",
+    "hiragana": "おこす",
+    "lesson": 16,
+    "meaning_en": "to cause",
+    "meaning_vn": "gây ra"
+  },
+  {
+    "kanji": "行う",
+    "hiragana": "おこなう",
+    "lesson": 7,
+    "meaning_en": "to do",
+    "meaning_vn": "tiến hành, thực hiện"
+  },
+  {
+    "kanji": "怒る",
+    "hiragana": "おこる",
+    "lesson": 10,
+    "meaning_en": "to get angry",
+    "meaning_vn": "tức giận"
+  },
+  {
+    "kanji": "起こる",
+    "hiragana": "おこる",
+    "lesson": 16,
+    "meaning_en": "to occur　(e.g. an earthquake occurs)",
+    "meaning_vn": "xảy ra [động đất]"
+  },
+  {
+    "kanji": "抑える",
+    "hiragana": "おさえる",
+    "lesson": 15,
+    "meaning_en": "to suppress",
+    "meaning_vn": "kìm nén, kiềm chế"
+  },
+  {
+    "kanji": "おさまる",
+    "hiragana": "おさまる",
+    "lesson": 16,
+    "meaning_en": "to stop　(e.g. the shaking has stopped)",
+    "meaning_vn": "ngừng lại [rung lắc]"
+  },
+  {
+    "kanji": "教える",
+    "hiragana": "おしえる",
+    "lesson": 2,
+    "meaning_en": "to tell",
+    "meaning_vn": "nói cho biết, chỉ cho"
+  },
+  {
+    "kanji": "教える",
+    "hiragana": "おしえる",
+    "lesson": 9,
+    "meaning_en": "to teach",
+    "meaning_vn": "dạy"
+  },
+  {
+    "kanji": "おしゃべりする",
+    "hiragana": "おしゃべりする",
+    "lesson": 9,
+    "meaning_en": "to chat",
+    "meaning_vn": "trò chuyện, tán gẫu"
+  },
+  {
+    "kanji": "おじゃまする",
+    "hiragana": "おじゃまする",
+    "lesson": 17,
+    "meaning_en": "to visit",
+    "meaning_vn": "đến thăm, làm phiền"
+  },
+  {
+    "kanji": "おしゃれをする",
+    "hiragana": "おしゃれをする",
+    "lesson": 9,
+    "meaning_en": "to dress up",
+    "meaning_vn": "làm đẹp, ăn diện"
+  },
+  {
+    "kanji": "押す",
+    "hiragana": "おす",
+    "lesson": 15,
+    "meaning_en": "to push",
+    "meaning_vn": "đẩy"
+  },
+  {
+    "kanji": "押す",
+    "hiragana": "おす",
+    "lesson": 13,
+    "meaning_en": "to press",
+    "meaning_vn": "nhấn, bấm"
+  },
+  {
+    "kanji": "押す",
+    "hiragana": "おす",
+    "lesson": 11,
+    "meaning_en": "to put　(e.g. put a stamp)",
+    "meaning_vn": "đóng [dấu]"
+  },
+  {
+    "kanji": "おすすめする",
+    "hiragana": "おすすめする",
+    "lesson": 4,
+    "meaning_en": "to recommend",
+    "meaning_vn": "giới thiệu, gợi ý"
+  },
+  {
+    "kanji": "遅くなる",
+    "hiragana": "おそくなる",
+    "lesson": 14,
+    "meaning_en": "to be late",
+    "meaning_vn": "trễ, muộn"
+  },
+  {
+    "kanji": "落ち着く",
+    "hiragana": "おちつく",
+    "lesson": 16,
+    "meaning_en": "to be calm",
+    "meaning_vn": "bình tĩnh"
+  },
+  {
+    "kanji": "お茶をいれる",
+    "hiragana": "おちゃをいれる",
+    "lesson": 8,
+    "meaning_en": "to make tea",
+    "meaning_vn": "pha trà"
+  },
+  {
+    "kanji": "落ちる",
+    "hiragana": "おちる",
+    "lesson": 14,
+    "meaning_en": "to be removed　(e.g. dirt is removed)",
+    "meaning_vn": "trôi đi [vết bẩn]"
+  },
+  {
+    "kanji": "落ちる",
+    "hiragana": "おちる",
+    "lesson": 16,
+    "meaning_en": "to fall",
+    "meaning_vn": "rơi, rớt"
+  },
+  {
+    "kanji": "音がする",
+    "hiragana": "おとがする",
+    "lesson": 13,
+    "meaning_en": "to be making a noise",
+    "meaning_vn": "có tiếng động"
+  },
+  {
+    "kanji": "踊る",
+    "hiragana": "おどる",
+    "lesson": 18,
+    "meaning_en": "to dance",
+    "meaning_vn": "nhảy múa"
+  },
+  {
+    "kanji": "踊る",
+    "hiragana": "おどる",
+    "lesson": 9,
+    "meaning_en": "to dance",
+    "meaning_vn": "nhảy múa"
+  },
+  {
+    "kanji": "驚く",
+    "hiragana": "おどろく",
+    "lesson": 2,
+    "meaning_en": "to be surprised",
+    "meaning_vn": "ngạc nhiên"
+  },
+  {
+    "kanji": "驚く",
+    "hiragana": "おどろく",
+    "lesson": 6,
+    "meaning_en": "to be surprised",
+    "meaning_vn": "ngạc nhiên"
+  },
+  {
+    "kanji": "音を立てる",
+    "hiragana": "おとをたてる",
+    "lesson": 10,
+    "meaning_en": "to make noise",
+    "meaning_vn": "gây tiếng động"
+  },
+  {
+    "kanji": "お腹がすく",
+    "hiragana": "おなかがすく",
+    "lesson": 8,
+    "meaning_en": "to get hungry",
+    "meaning_vn": "đói bụng"
+  },
+  {
+    "kanji": "お風呂に入る",
+    "hiragana": "おふろにはいる",
+    "lesson": 16,
+    "meaning_en": "to take a bath",
+    "meaning_vn": "tắm (bồn)"
+  },
+  {
+    "kanji": "覚える",
+    "hiragana": "おぼえる",
+    "lesson": 9,
+    "meaning_en": "to memorize",
+    "meaning_vn": "ghi nhớ, học thuộc"
+  },
+  {
+    "kanji": "思う",
+    "hiragana": "おもう",
+    "lesson": 18,
+    "meaning_en": "to think",
+    "meaning_vn": "nghĩ"
+  },
+  {
+    "kanji": "泳ぐ",
+    "hiragana": "およぐ",
+    "lesson": 5,
+    "meaning_en": "to swim",
+    "meaning_vn": "bơi"
+  },
+  {
+    "kanji": "泳ぐ",
+    "hiragana": "およぐ",
+    "lesson": 16,
+    "meaning_en": "to swim",
+    "meaning_vn": "bơi"
+  },
+  {
+    "kanji": "降りる",
+    "hiragana": "おりる",
+    "lesson": 13,
+    "meaning_en": "to get off",
+    "meaning_vn": "xuống (xe)"
+  },
+  {
+    "kanji": "下りる",
+    "hiragana": "おりる",
+    "lesson": 13,
+    "meaning_en": "to go down",
+    "meaning_vn": "đi xuống"
+  },
+  {
+    "kanji": "折る",
+    "hiragana": "おる",
+    "lesson": 10,
+    "meaning_en": "to break　(e.g. break a bone)",
+    "meaning_vn": "gãy [xương]"
+  },
+  {
+    "kanji": "おろす",
+    "hiragana": "おろす",
+    "lesson": 8,
+    "meaning_en": "to withdraw",
+    "meaning_vn": "rút (tiền)"
+  },
+  {
+    "kanji": "終わる",
+    "hiragana": "おわる",
+    "lesson": 13,
+    "meaning_en": "to finish",
+    "meaning_vn": "kết thúc, xong"
+  },
+  {
+    "kanji": "～終わる",
+    "hiragana": "～おわる",
+    "lesson": 10,
+    "meaning_en": "to finish ～　(e.g. finish eating)",
+    "meaning_vn": "làm xong [ăn]"
+  },
+  {
+    "kanji": "開催する",
+    "hiragana": "かいさいする",
+    "lesson": 7,
+    "meaning_en": "to hold",
+    "meaning_vn": "tổ chức"
+  },
+  {
+    "kanji": "開始する",
+    "hiragana": "かいしする",
+    "lesson": 16,
+    "meaning_en": "to start",
+    "meaning_vn": "bắt đầu"
+  },
+  {
+    "kanji": "買い物する",
+    "hiragana": "かいものする",
+    "lesson": 11,
+    "meaning_en": "to shop",
+    "meaning_vn": "mua sắm, mua hàng"
+  },
+  {
+    "kanji": "買う",
+    "hiragana": "かう",
+    "lesson": 17,
+    "meaning_en": "to buy",
+    "meaning_vn": "mua"
+  },
+  {
+    "kanji": "買う",
+    "hiragana": "かう",
+    "lesson": 18,
+    "meaning_en": "to buy",
+    "meaning_vn": "mua"
+  },
+  {
+    "kanji": "返す",
+    "hiragana": "かえす",
+    "lesson": 13,
+    "meaning_en": "to return",
+    "meaning_vn": "trả lại"
+  },
+  {
+    "kanji": "帰る",
+    "hiragana": "かえる",
+    "lesson": 6,
+    "meaning_en": "to go home",
+    "meaning_vn": "về nhà"
+  },
+  {
+    "kanji": "帰る",
+    "hiragana": "かえる",
+    "lesson": 14,
+    "meaning_en": "to go home",
+    "meaning_vn": "về nhà"
+  },
+  {
+    "kanji": "かかる",
+    "hiragana": "かかる",
+    "lesson": 13,
+    "meaning_en": "to take",
+    "meaning_vn": "mất (thời gian)"
+  },
+  {
+    "kanji": "かかる",
+    "hiragana": "かかる",
+    "lesson": 10,
+    "meaning_en": "to cost (a fee)",
+    "meaning_vn": "tốn (phí)"
+  },
+  {
+    "kanji": "かかる",
+    "hiragana": "かかる",
+    "lesson": 13,
+    "meaning_en": "to cost (a fee)",
+    "meaning_vn": "tốn (phí)"
+  },
+  {
+    "kanji": "書く",
+    "hiragana": "かく",
+    "lesson": 9,
+    "meaning_en": "to write",
+    "meaning_vn": "viết"
+  },
+  {
+    "kanji": "描く",
+    "hiragana": "かく",
+    "lesson": 6,
+    "meaning_en": "to draw (a picture)",
+    "meaning_vn": "vẽ"
+  },
+  {
+    "kanji": "書く",
+    "hiragana": "かく",
+    "lesson": 9,
+    "meaning_en": "to write",
+    "meaning_vn": "viết"
+  },
+  {
+    "kanji": "確認する",
+    "hiragana": "かくにんする",
+    "lesson": 13,
+    "meaning_en": "to check",
+    "meaning_vn": "xác nhận, kiểm tra"
+  },
+  {
+    "kanji": "確認する",
+    "hiragana": "かくにんする",
+    "lesson": 16,
+    "meaning_en": "to check",
+    "meaning_vn": "xác nhận, kiểm tra"
+  },
+  {
+    "kanji": "隠れる",
+    "hiragana": "かくれる",
+    "lesson": 16,
+    "meaning_en": "to take cover",
+    "meaning_vn": "trốn, ẩn nấp"
+  },
+  {
+    "kanji": "かけ合う",
+    "hiragana": "かけあう",
+    "lesson": 9,
+    "meaning_en": "to throw / to splash on each other",
+    "meaning_vn": "té nước vào nhau"
+  },
+  {
+    "kanji": "かける",
+    "hiragana": "かける",
+    "lesson": 12,
+    "meaning_en": "to sprinkle",
+    "meaning_vn": "rắc, rưới"
+  },
+  {
+    "kanji": "かける",
+    "hiragana": "かける",
+    "lesson": 17,
+    "meaning_en": "to hang on　 (e.g. hang on a wall)",
+    "meaning_vn": "treo [lên tường]"
+  },
+  {
+    "kanji": "かける",
+    "hiragana": "かける",
+    "lesson": 17,
+    "meaning_en": "to sprinkle",
+    "meaning_vn": "rắc, rưới"
+  },
+  {
+    "kanji": "かける",
+    "hiragana": "かける",
+    "lesson": 2,
+    "meaning_en": "to wear　(e.g. wear glasses)",
+    "meaning_vn": "đeo [kính]"
+  },
+  {
+    "kanji": "かける",
+    "hiragana": "かける",
+    "lesson": 4,
+    "meaning_en": "to pour over / to sprinkle　(e.g. pour the sauce over)",
+    "meaning_vn": "rưới [nước sốt]"
+  },
+  {
+    "kanji": "飾る",
+    "hiragana": "かざる",
+    "lesson": 18,
+    "meaning_en": "to display",
+    "meaning_vn": "trang trí"
+  },
+  {
+    "kanji": "飾る",
+    "hiragana": "かざる",
+    "lesson": 9,
+    "meaning_en": "to display",
+    "meaning_vn": "trang trí"
+  },
+  {
+    "kanji": "火事になる",
+    "hiragana": "かじになる",
+    "lesson": 16,
+    "meaning_en": "to turn into a fire",
+    "meaning_vn": "xảy ra hỏa hoạn"
+  },
+  {
+    "kanji": "貸す",
+    "hiragana": "かす",
+    "lesson": 10,
+    "meaning_en": "to lend",
+    "meaning_vn": "cho mượn"
+  },
+  {
+    "kanji": "貸す",
+    "hiragana": "かす",
+    "lesson": 9,
+    "meaning_en": "to lend",
+    "meaning_vn": "cho mượn"
+  },
+  {
+    "kanji": "稼ぐ",
+    "hiragana": "かせぐ",
+    "lesson": 18,
+    "meaning_en": "to earn　(e.g. earn money)",
+    "meaning_vn": "kiếm [tiền]"
+  },
+  {
+    "kanji": "肩がこる",
+    "hiragana": "かたがこる",
+    "lesson": 16,
+    "meaning_en": "to have stiff shoulders",
+    "meaning_vn": "mỏi vai"
+  },
+  {
+    "kanji": "片付ける",
+    "hiragana": "かたづける",
+    "lesson": 10,
+    "meaning_en": "to clean up",
+    "meaning_vn": "dọn dẹp"
+  },
+  {
+    "kanji": "固める",
+    "hiragana": "かためる",
+    "lesson": 15,
+    "meaning_en": "to solidify",
+    "meaning_vn": "làm đông cứng"
+  },
+  {
+    "kanji": "語る",
+    "hiragana": "かたる",
+    "lesson": 9,
+    "meaning_en": "to talk",
+    "meaning_vn": "kể, nói chuyện"
+  },
+  {
+    "kanji": "かつぐ",
+    "hiragana": "かつぐ",
+    "lesson": 7,
+    "meaning_en": "to carry over the shoulder",
+    "meaning_vn": "vác (trên vai)"
+  },
+  {
+    "kanji": "加熱する",
+    "hiragana": "かねつする",
+    "lesson": 16,
+    "meaning_en": "(to) heat",
+    "meaning_vn": "làm nóng, gia nhiệt"
+  },
+  {
+    "kanji": "かぶせる",
+    "hiragana": "かぶせる",
+    "lesson": 14,
+    "meaning_en": "to cover",
+    "meaning_vn": "đậy, phủ lên"
+  },
+  {
+    "kanji": "かぶる",
+    "hiragana": "かぶる",
+    "lesson": 2,
+    "meaning_en": "to wear　(e.g. wear a hat)",
+    "meaning_vn": "đội [mũ]"
+  },
+  {
+    "kanji": "かぶる",
+    "hiragana": "かぶる",
+    "lesson": 16,
+    "meaning_en": "to wear　(e.g. wear a helmet)",
+    "meaning_vn": "đội [mũ bảo hiểm]"
+  },
+  {
+    "kanji": "がまんする",
+    "hiragana": "がまんする",
+    "lesson": 15,
+    "meaning_en": "to bear with / to tolerate",
+    "meaning_vn": "chịu đựng, nhẫn nhịn"
+  },
+  {
+    "kanji": "通う",
+    "hiragana": "かよう",
+    "lesson": 1,
+    "meaning_en": "to go to",
+    "meaning_vn": "đi lại (thường xuyên)"
+  },
+  {
+    "kanji": "借りる",
+    "hiragana": "かりる",
+    "lesson": 10,
+    "meaning_en": "to borrow",
+    "meaning_vn": "mượn"
+  },
+  {
+    "kanji": "変わる",
+    "hiragana": "かわる",
+    "lesson": 12,
+    "meaning_en": "to change",
+    "meaning_vn": "thay đổi"
+  },
+  {
+    "kanji": "考える",
+    "hiragana": "かんがえる",
+    "lesson": 18,
+    "meaning_en": "to think",
+    "meaning_vn": "suy nghĩ"
+  },
+  {
+    "kanji": "感謝する",
+    "hiragana": "かんしゃする",
+    "lesson": 17,
+    "meaning_en": "to appreciate",
+    "meaning_vn": "biết ơn, cảm ơn"
+  },
+  {
+    "kanji": "感じる",
+    "hiragana": "かんじる",
+    "lesson": 16,
+    "meaning_en": "to feel",
+    "meaning_vn": "cảm thấy"
+  },
+  {
+    "kanji": "感じる",
+    "hiragana": "かんじる",
+    "lesson": 16,
+    "meaning_en": "to feel",
+    "meaning_vn": "cảm thấy"
+  },
+  {
+    "kanji": "感染する",
+    "hiragana": "かんせんする",
+    "lesson": 16,
+    "meaning_en": "to get infected",
+    "meaning_vn": "bị lây nhiễm"
+  },
+  {
+    "kanji": "感動する",
+    "hiragana": "かんどうする",
+    "lesson": 8,
+    "meaning_en": "to be deeply moved",
+    "meaning_vn": "xúc động"
+  },
+  {
+    "kanji": "感動する",
+    "hiragana": "かんどうする",
+    "lesson": 6,
+    "meaning_en": "to be deeply moved",
+    "meaning_vn": "xúc động"
+  },
+  {
+    "kanji": "がんばる",
+    "hiragana": "がんばる",
+    "lesson": 1,
+    "meaning_en": "to work hard",
+    "meaning_vn": "cố gắng"
+  },
+  {
+    "kanji": "がんばる",
+    "hiragana": "がんばる",
+    "lesson": 18,
+    "meaning_en": "to work hard",
+    "meaning_vn": "cố gắng"
+  },
+  {
+    "kanji": "消える",
+    "hiragana": "きえる",
+    "lesson": 16,
+    "meaning_en": "to extinguish",
+    "meaning_vn": "tắt"
+  },
+  {
+    "kanji": "着替える",
+    "hiragana": "きがえる",
+    "lesson": 8,
+    "meaning_en": "to change (clothing)",
+    "meaning_vn": "thay quần áo"
+  },
+  {
+    "kanji": "聞く",
+    "hiragana": "きく",
+    "lesson": 9,
+    "meaning_en": "to listen",
+    "meaning_vn": "nghe"
+  },
+  {
+    "kanji": "聞く",
+    "hiragana": "きく",
+    "lesson": 11,
+    "meaning_en": "to listen",
+    "meaning_vn": "nghe"
+  },
+  {
+    "kanji": "聞く",
+    "hiragana": "きく",
+    "lesson": 2,
+    "meaning_en": "to listen",
+    "meaning_vn": "nghe"
+  },
+  {
+    "kanji": "聞く",
+    "hiragana": "きく",
+    "lesson": 10,
+    "meaning_en": "to ask",
+    "meaning_vn": "hỏi"
+  },
+  {
+    "kanji": "帰国する",
+    "hiragana": "きこくする",
+    "lesson": 18,
+    "meaning_en": "(to) return to one's country",
+    "meaning_vn": "về nước"
+  },
+  {
+    "kanji": "築く",
+    "hiragana": "きずく",
+    "lesson": 18,
+    "meaning_en": "to create / to build",
+    "meaning_vn": "xây dựng, tạo dựng"
+  },
+  {
+    "kanji": "期待する",
+    "hiragana": "きたいする",
+    "lesson": 18,
+    "meaning_en": "to expect / to hope for",
+    "meaning_vn": "kỳ vọng, mong đợi"
+  },
+  {
+    "kanji": "帰宅する",
+    "hiragana": "きたくする",
+    "lesson": 16,
+    "meaning_en": "to go home",
+    "meaning_vn": "về nhà"
+  },
+  {
+    "kanji": "気づく",
+    "hiragana": "きづく",
+    "lesson": 11,
+    "meaning_en": "to notice",
+    "meaning_vn": "nhận ra, để ý"
+  },
+  {
+    "kanji": "気に入る",
+    "hiragana": "きにいる",
+    "lesson": 10,
+    "meaning_en": "to come to like",
+    "meaning_vn": "vừa ý, ưng ý"
+  },
+  {
+    "kanji": "記入する",
+    "hiragana": "きにゅうする",
+    "lesson": 15,
+    "meaning_en": "to fill out",
+    "meaning_vn": "điền (vào)"
+  },
+  {
+    "kanji": "決まる",
+    "hiragana": "きまる",
+    "lesson": 3,
+    "meaning_en": "to make a decision",
+    "meaning_vn": "được quyết định"
+  },
+  {
+    "kanji": "決める",
+    "hiragana": "きめる",
+    "lesson": 18,
+    "meaning_en": "to decide",
+    "meaning_vn": "quyết định"
+  },
+  {
+    "kanji": "吸引する",
+    "hiragana": "きゅういんする",
+    "lesson": 12,
+    "meaning_en": "suction　(to suck up)",
+    "meaning_vn": "hút"
+  },
+  {
+    "kanji": "休憩する",
+    "hiragana": "きゅうけいする",
+    "lesson": 14,
+    "meaning_en": "(to take) a break",
+    "meaning_vn": "nghỉ giải lao"
+  },
+  {
+    "kanji": "興味がある",
+    "hiragana": "きょうみがある",
+    "lesson": 10,
+    "meaning_en": "to be interested in",
+    "meaning_vn": "quan tâm, hứng thú"
+  },
+  {
+    "kanji": "協力する",
+    "hiragana": "きょうりょくする",
+    "lesson": 8,
+    "meaning_en": "(to) cooperate",
+    "meaning_vn": "hợp tác"
+  },
+  {
+    "kanji": "切り開く",
+    "hiragana": "きりひらく",
+    "lesson": 15,
+    "meaning_en": "to cut open",
+    "meaning_vn": "rạch mở, khai phá"
+  },
+  {
+    "kanji": "切る",
+    "hiragana": "きる",
+    "lesson": 7,
+    "meaning_en": "to turn off / OFF",
+    "meaning_vn": "tắt"
+  },
+  {
+    "kanji": "着る",
+    "hiragana": "きる",
+    "lesson": 2,
+    "meaning_en": "to wear (a dress)",
+    "meaning_vn": "mặc"
+  },
+  {
+    "kanji": "切る",
+    "hiragana": "きる",
+    "lesson": 4,
+    "meaning_en": "to cut",
+    "meaning_vn": "cắt"
+  },
+  {
+    "kanji": "切れる",
+    "hiragana": "きれる",
+    "lesson": 16,
+    "meaning_en": "to expire / to pass　(e.g. the expiration date has passed)",
+    "meaning_vn": "hết hạn [sử dụng]"
+  },
+  {
+    "kanji": "切れる",
+    "hiragana": "きれる",
+    "lesson": 16,
+    "meaning_en": "to run out　(e.g. the battery has run out)",
+    "meaning_vn": "hết [pin]"
+  },
+  {
+    "kanji": "気をつける",
+    "hiragana": "きをつける",
+    "lesson": 16,
+    "meaning_en": "to be mindful",
+    "meaning_vn": "chú ý, cẩn thận"
+  },
+  {
+    "kanji": "くじく",
+    "hiragana": "くじく",
+    "lesson": 15,
+    "meaning_en": "to twist",
+    "meaning_vn": "trật, bong gân"
+  },
+  {
+    "kanji": "口に当てる",
+    "hiragana": "くちにあてる",
+    "lesson": 16,
+    "meaning_en": "to put over one's mouth",
+    "meaning_vn": "che miệng"
+  },
+  {
+    "kanji": "口を付ける",
+    "hiragana": "くちをつける",
+    "lesson": 10,
+    "meaning_en": "to put to one's mouth",
+    "meaning_vn": "kề miệng vào"
+  },
+  {
+    "kanji": "くもる",
+    "hiragana": "くもる",
+    "lesson": 4,
+    "meaning_en": "to become cloudy / to overcast",
+    "meaning_vn": "trời âm u"
+  },
+  {
+    "kanji": "暮らす",
+    "hiragana": "くらす",
+    "lesson": 14,
+    "meaning_en": "to live a life",
+    "meaning_vn": "sinh sống"
+  },
+  {
+    "kanji": "暮らす",
+    "hiragana": "くらす",
+    "lesson": 18,
+    "meaning_en": "to live a life",
+    "meaning_vn": "sinh sống"
+  },
+  {
+    "kanji": "比べる",
+    "hiragana": "くらべる",
+    "lesson": 12,
+    "meaning_en": "to compare",
+    "meaning_vn": "so sánh"
+  },
+  {
+    "kanji": "くり返す",
+    "hiragana": "くりかえす",
+    "lesson": 10,
+    "meaning_en": "to repeat",
+    "meaning_vn": "lặp lại"
+  },
+  {
+    "kanji": "来る",
+    "hiragana": "くる",
+    "lesson": 3,
+    "meaning_en": "to come",
+    "meaning_vn": "đến"
+  },
+  {
+    "kanji": "来る",
+    "hiragana": "くる",
+    "lesson": 3,
+    "meaning_en": "to come",
+    "meaning_vn": "đến"
+  },
+  {
+    "kanji": "車を出す",
+    "hiragana": "くるまをだす",
+    "lesson": 12,
+    "meaning_en": "to give a ride",
+    "meaning_vn": "chở đi (bằng xe)"
+  },
+  {
+    "kanji": "くれる",
+    "hiragana": "くれる",
+    "lesson": 17,
+    "meaning_en": "to be given",
+    "meaning_vn": "được cho, tặng"
+  },
+  {
+    "kanji": "苦労する",
+    "hiragana": "くろうする",
+    "lesson": 17,
+    "meaning_en": "to have hard time",
+    "meaning_vn": "vất vả, khổ sở"
+  },
+  {
+    "kanji": "警戒する",
+    "hiragana": "けいかいする",
+    "lesson": 16,
+    "meaning_en": "to exercise caution",
+    "meaning_vn": "đề phòng, cảnh giác"
+  },
+  {
+    "kanji": "消す",
+    "hiragana": "けす",
+    "lesson": 15,
+    "meaning_en": "to turn off　(e.g. turn off the light)",
+    "meaning_vn": "tắt [đèn]"
+  },
+  {
+    "kanji": "消す",
+    "hiragana": "けす",
+    "lesson": 16,
+    "meaning_en": "to extinguish　(e.g. extinguish a fire)",
+    "meaning_vn": "dập [lửa]"
+  },
+  {
+    "kanji": "結婚する",
+    "hiragana": "けっこんする",
+    "lesson": 18,
+    "meaning_en": "(to) marry",
+    "meaning_vn": "kết hôn"
+  },
+  {
+    "kanji": "結婚する",
+    "hiragana": "けっこんする",
+    "lesson": 18,
+    "meaning_en": "to marry / to get married",
+    "meaning_vn": "kết hôn"
+  },
+  {
+    "kanji": "見学",
+    "hiragana": "けんがくする",
+    "lesson": 7,
+    "meaning_en": "(to) observe",
+    "meaning_vn": "tham quan, quan sát"
+  },
+  {
+    "kanji": "検査する",
+    "hiragana": "けんさする",
+    "lesson": 15,
+    "meaning_en": "to examine",
+    "meaning_vn": "kiểm tra, xét nghiệm"
+  },
+  {
+    "kanji": "合格する",
+    "hiragana": "ごうかくする",
+    "lesson": 18,
+    "meaning_en": "(to) pass",
+    "meaning_vn": "đỗ, đậu"
+  },
+  {
+    "kanji": "行動する",
+    "hiragana": "こうどうする",
+    "lesson": 16,
+    "meaning_en": "to act",
+    "meaning_vn": "hành động"
+  },
+  {
+    "kanji": "購入する",
+    "hiragana": "こうにゅうする",
+    "lesson": 12,
+    "meaning_en": "(to) buy",
+    "meaning_vn": "mua"
+  },
+  {
+    "kanji": "声をかけあう",
+    "hiragana": "こえをかけあう",
+    "lesson": 7,
+    "meaning_en": "to speak to each other",
+    "meaning_vn": "gọi nhau, nói chuyện với nhau"
+  },
+  {
+    "kanji": "声をかけ合う",
+    "hiragana": "こえをかけあう",
+    "lesson": 16,
+    "meaning_en": "to speak to each other",
+    "meaning_vn": "gọi nhau, nói chuyện với nhau"
+  },
+  {
+    "kanji": "声をかける",
+    "hiragana": "こえをかける",
+    "lesson": 13,
+    "meaning_en": "to speak to",
+    "meaning_vn": "bắt chuyện, gọi"
+  },
+  {
+    "kanji": "答える",
+    "hiragana": "こたえる",
+    "lesson": 15,
+    "meaning_en": "to answer",
+    "meaning_vn": "trả lời"
+  },
+  {
+    "kanji": "ごちそうする",
+    "hiragana": "ごちそうする",
+    "lesson": 18,
+    "meaning_en": "to treat a meal",
+    "meaning_vn": "mời ăn, khoản đãi"
+  },
+  {
+    "kanji": "ご飯を食べる",
+    "hiragana": "ごはんをたべる",
+    "lesson": 8,
+    "meaning_en": "to have meal",
+    "meaning_vn": "ăn cơm"
+  },
+  {
+    "kanji": "困る",
+    "hiragana": "こまる",
+    "lesson": 6,
+    "meaning_en": "to be troubled",
+    "meaning_vn": "gặp khó khăn, bối rối"
+  },
+  {
+    "kanji": "コミュニケーションする",
+    "hiragana": "コミュニケーションする",
+    "lesson": 1,
+    "meaning_en": "to communicate",
+    "meaning_vn": "giao tiếp"
+  },
+  {
+    "kanji": "混む",
+    "hiragana": "こむ",
+    "lesson": 5,
+    "meaning_en": "to be crowded",
+    "meaning_vn": "đông đúc"
+  },
+  {
+    "kanji": "ごろごろする",
+    "hiragana": "ごろごろする",
+    "lesson": 11,
+    "meaning_en": "(to) laze around",
+    "meaning_vn": "nằm ườn, lười biếng"
+  },
+  {
+    "kanji": "ごろごろする",
+    "hiragana": "ごろごろする",
+    "lesson": 9,
+    "meaning_en": "to laze around",
+    "meaning_vn": "nằm ườn, lười biếng"
+  },
+  {
+    "kanji": "転ぶ",
+    "hiragana": "ころぶ",
+    "lesson": 15,
+    "meaning_en": "to fall",
+    "meaning_vn": "ngã"
+  },
+  {
+    "kanji": "壊れる",
+    "hiragana": "こわれる",
+    "lesson": 6,
+    "meaning_en": "to break",
+    "meaning_vn": "hỏng, bị hỏng"
+  },
+  {
+    "kanji": "再起動する",
+    "hiragana": "さいきどうする",
+    "lesson": 13,
+    "meaning_en": "to restart",
+    "meaning_vn": "khởi động lại"
+  },
+  {
+    "kanji": "再生する",
+    "hiragana": "さいせいする",
+    "lesson": 15,
+    "meaning_en": "(to) recycle / regenerate",
+    "meaning_vn": "tái chế, tái sinh"
+  },
+  {
+    "kanji": "探す",
+    "hiragana": "さがす",
+    "lesson": 9,
+    "meaning_en": "to look for",
+    "meaning_vn": "tìm"
+  },
+  {
+    "kanji": "探す",
+    "hiragana": "さがす",
+    "lesson": 11,
+    "meaning_en": "to look for",
+    "meaning_vn": "tìm"
+  },
+  {
+    "kanji": "下がる",
+    "hiragana": "さがる",
+    "lesson": 15,
+    "meaning_en": "to go down　(e.g. fever goes down)",
+    "meaning_vn": "hạ [sốt]"
+  },
+  {
+    "kanji": "咲く",
+    "hiragana": "さく",
+    "lesson": 3,
+    "meaning_en": "to bloom",
+    "meaning_vn": "nở (hoa)"
+  },
+  {
+    "kanji": "下げる",
+    "hiragana": "さげる",
+    "lesson": 15,
+    "meaning_en": "to reduce　(e.g. reduce a fever)",
+    "meaning_vn": "hạ, giảm [sốt]"
+  },
+  {
+    "kanji": "下げる",
+    "hiragana": "さげる",
+    "lesson": 15,
+    "meaning_en": "to lower",
+    "meaning_vn": "hạ thấp, giảm"
+  },
+  {
+    "kanji": "誘う",
+    "hiragana": "さそう",
+    "lesson": 17,
+    "meaning_en": "to invite",
+    "meaning_vn": "rủ, mời"
+  },
+  {
+    "kanji": "触る",
+    "hiragana": "さわる",
+    "lesson": 4,
+    "meaning_en": "to touch",
+    "meaning_vn": "chạm, sờ"
+  },
+  {
+    "kanji": "参加する",
+    "hiragana": "さんかする",
+    "lesson": 10,
+    "meaning_en": "to join",
+    "meaning_vn": "tham gia"
+  },
+  {
+    "kanji": "時間がかかる",
+    "hiragana": "じかんがかかる",
+    "lesson": 4,
+    "meaning_en": "to take time",
+    "meaning_vn": "mất thời gian"
+  },
+  {
+    "kanji": "仕事をする",
+    "hiragana": "しごとをする",
+    "lesson": 1,
+    "meaning_en": "to work",
+    "meaning_vn": "làm việc"
+  },
+  {
+    "kanji": "従う",
+    "hiragana": "したがう",
+    "lesson": 16,
+    "meaning_en": "to follow　(e.g. follow instructions)",
+    "meaning_vn": "tuân theo [chỉ dẫn]"
+  },
+  {
+    "kanji": "試着する",
+    "hiragana": "しちゃくする",
+    "lesson": 11,
+    "meaning_en": "(to) try on",
+    "meaning_vn": "mặc thử"
+  },
+  {
+    "kanji": "失敗する",
+    "hiragana": "しっぱいする",
+    "lesson": 18,
+    "meaning_en": "to make mistakes",
+    "meaning_vn": "thất bại, sai sót"
+  },
+  {
+    "kanji": "指定する",
+    "hiragana": "していする",
+    "lesson": 12,
+    "meaning_en": "to specify",
+    "meaning_vn": "chỉ định"
+  },
+  {
+    "kanji": "死ぬ",
+    "hiragana": "しぬ",
+    "lesson": 4,
+    "meaning_en": "to die",
+    "meaning_vn": "chết"
+  },
+  {
+    "kanji": "しばる",
+    "hiragana": "しばる",
+    "lesson": 15,
+    "meaning_en": "to tie",
+    "meaning_vn": "buộc, cột"
+  },
+  {
+    "kanji": "閉まる",
+    "hiragana": "しまる",
+    "lesson": 13,
+    "meaning_en": "to close",
+    "meaning_vn": "đóng (tự đóng)"
+  },
+  {
+    "kanji": "しみこませる",
+    "hiragana": "しみこませる",
+    "lesson": 15,
+    "meaning_en": "to soak up",
+    "meaning_vn": "thấm vào"
+  },
+  {
+    "kanji": "じめじめする",
+    "hiragana": "じめじめする",
+    "lesson": 3,
+    "meaning_en": "damp",
+    "meaning_vn": "ẩm ướt"
+  },
+  {
+    "kanji": "しゃがむ",
+    "hiragana": "しゃがむ",
+    "lesson": 16,
+    "meaning_en": "to crouch",
+    "meaning_vn": "ngồi xổm"
+  },
+  {
+    "kanji": "シャドーイングする",
+    "hiragana": "シャドーイングする",
+    "lesson": 9,
+    "meaning_en": "to shadow",
+    "meaning_vn": "nói theo (shadowing)"
+  },
+  {
+    "kanji": "集合する",
+    "hiragana": "しゅうごうする",
+    "lesson": 7,
+    "meaning_en": "(to) assemble",
+    "meaning_vn": "tập hợp"
+  },
+  {
+    "kanji": "重視する",
+    "hiragana": "じゅうしする",
+    "lesson": 12,
+    "meaning_en": "to prioritize",
+    "meaning_vn": "coi trọng"
+  },
+  {
+    "kanji": "就職する",
+    "hiragana": "しゅうしょくする",
+    "lesson": 18,
+    "meaning_en": "to get a job in a company",
+    "meaning_vn": "đi làm, xin việc"
+  },
+  {
+    "kanji": "充電する",
+    "hiragana": "じゅうでんする",
+    "lesson": 16,
+    "meaning_en": "(to) charge",
+    "meaning_vn": "sạc (pin)"
+  },
+  {
+    "kanji": "充満する",
+    "hiragana": "じゅうまんする",
+    "lesson": 16,
+    "meaning_en": "to fill",
+    "meaning_vn": "tràn ngập, đầy"
+  },
+  {
+    "kanji": "終了する",
+    "hiragana": "しゅうりょうする",
+    "lesson": 8,
+    "meaning_en": "to end",
+    "meaning_vn": "kết thúc"
+  },
+  {
+    "kanji": "出発する",
+    "hiragana": "しゅっぱつする",
+    "lesson": 5,
+    "meaning_en": "to depart",
+    "meaning_vn": "khởi hành"
+  },
+  {
+    "kanji": "出品する",
+    "hiragana": "しゅっぴんする",
+    "lesson": 12,
+    "meaning_en": "to put up for sale ",
+    "meaning_vn": "đăng bán"
+  },
+  {
+    "kanji": "準備する",
+    "hiragana": "じゅんびする",
+    "lesson": 13,
+    "meaning_en": "to prepare / to set up",
+    "meaning_vn": "chuẩn bị"
+  },
+  {
+    "kanji": "準備する",
+    "hiragana": "じゅんびする",
+    "lesson": 5,
+    "meaning_en": "to prepare",
+    "meaning_vn": "chuẩn bị"
+  },
+  {
+    "kanji": "紹介する",
+    "hiragana": "しょうかいする",
+    "lesson": 4,
+    "meaning_en": "to introduce",
+    "meaning_vn": "giới thiệu"
+  },
+  {
+    "kanji": "紹介する",
+    "hiragana": "しょうかいする",
+    "lesson": 10,
+    "meaning_en": "to introduce",
+    "meaning_vn": "giới thiệu"
+  },
+  {
+    "kanji": "消火する",
+    "hiragana": "しょうかする",
+    "lesson": 16,
+    "meaning_en": "to put out fire",
+    "meaning_vn": "dập lửa"
+  },
+  {
+    "kanji": "使用する",
+    "hiragana": "しようする",
+    "lesson": 7,
+    "meaning_en": "to use",
+    "meaning_vn": "sử dụng"
+  },
+  {
+    "kanji": "承認する",
+    "hiragana": "しょうにんする",
+    "lesson": 17,
+    "meaning_en": "to approve",
+    "meaning_vn": "phê duyệt, chấp thuận"
+  },
+  {
+    "kanji": "上陸する",
+    "hiragana": "じょうりくする",
+    "lesson": 16,
+    "meaning_en": "to land",
+    "meaning_vn": "đổ bộ"
+  },
+  {
+    "kanji": "ジョギングする",
+    "hiragana": "ジョギングする",
+    "lesson": 16,
+    "meaning_en": "to go jogging",
+    "meaning_vn": "chạy bộ"
+  },
+  {
+    "kanji": "知らせる",
+    "hiragana": "しらせる",
+    "lesson": 16,
+    "meaning_en": "to inform",
+    "meaning_vn": "báo cho biết"
+  },
+  {
+    "kanji": "調べる",
+    "hiragana": "しらべる",
+    "lesson": 5,
+    "meaning_en": "to check",
+    "meaning_vn": "tra cứu, kiểm tra"
+  },
+  {
+    "kanji": "知り合う",
+    "hiragana": "しりあう",
+    "lesson": 18,
+    "meaning_en": "to become acquainted",
+    "meaning_vn": "quen biết"
+  },
+  {
+    "kanji": "知る",
+    "hiragana": "しる",
+    "lesson": 5,
+    "meaning_en": "to know",
+    "meaning_vn": "biết"
+  },
+  {
+    "kanji": "進学する",
+    "hiragana": "しんがくする",
+    "lesson": 18,
+    "meaning_en": "to go on to higher education",
+    "meaning_vn": "học lên cao"
+  },
+  {
+    "kanji": "信じる",
+    "hiragana": "しんじる",
+    "lesson": 10,
+    "meaning_en": "to believe",
+    "meaning_vn": "tin tưởng"
+  },
+  {
+    "kanji": "親切にする",
+    "hiragana": "しんせつにする",
+    "lesson": 18,
+    "meaning_en": "to be kind to",
+    "meaning_vn": "đối xử tử tế"
+  },
+  {
+    "kanji": "吸う",
+    "hiragana": "すう",
+    "lesson": 14,
+    "meaning_en": "to smoke  (e.g. smoke a cigarette)",
+    "meaning_vn": "hút [thuốc]"
+  },
+  {
+    "kanji": "吸う",
+    "hiragana": "すう",
+    "lesson": 16,
+    "meaning_en": "to breath   (e.g. breath smoke)",
+    "meaning_vn": "hít [khói]"
+  },
+  {
+    "kanji": "過ごす",
+    "hiragana": "すごす",
+    "lesson": 9,
+    "meaning_en": "to spend",
+    "meaning_vn": "trải qua (thời gian)"
+  },
+  {
+    "kanji": "すすぐ",
+    "hiragana": "すすぐ",
+    "lesson": 15,
+    "meaning_en": "to rinse",
+    "meaning_vn": "xả, tráng"
+  },
+  {
+    "kanji": "進む",
+    "hiragana": "すすむ",
+    "lesson": 16,
+    "meaning_en": "to move forward",
+    "meaning_vn": "tiến lên, tiến triển"
+  },
+  {
+    "kanji": "捨てる",
+    "hiragana": "すてる",
+    "lesson": 12,
+    "meaning_en": "to discard",
+    "meaning_vn": "vứt bỏ"
+  },
+  {
+    "kanji": "捨てる",
+    "hiragana": "すてる",
+    "lesson": 10,
+    "meaning_en": "to throw away",
+    "meaning_vn": "vứt bỏ"
+  },
+  {
+    "kanji": "住む",
+    "hiragana": "すむ",
+    "lesson": 4,
+    "meaning_en": "to live",
+    "meaning_vn": "sống, cư trú"
+  },
+  {
+    "kanji": "済む",
+    "hiragana": "すむ",
+    "lesson": 14,
+    "meaning_en": "to finish",
+    "meaning_vn": "xong"
+  },
+  {
+    "kanji": "住む",
+    "hiragana": "すむ",
+    "lesson": 18,
+    "meaning_en": "to live",
+    "meaning_vn": "sống, cư trú"
+  },
+  {
+    "kanji": "する",
+    "hiragana": "する",
+    "lesson": 9,
+    "meaning_en": "to do",
+    "meaning_vn": "làm"
+  },
+  {
+    "kanji": "する",
+    "hiragana": "する",
+    "lesson": 11,
+    "meaning_en": "to do",
+    "meaning_vn": "làm"
+  },
+  {
+    "kanji": "する",
+    "hiragana": "する",
+    "lesson": 2,
+    "meaning_en": "to wear　(e.g.wear earrings)",
+    "meaning_vn": "đeo [khuyên tai]"
+  },
+  {
+    "kanji": "座る",
+    "hiragana": "すわる",
+    "lesson": 2,
+    "meaning_en": "to sit",
+    "meaning_vn": "ngồi"
+  },
+  {
+    "kanji": "生活する",
+    "hiragana": "せいかつする",
+    "lesson": 16,
+    "meaning_en": "(to) live",
+    "meaning_vn": "sinh sống"
+  },
+  {
+    "kanji": "生産する",
+    "hiragana": "せいさんする",
+    "lesson": 7,
+    "meaning_en": "to produce",
+    "meaning_vn": "sản xuất"
+  },
+  {
+    "kanji": "節水する",
+    "hiragana": "せっすいする",
+    "lesson": 15,
+    "meaning_en": "to save water",
+    "meaning_vn": "tiết kiệm nước"
+  },
+  {
+    "kanji": "設定する",
+    "hiragana": "せっていする",
+    "lesson": 8,
+    "meaning_en": "to set",
+    "meaning_vn": "cài đặt"
+  },
+  {
+    "kanji": "節電する",
+    "hiragana": "せつでんする",
+    "lesson": 15,
+    "meaning_en": "to save electricity",
+    "meaning_vn": "tiết kiệm điện"
+  },
+  {
+    "kanji": "セットする",
+    "hiragana": "セットする",
+    "lesson": 13,
+    "meaning_en": "to set",
+    "meaning_vn": "cài đặt"
+  },
+  {
+    "kanji": "説明する",
+    "hiragana": "せつめいする",
+    "lesson": 9,
+    "meaning_en": "to explain",
+    "meaning_vn": "giải thích"
+  },
+  {
+    "kanji": "説明する",
+    "hiragana": "せつめいする",
+    "lesson": 9,
+    "meaning_en": "to explain",
+    "meaning_vn": "giải thích"
+  },
+  {
+    "kanji": "節約する",
+    "hiragana": "せつやくする",
+    "lesson": 15,
+    "meaning_en": "to save",
+    "meaning_vn": "tiết kiệm"
+  },
+  {
+    "kanji": "掃除する",
+    "hiragana": "そうじする",
+    "lesson": 17,
+    "meaning_en": "to clean",
+    "meaning_vn": "dọn dẹp, quét dọn"
+  },
+  {
+    "kanji": "早退する",
+    "hiragana": "そうたいする",
+    "lesson": 14,
+    "meaning_en": "to leave early",
+    "meaning_vn": "về sớm"
+  },
+  {
+    "kanji": "相談する",
+    "hiragana": "そうだんする",
+    "lesson": 8,
+    "meaning_en": "to consult",
+    "meaning_vn": "bàn bạc, tham khảo ý kiến"
+  },
+  {
+    "kanji": "相談する",
+    "hiragana": "そうだんする",
+    "lesson": 12,
+    "meaning_en": "(to) consult",
+    "meaning_vn": "bàn bạc, tham khảo ý kiến"
+  },
+  {
+    "kanji": "注ぐ",
+    "hiragana": "そそぐ",
+    "lesson": 12,
+    "meaning_en": "to pour",
+    "meaning_vn": "rót, đổ"
+  },
+  {
+    "kanji": "卒業する",
+    "hiragana": "そつぎょうする",
+    "lesson": 18,
+    "meaning_en": "to graduate",
+    "meaning_vn": "tốt nghiệp"
+  },
+  {
+    "kanji": "ダイエットする",
+    "hiragana": "ダイエットする",
+    "lesson": 16,
+    "meaning_en": "to go on a diet",
+    "meaning_vn": "ăn kiêng"
+  },
+  {
+    "kanji": "体験する",
+    "hiragana": "たいけんする",
+    "lesson": 9,
+    "meaning_en": "to experience",
+    "meaning_vn": "trải nghiệm"
+  },
+  {
+    "kanji": "大切にする",
+    "hiragana": "たいせつにする",
+    "lesson": 18,
+    "meaning_en": "to take good care",
+    "meaning_vn": "trân trọng, giữ gìn"
+  },
+  {
+    "kanji": "倒れる",
+    "hiragana": "たおれる",
+    "lesson": 16,
+    "meaning_en": "to fall down",
+    "meaning_vn": "ngã, đổ"
+  },
+  {
+    "kanji": "炊ける",
+    "hiragana": "たける",
+    "lesson": 12,
+    "meaning_en": "to be cooked　(e.g. rice cooks)",
+    "meaning_vn": "chín [cơm]"
+  },
+  {
+    "kanji": "出す",
+    "hiragana": "だす",
+    "lesson": 13,
+    "meaning_en": "to take out",
+    "meaning_vn": "lấy ra"
+  },
+  {
+    "kanji": "出す",
+    "hiragana": "だす",
+    "lesson": 14,
+    "meaning_en": "to submit",
+    "meaning_vn": "nộp"
+  },
+  {
+    "kanji": "出す",
+    "hiragana": "だす",
+    "lesson": 7,
+    "meaning_en": "to run　(e.g. run the water)",
+    "meaning_vn": "mở, xả [nước]"
+  },
+  {
+    "kanji": "出す",
+    "hiragana": "だす",
+    "lesson": 15,
+    "meaning_en": "to run　(e.g. use water / turn the tap on)",
+    "meaning_vn": "mở, xả [nước]"
+  },
+  {
+    "kanji": "出す",
+    "hiragana": "だす",
+    "lesson": 15,
+    "meaning_en": "to put out　(e.g. put out trash)",
+    "meaning_vn": "đổ, mang ra [rác]"
+  },
+  {
+    "kanji": "助かる",
+    "hiragana": "たすかる",
+    "lesson": 14,
+    "meaning_en": "to be helpful",
+    "meaning_vn": "được giúp đỡ, đỡ vất vả"
+  },
+  {
+    "kanji": "助ける",
+    "hiragana": "たすける",
+    "lesson": 18,
+    "meaning_en": "to help",
+    "meaning_vn": "giúp đỡ"
+  },
+  {
+    "kanji": "たたく",
+    "hiragana": "たたく",
+    "lesson": 8,
+    "meaning_en": "to beat",
+    "meaning_vn": "đập, gõ"
+  },
+  {
+    "kanji": "立つ",
+    "hiragana": "たつ",
+    "lesson": 2,
+    "meaning_en": "to stand",
+    "meaning_vn": "đứng"
+  },
+  {
+    "kanji": "タッチする",
+    "hiragana": "タッチする",
+    "lesson": 16,
+    "meaning_en": "to tap / touch",
+    "meaning_vn": "chạm"
+  },
+  {
+    "kanji": "立てる",
+    "hiragana": "たてる",
+    "lesson": 5,
+    "meaning_en": "to make　(e.g. put together a plan)",
+    "meaning_vn": "lập [kế hoạch]"
+  },
+  {
+    "kanji": "建てる",
+    "hiragana": "たてる",
+    "lesson": 13,
+    "meaning_en": "to build",
+    "meaning_vn": "xây dựng"
+  },
+  {
+    "kanji": "建てる",
+    "hiragana": "たてる",
+    "lesson": 18,
+    "meaning_en": "to build　(e.g. build a house)",
+    "meaning_vn": "xây [nhà]"
+  },
+  {
+    "kanji": "楽しむ",
+    "hiragana": "たのしむ",
+    "lesson": 5,
+    "meaning_en": "to enjoy",
+    "meaning_vn": "tận hưởng, thưởng thức"
+  },
+  {
+    "kanji": "頼む",
+    "hiragana": "たのむ",
+    "lesson": 13,
+    "meaning_en": "to request / to ask",
+    "meaning_vn": "nhờ, yêu cầu"
+  },
+  {
+    "kanji": "頼む",
+    "hiragana": "たのむ",
+    "lesson": 4,
+    "meaning_en": "to order",
+    "meaning_vn": "gọi (món)"
+  },
+  {
+    "kanji": "食べすぎる",
+    "hiragana": "たべすぎる",
+    "lesson": 16,
+    "meaning_en": "to eat too much",
+    "meaning_vn": "ăn quá nhiều"
+  },
+  {
+    "kanji": "食べる",
+    "hiragana": "たべる",
+    "lesson": 5,
+    "meaning_en": "to eat",
+    "meaning_vn": "ăn"
+  },
+  {
+    "kanji": "食べる",
+    "hiragana": "たべる",
+    "lesson": 18,
+    "meaning_en": "to eat",
+    "meaning_vn": "ăn"
+  },
+  {
+    "kanji": "貯まる",
+    "hiragana": "たまる",
+    "lesson": 12,
+    "meaning_en": "to accumulate",
+    "meaning_vn": "tích lũy, dồn lại"
+  },
+  {
+    "kanji": "試す",
+    "hiragana": "ためす",
+    "lesson": 16,
+    "meaning_en": "to try",
+    "meaning_vn": "thử"
+  },
+  {
+    "kanji": "断水する",
+    "hiragana": "だんすいする",
+    "lesson": 7,
+    "meaning_en": "water outage　(to cut off the water)",
+    "meaning_vn": "cắt nước"
+  },
+  {
+    "kanji": "断水する",
+    "hiragana": "だんすいする",
+    "lesson": 16,
+    "meaning_en": "to have a water outage ",
+    "meaning_vn": "bị cắt nước"
+  },
+  {
+    "kanji": "チェックする",
+    "hiragana": "チェックする",
+    "lesson": 9,
+    "meaning_en": "to check",
+    "meaning_vn": "kiểm tra"
+  },
+  {
+    "kanji": "違う",
+    "hiragana": "ちがう",
+    "lesson": 9,
+    "meaning_en": "different",
+    "meaning_vn": "khác"
+  },
+  {
+    "kanji": "近づく",
+    "hiragana": "ちかづく",
+    "lesson": 16,
+    "meaning_en": "to approach",
+    "meaning_vn": "đến gần"
+  },
+  {
+    "kanji": "遅刻する",
+    "hiragana": "ちこくする",
+    "lesson": 14,
+    "meaning_en": "to be late",
+    "meaning_vn": "đi trễ, trễ giờ"
+  },
+  {
+    "kanji": "注意する",
+    "hiragana": "ちゅういする",
+    "lesson": 13,
+    "meaning_en": "(to pay) attention",
+    "meaning_vn": "chú ý, lưu ý"
+  },
+  {
+    "kanji": "注文する",
+    "hiragana": "ちゅうもんする",
+    "lesson": 3,
+    "meaning_en": "to order",
+    "meaning_vn": "gọi món, đặt hàng"
+  },
+  {
+    "kanji": "調理する",
+    "hiragana": "ちょうりする",
+    "lesson": 16,
+    "meaning_en": "(to) cook",
+    "meaning_vn": "nấu ăn, chế biến"
+  },
+  {
+    "kanji": "貯金する",
+    "hiragana": "ちょきんする",
+    "lesson": 18,
+    "meaning_en": "to save money",
+    "meaning_vn": "tiết kiệm tiền"
+  },
+  {
+    "kanji": "通話する",
+    "hiragana": "つうわする",
+    "lesson": 8,
+    "meaning_en": "(to) talk on the phone",
+    "meaning_vn": "gọi điện thoại"
+  },
+  {
+    "kanji": "使い切る",
+    "hiragana": "つかいきる",
+    "lesson": 15,
+    "meaning_en": "to use up",
+    "meaning_vn": "dùng hết"
+  },
+  {
+    "kanji": "使う",
+    "hiragana": "つかう",
+    "lesson": 7,
+    "meaning_en": "to use",
+    "meaning_vn": "dùng, sử dụng"
+  },
+  {
+    "kanji": "使う",
+    "hiragana": "つかう",
+    "lesson": 10,
+    "meaning_en": "to use",
+    "meaning_vn": "dùng, sử dụng"
+  },
+  {
+    "kanji": "疲れる",
+    "hiragana": "つかれる",
+    "lesson": 1,
+    "meaning_en": "to get tired",
+    "meaning_vn": "mệt"
+  },
+  {
+    "kanji": "疲れる",
+    "hiragana": "つかれる",
+    "lesson": 6,
+    "meaning_en": "to get tired",
+    "meaning_vn": "mệt"
+  },
+  {
+    "kanji": "着く",
+    "hiragana": "つく",
+    "lesson": 17,
+    "meaning_en": "to arrive",
+    "meaning_vn": "đến, tới nơi"
+  },
+  {
+    "kanji": "着く",
+    "hiragana": "つく",
+    "lesson": 7,
+    "meaning_en": "to arrive",
+    "meaning_vn": "đến, tới nơi"
+  },
+  {
+    "kanji": "つく",
+    "hiragana": "つく",
+    "lesson": 13,
+    "meaning_en": "to be on　(e.g. light turns on)",
+    "meaning_vn": "sáng, bật [đèn]"
+  },
+  {
+    "kanji": "つく",
+    "hiragana": "つく",
+    "lesson": 16,
+    "meaning_en": "to stick　(e.g. virus sticks)",
+    "meaning_vn": "bám [vi-rút]"
+  },
+  {
+    "kanji": "つく",
+    "hiragana": "つく",
+    "lesson": 3,
+    "meaning_en": "to be served with　(e.g. served with miso soup)",
+    "meaning_vn": "kèm theo [súp miso]"
+  },
+  {
+    "kanji": "つく",
+    "hiragana": "つく",
+    "lesson": 12,
+    "meaning_en": "to include / to attach　(e.g. included functions)",
+    "meaning_vn": "có kèm [chức năng]"
+  },
+  {
+    "kanji": "作る",
+    "hiragana": "つくる",
+    "lesson": 1,
+    "meaning_en": "to make / to grow",
+    "meaning_vn": "làm, trồng"
+  },
+  {
+    "kanji": "作る",
+    "hiragana": "つくる",
+    "lesson": 18,
+    "meaning_en": "to make / to start　(e.g. start a company)",
+    "meaning_vn": "thành lập [công ty]"
+  },
+  {
+    "kanji": "つける",
+    "hiragana": "つける",
+    "lesson": 4,
+    "meaning_en": "to dip　(e.g. dip in the sauce)",
+    "meaning_vn": "chấm [nước sốt]"
+  },
+  {
+    "kanji": "つける",
+    "hiragana": "つける",
+    "lesson": 9,
+    "meaning_en": "to attach　(e.g. attach decorations)",
+    "meaning_vn": "gắn, đính [đồ trang trí]"
+  },
+  {
+    "kanji": "伝える",
+    "hiragana": "つたえる",
+    "lesson": 14,
+    "meaning_en": "to tell",
+    "meaning_vn": "truyền đạt, báo cho"
+  },
+  {
+    "kanji": "続く",
+    "hiragana": "つづく",
+    "lesson": 16,
+    "meaning_en": "to continue",
+    "meaning_vn": "tiếp tục, kéo dài"
+  },
+  {
+    "kanji": "続ける",
+    "hiragana": "つづける",
+    "lesson": 18,
+    "meaning_en": "to continue",
+    "meaning_vn": "tiếp tục"
+  },
+  {
+    "kanji": "包む",
+    "hiragana": "つつむ",
+    "lesson": 15,
+    "meaning_en": "to wrap up",
+    "meaning_vn": "gói, bọc"
+  },
+  {
+    "kanji": "つながる",
+    "hiragana": "つながる",
+    "lesson": 11,
+    "meaning_en": "to connect",
+    "meaning_vn": "kết nối"
+  },
+  {
+    "kanji": "つぶす",
+    "hiragana": "つぶす",
+    "lesson": 15,
+    "meaning_en": "to break down",
+    "meaning_vn": "làm nát, nghiền"
+  },
+  {
+    "kanji": "つまる",
+    "hiragana": "つまる",
+    "lesson": 10,
+    "meaning_en": "to clog",
+    "meaning_vn": "tắc nghẽn"
+  },
+  {
+    "kanji": "積もる",
+    "hiragana": "つもる",
+    "lesson": 16,
+    "meaning_en": "to pile up　(e.g. snow piles up)",
+    "meaning_vn": "chất đống, đọng lại [tuyết]"
+  },
+  {
+    "kanji": "提出する",
+    "hiragana": "ていしゅつする",
+    "lesson": 14,
+    "meaning_en": "to submit",
+    "meaning_vn": "nộp"
+  },
+  {
+    "kanji": "停電する",
+    "hiragana": "ていでんする",
+    "lesson": 16,
+    "meaning_en": "to have a power outage",
+    "meaning_vn": "bị mất điện"
+  },
+  {
+    "kanji": "デートする",
+    "hiragana": "デートする",
+    "lesson": 9,
+    "meaning_en": "to go out on a date",
+    "meaning_vn": "hẹn hò"
+  },
+  {
+    "kanji": "出かける",
+    "hiragana": "でかける",
+    "lesson": 2,
+    "meaning_en": "to go out",
+    "meaning_vn": "ra ngoài"
+  },
+  {
+    "kanji": "できる",
+    "hiragana": "できる",
+    "lesson": 2,
+    "meaning_en": "to be able to do something",
+    "meaning_vn": "có thể làm được"
+  },
+  {
+    "kanji": "できる",
+    "hiragana": "できる",
+    "lesson": 13,
+    "meaning_en": "to finish",
+    "meaning_vn": "xong, hoàn thành"
+  },
+  {
+    "kanji": "できる",
+    "hiragana": "できる",
+    "lesson": 4,
+    "meaning_en": "to be newly opened　(e.g. the store has been newly opened)",
+    "meaning_vn": "mới mở [cửa hàng]"
+  },
+  {
+    "kanji": "手伝う",
+    "hiragana": "てつだう",
+    "lesson": 11,
+    "meaning_en": "to help",
+    "meaning_vn": "giúp đỡ"
+  },
+  {
+    "kanji": "出る",
+    "hiragana": "でる",
+    "lesson": 15,
+    "meaning_en": "to have (a cough / runny nose)",
+    "meaning_vn": "bị [ho / sổ mũi]"
+  },
+  {
+    "kanji": "出る",
+    "hiragana": "でる",
+    "lesson": 7,
+    "meaning_en": "to be running　(e.g. the water is running)",
+    "meaning_vn": "chảy [nước]"
+  },
+  {
+    "kanji": "出る",
+    "hiragana": "でる",
+    "lesson": 8,
+    "meaning_en": "to participate in　(e.g. participate in a karaoke competition)",
+    "meaning_vn": "tham gia [thi karaoke]"
+  },
+  {
+    "kanji": "出る",
+    "hiragana": "でる",
+    "lesson": 8,
+    "meaning_en": "to be offered　(e.g. awards are offered)",
+    "meaning_vn": "có [giải thưởng]"
+  },
+  {
+    "kanji": "出る",
+    "hiragana": "でる",
+    "lesson": 16,
+    "meaning_en": "to leave / to go out　(e.g. go outside)",
+    "meaning_vn": "ra [ngoài]"
+  },
+  {
+    "kanji": "点呼する",
+    "hiragana": "てんこする",
+    "lesson": 16,
+    "meaning_en": "to call the roll",
+    "meaning_vn": "điểm danh"
+  },
+  {
+    "kanji": "展示する",
+    "hiragana": "てんじする",
+    "lesson": 13,
+    "meaning_en": "to display",
+    "meaning_vn": "trưng bày"
+  },
+  {
+    "kanji": "電話する",
+    "hiragana": "でんわする",
+    "lesson": 10,
+    "meaning_en": "to telephone",
+    "meaning_vn": "gọi điện"
+  },
+  {
+    "kanji": "電話する",
+    "hiragana": "でんわする",
+    "lesson": 13,
+    "meaning_en": "to telephone",
+    "meaning_vn": "gọi điện"
+  },
+  {
+    "kanji": "投稿する",
+    "hiragana": "とうこうする",
+    "lesson": 5,
+    "meaning_en": "to post",
+    "meaning_vn": "đăng bài"
+  },
+  {
+    "kanji": "到着する",
+    "hiragana": "とうちゃくする",
+    "lesson": 6,
+    "meaning_en": "to arrive",
+    "meaning_vn": "đến nơi"
+  },
+  {
+    "kanji": "閉じる",
+    "hiragana": "とじる",
+    "lesson": 15,
+    "meaning_en": "to close",
+    "meaning_vn": "đóng"
+  },
+  {
+    "kanji": "取って来る",
+    "hiragana": "とってくる",
+    "lesson": 13,
+    "meaning_en": "to get and come back",
+    "meaning_vn": "lấy rồi mang về"
+  },
+  {
+    "kanji": "届く",
+    "hiragana": "とどく",
+    "lesson": 11,
+    "meaning_en": "to be handed in",
+    "meaning_vn": "được nộp, gửi đến"
+  },
+  {
+    "kanji": "届く",
+    "hiragana": "とどく",
+    "lesson": 12,
+    "meaning_en": "to be delivered",
+    "meaning_vn": "được giao đến"
+  },
+  {
+    "kanji": "届く",
+    "hiragana": "とどく",
+    "lesson": 16,
+    "meaning_en": "to reach",
+    "meaning_vn": "tới, chạm tới"
+  },
+  {
+    "kanji": "止まる",
+    "hiragana": "とまる",
+    "lesson": 13,
+    "meaning_en": "to stop",
+    "meaning_vn": "dừng lại"
+  },
+  {
+    "kanji": "止まる",
+    "hiragana": "とまる",
+    "lesson": 7,
+    "meaning_en": "to stop",
+    "meaning_vn": "dừng lại"
+  },
+  {
+    "kanji": "泊まる",
+    "hiragana": "とまる",
+    "lesson": 5,
+    "meaning_en": "to stay",
+    "meaning_vn": "ở lại, lưu trú"
+  },
+  {
+    "kanji": "泊まる",
+    "hiragana": "とまる",
+    "lesson": 6,
+    "meaning_en": "to stay",
+    "meaning_vn": "ở lại, lưu trú"
+  },
+  {
+    "kanji": "止まる",
+    "hiragana": "とまる",
+    "lesson": 16,
+    "meaning_en": "to stop　(e.g. the water has stopped)",
+    "meaning_vn": "ngừng chảy [nước]"
+  },
+  {
+    "kanji": "停める",
+    "hiragana": "とめる",
+    "lesson": 11,
+    "meaning_en": "to park",
+    "meaning_vn": "đỗ, đậu (xe)"
+  },
+  {
+    "kanji": "止める",
+    "hiragana": "とめる",
+    "lesson": 15,
+    "meaning_en": "to stop　(e.g. stop the water)",
+    "meaning_vn": "khóa, tắt [nước]"
+  },
+  {
+    "kanji": "友だちができる",
+    "hiragana": "ともだちができる",
+    "lesson": 18,
+    "meaning_en": "to make friends",
+    "meaning_vn": "kết bạn"
+  },
+  {
+    "kanji": "取り出す",
+    "hiragana": "とりだす",
+    "lesson": 12,
+    "meaning_en": "to take out",
+    "meaning_vn": "lấy ra"
+  },
+  {
+    "kanji": "撮る",
+    "hiragana": "とる",
+    "lesson": 2,
+    "meaning_en": "to take (a photo, video)",
+    "meaning_vn": "chụp, quay"
+  },
+  {
+    "kanji": "取る",
+    "hiragana": "とる",
+    "lesson": 14,
+    "meaning_en": "to pick up",
+    "meaning_vn": "nhấc lên, lấy"
+  },
+  {
+    "kanji": "撮る",
+    "hiragana": "とる",
+    "lesson": 5,
+    "meaning_en": "to take (a photo, video)",
+    "meaning_vn": "chụp, quay"
+  },
+  {
+    "kanji": "とる",
+    "hiragana": "とる",
+    "lesson": 11,
+    "meaning_en": "to steal",
+    "meaning_vn": "lấy trộm"
+  },
+  {
+    "kanji": "取る",
+    "hiragana": "とる",
+    "lesson": 15,
+    "meaning_en": "to take off / to peel of",
+    "meaning_vn": "bóc, lột"
+  },
+  {
+    "kanji": "とれる",
+    "hiragana": "とれる",
+    "lesson": 12,
+    "meaning_en": "to pick",
+    "meaning_vn": "hái được"
+  },
+  {
+    "kanji": "流す",
+    "hiragana": "ながす",
+    "lesson": 10,
+    "meaning_en": "to flush",
+    "meaning_vn": "xả nước"
+  },
+  {
+    "kanji": "鳴く",
+    "hiragana": "なく",
+    "lesson": 3,
+    "meaning_en": "to sing / to make a sound",
+    "meaning_vn": "kêu (chim, côn trùng)"
+  },
+  {
+    "kanji": "泣く",
+    "hiragana": "なく",
+    "lesson": 2,
+    "meaning_en": "to cry",
+    "meaning_vn": "khóc"
+  },
+  {
+    "kanji": "なくす",
+    "hiragana": "なくす",
+    "lesson": 11,
+    "meaning_en": "to lose",
+    "meaning_vn": "làm mất"
+  },
+  {
+    "kanji": "なくなる",
+    "hiragana": "なくなる",
+    "lesson": 13,
+    "meaning_en": "to be out of",
+    "meaning_vn": "hết"
+  },
+  {
+    "kanji": "習う",
+    "hiragana": "ならう",
+    "lesson": 2,
+    "meaning_en": "to learn",
+    "meaning_vn": "học"
+  },
+  {
+    "kanji": "並ぶ",
+    "hiragana": "ならぶ",
+    "lesson": 5,
+    "meaning_en": "to line up",
+    "meaning_vn": "xếp hàng"
+  },
+  {
+    "kanji": "並ぶ",
+    "hiragana": "ならぶ",
+    "lesson": 16,
+    "meaning_en": "to line up",
+    "meaning_vn": "xếp hàng"
+  },
+  {
+    "kanji": "並べる",
+    "hiragana": "ならべる",
+    "lesson": 13,
+    "meaning_en": "to line up",
+    "meaning_vn": "xếp, bày"
+  },
+  {
+    "kanji": "なる",
+    "hiragana": "なる",
+    "lesson": 3,
+    "meaning_en": "to be　(e.g. to be on holiday)",
+    "meaning_vn": "vào [kỳ nghỉ]"
+  },
+  {
+    "kanji": "鳴る",
+    "hiragana": "なる",
+    "lesson": 4,
+    "meaning_en": "to clap / to roll",
+    "meaning_vn": "vang, nổ (sấm)"
+  },
+  {
+    "kanji": "鳴る",
+    "hiragana": "なる",
+    "lesson": 16,
+    "meaning_en": "to ring / to sound",
+    "meaning_vn": "reo, vang lên"
+  },
+  {
+    "kanji": "なる",
+    "hiragana": "なる",
+    "lesson": 18,
+    "meaning_en": "to become　(e.g. become a professional)",
+    "meaning_vn": "trở thành [thợ lành nghề]"
+  },
+  {
+    "kanji": "慣れる",
+    "hiragana": "なれる",
+    "lesson": 1,
+    "meaning_en": "to get used to",
+    "meaning_vn": "quen với"
+  },
+  {
+    "kanji": "握る",
+    "hiragana": "にぎる",
+    "lesson": 16,
+    "meaning_en": "to take hold",
+    "meaning_vn": "nắm, cầm"
+  },
+  {
+    "kanji": "逃げ遅れる",
+    "hiragana": "にげおくれる",
+    "lesson": 16,
+    "meaning_en": "to fail to escape",
+    "meaning_vn": "không kịp chạy thoát"
+  },
+  {
+    "kanji": "逃げる",
+    "hiragana": "にげる",
+    "lesson": 16,
+    "meaning_en": "to escape",
+    "meaning_vn": "chạy trốn, thoát"
+  },
+  {
+    "kanji": "濁る",
+    "hiragana": "にごる",
+    "lesson": 7,
+    "meaning_en": "to become cloudy　(e.g. the water　becomes cloudy)",
+    "meaning_vn": "đục [nước]"
+  },
+  {
+    "kanji": "入院する",
+    "hiragana": "にゅういんする",
+    "lesson": 10,
+    "meaning_en": "to admit to hospital",
+    "meaning_vn": "nhập viện"
+  },
+  {
+    "kanji": "入力する",
+    "hiragana": "にゅうりょくする",
+    "lesson": 14,
+    "meaning_en": "to enter",
+    "meaning_vn": "nhập (dữ liệu)"
+  },
+  {
+    "kanji": "煮る",
+    "hiragana": "にる",
+    "lesson": 4,
+    "meaning_en": "to simmer / to stew",
+    "meaning_vn": "ninh, hầm"
+  },
+  {
+    "kanji": "人気がある",
+    "hiragana": "にんきがある",
+    "lesson": 3,
+    "meaning_en": "popular",
+    "meaning_vn": "nổi tiếng, được yêu thích"
+  },
+  {
+    "kanji": "人気がある",
+    "hiragana": "にんきがある",
+    "lesson": 5,
+    "meaning_en": "popular",
+    "meaning_vn": "nổi tiếng, được yêu thích"
+  },
+  {
+    "kanji": "妊娠する",
+    "hiragana": "にんしんする",
+    "lesson": 15,
+    "meaning_en": "to get pregnant",
+    "meaning_vn": "mang thai"
+  },
+  {
+    "kanji": "抜く",
+    "hiragana": "ぬく",
+    "lesson": 16,
+    "meaning_en": "to pull",
+    "meaning_vn": "rút, nhổ"
+  },
+  {
+    "kanji": "脱ぐ",
+    "hiragana": "ぬぐ",
+    "lesson": 7,
+    "meaning_en": "to take off",
+    "meaning_vn": "cởi (quần áo)"
+  },
+  {
+    "kanji": "盗む",
+    "hiragana": "ぬすむ",
+    "lesson": 11,
+    "meaning_en": "to steal",
+    "meaning_vn": "ăn trộm"
+  },
+  {
+    "kanji": "熱がある",
+    "hiragana": "ねつがある",
+    "lesson": 14,
+    "meaning_en": "to have a fever",
+    "meaning_vn": "bị sốt"
+  },
+  {
+    "kanji": "ねぼうする",
+    "hiragana": "ねぼうする",
+    "lesson": 7,
+    "meaning_en": "to oversleep",
+    "meaning_vn": "ngủ quên"
+  },
+  {
+    "kanji": "狙う",
+    "hiragana": "ねらう",
+    "lesson": 16,
+    "meaning_en": "to aim at",
+    "meaning_vn": "nhắm vào"
+  },
+  {
+    "kanji": "寝る",
+    "hiragana": "ねる",
+    "lesson": 9,
+    "meaning_en": "to sleep",
+    "meaning_vn": "ngủ"
+  },
+  {
+    "kanji": "寝る",
+    "hiragana": "ねる",
+    "lesson": 17,
+    "meaning_en": "to sleep",
+    "meaning_vn": "ngủ"
+  },
+  {
+    "kanji": "残る",
+    "hiragana": "のこる",
+    "lesson": 18,
+    "meaning_en": "to stay",
+    "meaning_vn": "ở lại, còn lại"
+  },
+  {
+    "kanji": "のせる",
+    "hiragana": "のせる",
+    "lesson": 4,
+    "meaning_en": "to put on top",
+    "meaning_vn": "đặt lên trên"
+  },
+  {
+    "kanji": "のどが渇く",
+    "hiragana": "のどがかわく",
+    "lesson": 10,
+    "meaning_en": "to get thirsty",
+    "meaning_vn": "khát nước"
+  },
+  {
+    "kanji": "延ばす",
+    "hiragana": "のばす",
+    "lesson": 13,
+    "meaning_en": "to extend",
+    "meaning_vn": "kéo dài, gia hạn"
+  },
+  {
+    "kanji": "登る",
+    "hiragana": "のぼる",
+    "lesson": 18,
+    "meaning_en": "to climb",
+    "meaning_vn": "leo, trèo"
+  },
+  {
+    "kanji": "登る",
+    "hiragana": "のぼる",
+    "lesson": 6,
+    "meaning_en": "to go up",
+    "meaning_vn": "đi lên, leo lên"
+  },
+  {
+    "kanji": "飲みすぎる",
+    "hiragana": "のみすぎる",
+    "lesson": 16,
+    "meaning_en": "to drink too much",
+    "meaning_vn": "uống quá nhiều"
+  },
+  {
+    "kanji": "飲みに行く",
+    "hiragana": "のみにいく",
+    "lesson": 17,
+    "meaning_en": "to go drinking",
+    "meaning_vn": "đi uống rượu"
+  },
+  {
+    "kanji": "飲む",
+    "hiragana": "のむ",
+    "lesson": 5,
+    "meaning_en": "to drink",
+    "meaning_vn": "uống"
+  },
+  {
+    "kanji": "飲む",
+    "hiragana": "のむ",
+    "lesson": 15,
+    "meaning_en": "to take　(e.g. take medicine)",
+    "meaning_vn": "uống [thuốc]"
+  },
+  {
+    "kanji": "飲む",
+    "hiragana": "のむ",
+    "lesson": 16,
+    "meaning_en": "to drink",
+    "meaning_vn": "uống"
+  },
+  {
+    "kanji": "飲む",
+    "hiragana": "のむ",
+    "lesson": 16,
+    "meaning_en": "to take　(e.g. take medicine)",
+    "meaning_vn": "uống [thuốc]"
+  },
+  {
+    "kanji": "乗り換える",
+    "hiragana": "のりかえる",
+    "lesson": 13,
+    "meaning_en": "to transfer",
+    "meaning_vn": "chuyển (tàu/xe)"
+  },
+  {
+    "kanji": "乗り換える",
+    "hiragana": "のりかえる",
+    "lesson": 6,
+    "meaning_en": "to transfer",
+    "meaning_vn": "chuyển (tàu/xe)"
+  },
+  {
+    "kanji": "乗る",
+    "hiragana": "のる",
+    "lesson": 13,
+    "meaning_en": "to take / to ride",
+    "meaning_vn": "đi, lên (xe)"
+  },
+  {
+    "kanji": "乗る",
+    "hiragana": "のる",
+    "lesson": 13,
+    "meaning_en": "to take / to ride",
+    "meaning_vn": "đi, lên (xe)"
+  },
+  {
+    "kanji": "拝借する",
+    "hiragana": "はいしゃくする",
+    "lesson": 9,
+    "meaning_en": "to borrow",
+    "meaning_vn": "mượn (khiêm nhường)"
+  },
+  {
+    "kanji": "入って来る",
+    "hiragana": "はいってくる",
+    "lesson": 17,
+    "meaning_en": "to come in",
+    "meaning_vn": "đi vào, bước vào"
+  },
+  {
+    "kanji": "入る",
+    "hiragana": "はいる",
+    "lesson": 7,
+    "meaning_en": "to come in",
+    "meaning_vn": "vào"
+  },
+  {
+    "kanji": "入る",
+    "hiragana": "はいる",
+    "lesson": 18,
+    "meaning_en": "to enter",
+    "meaning_vn": "vào"
+  },
+  {
+    "kanji": "入る",
+    "hiragana": "はいる",
+    "lesson": 6,
+    "meaning_en": "to turn",
+    "meaning_vn": "rẽ vào"
+  },
+  {
+    "kanji": "入る",
+    "hiragana": "はいる",
+    "lesson": 14,
+    "meaning_en": "to go into　(e.g. air goes into / inflates)",
+    "meaning_vn": "vào, lọt vào [không khí]"
+  },
+  {
+    "kanji": "入る",
+    "hiragana": "はいる",
+    "lesson": 17,
+    "meaning_en": "to join　(e.g. join a circle)",
+    "meaning_vn": "tham gia [câu lạc bộ]"
+  },
+  {
+    "kanji": "はがす",
+    "hiragana": "はがす",
+    "lesson": 12,
+    "meaning_en": "to remove",
+    "meaning_vn": "bóc, gỡ"
+  },
+  {
+    "kanji": "吐き気がする",
+    "hiragana": "はきけがする",
+    "lesson": 15,
+    "meaning_en": "to have a nausea",
+    "meaning_vn": "buồn nôn"
+  },
+  {
+    "kanji": "はく",
+    "hiragana": "はく",
+    "lesson": 2,
+    "meaning_en": "to wear　(e.g. wear shoes)",
+    "meaning_vn": "mang, đi [giày]"
+  },
+  {
+    "kanji": "はさむ",
+    "hiragana": "はさむ",
+    "lesson": 14,
+    "meaning_en": "to clamp",
+    "meaning_vn": "kẹp"
+  },
+  {
+    "kanji": "始まる",
+    "hiragana": "はじまる",
+    "lesson": 7,
+    "meaning_en": "to start",
+    "meaning_vn": "bắt đầu"
+  },
+  {
+    "kanji": "始める",
+    "hiragana": "はじめる",
+    "lesson": 7,
+    "meaning_en": "to start",
+    "meaning_vn": "bắt đầu"
+  },
+  {
+    "kanji": "～始める",
+    "hiragana": "～はじめる",
+    "lesson": 18,
+    "meaning_en": "to start ～　(e.g.start working)",
+    "meaning_vn": "bắt đầu [đi làm]"
+  },
+  {
+    "kanji": "走る",
+    "hiragana": "はしる",
+    "lesson": 16,
+    "meaning_en": "to run",
+    "meaning_vn": "chạy"
+  },
+  {
+    "kanji": "はずす",
+    "hiragana": "はずす",
+    "lesson": 14,
+    "meaning_en": "to remove",
+    "meaning_vn": "tháo ra"
+  },
+  {
+    "kanji": "働く",
+    "hiragana": "はたらく",
+    "lesson": 1,
+    "meaning_en": "to work",
+    "meaning_vn": "làm việc"
+  },
+  {
+    "kanji": "働く",
+    "hiragana": "はたらく",
+    "lesson": 18,
+    "meaning_en": "to work",
+    "meaning_vn": "làm việc"
+  },
+  {
+    "kanji": "発車する",
+    "hiragana": "はっしゃする",
+    "lesson": 6,
+    "meaning_en": "to depart",
+    "meaning_vn": "khởi hành (xe)"
+  },
+  {
+    "kanji": "発生する",
+    "hiragana": "はっせいする",
+    "lesson": 16,
+    "meaning_en": "to occur",
+    "meaning_vn": "xảy ra, phát sinh"
+  },
+  {
+    "kanji": "話す",
+    "hiragana": "はなす",
+    "lesson": 17,
+    "meaning_en": "to talk",
+    "meaning_vn": "nói, nói chuyện"
+  },
+  {
+    "kanji": "話す",
+    "hiragana": "はなす",
+    "lesson": 2,
+    "meaning_en": "to talk",
+    "meaning_vn": "nói, nói chuyện"
+  },
+  {
+    "kanji": "離れる",
+    "hiragana": "はなれる",
+    "lesson": 16,
+    "meaning_en": "to move away",
+    "meaning_vn": "rời xa, cách xa"
+  },
+  {
+    "kanji": "はやす",
+    "hiragana": "はやす",
+    "lesson": 2,
+    "meaning_en": "to have　(e.g. have a beard)",
+    "meaning_vn": "để [râu]"
+  },
+  {
+    "kanji": "払う",
+    "hiragana": "はらう",
+    "lesson": 10,
+    "meaning_en": "to pay",
+    "meaning_vn": "trả (tiền)"
+  },
+  {
+    "kanji": "貼る",
+    "hiragana": "はる",
+    "lesson": 15,
+    "meaning_en": "to paste",
+    "meaning_vn": "dán"
+  },
+  {
+    "kanji": "晴れる",
+    "hiragana": "はれる",
+    "lesson": 4,
+    "meaning_en": "to clear / to fair",
+    "meaning_vn": "trời quang, nắng ráo"
+  },
+  {
+    "kanji": "火が出る",
+    "hiragana": "ひがでる",
+    "lesson": 16,
+    "meaning_en": "to catch fire / to be on fire",
+    "meaning_vn": "bốc cháy"
+  },
+  {
+    "kanji": "光る",
+    "hiragana": "ひかる",
+    "lesson": 6,
+    "meaning_en": "to shine",
+    "meaning_vn": "phát sáng, tỏa sáng"
+  },
+  {
+    "kanji": "引く",
+    "hiragana": "ひく",
+    "lesson": 15,
+    "meaning_en": "to pull",
+    "meaning_vn": "kéo"
+  },
+  {
+    "kanji": "弾く",
+    "hiragana": "ひく",
+    "lesson": 2,
+    "meaning_en": "to play (an instrument)",
+    "meaning_vn": "chơi (nhạc cụ)"
+  },
+  {
+    "kanji": "低くする",
+    "hiragana": "ひくくする",
+    "lesson": 16,
+    "meaning_en": "to lower",
+    "meaning_vn": "hạ thấp"
+  },
+  {
+    "kanji": "びっくりする",
+    "hiragana": "びっくりする",
+    "lesson": 2,
+    "meaning_en": "to be shocked",
+    "meaning_vn": "giật mình, bất ngờ"
+  },
+  {
+    "kanji": "びっくりする",
+    "hiragana": "びっくりする",
+    "lesson": 6,
+    "meaning_en": "to be shocked",
+    "meaning_vn": "giật mình, bất ngờ"
+  },
+  {
+    "kanji": "避難する",
+    "hiragana": "ひなんする",
+    "lesson": 16,
+    "meaning_en": "to evacuate / to take shelter",
+    "meaning_vn": "sơ tán"
+  },
+  {
+    "kanji": "日焼けする",
+    "hiragana": "ひやけする",
+    "lesson": 5,
+    "meaning_en": "to get a suntan",
+    "meaning_vn": "bị cháy nắng"
+  },
+  {
+    "kanji": "病気にかかる",
+    "hiragana": "びょうきにかかる",
+    "lesson": 15,
+    "meaning_en": "to get sick",
+    "meaning_vn": "bị bệnh, mắc bệnh"
+  },
+  {
+    "kanji": "表示する",
+    "hiragana": "ひょうじする",
+    "lesson": 14,
+    "meaning_en": "to display",
+    "meaning_vn": "hiển thị"
+  },
+  {
+    "kanji": "開く",
+    "hiragana": "ひらく",
+    "lesson": 15,
+    "meaning_en": "to open",
+    "meaning_vn": "mở"
+  },
+  {
+    "kanji": "開く",
+    "hiragana": "ひらく",
+    "lesson": 7,
+    "meaning_en": "to hold",
+    "meaning_vn": "tổ chức"
+  },
+  {
+    "kanji": "拾う",
+    "hiragana": "ひろう",
+    "lesson": 7,
+    "meaning_en": "to pick up",
+    "meaning_vn": "nhặt"
+  },
+  {
+    "kanji": "広げる",
+    "hiragana": "ひろげる",
+    "lesson": 18,
+    "meaning_en": "to expand",
+    "meaning_vn": "mở rộng"
+  },
+  {
+    "kanji": "増える",
+    "hiragana": "ふえる",
+    "lesson": 16,
+    "meaning_en": "to spread",
+    "meaning_vn": "lan rộng, tăng lên"
+  },
+  {
+    "kanji": "増える",
+    "hiragana": "ふえる",
+    "lesson": 2,
+    "meaning_en": "to increase",
+    "meaning_vn": "tăng lên"
+  },
+  {
+    "kanji": "増える",
+    "hiragana": "ふえる",
+    "lesson": 17,
+    "meaning_en": "to increase",
+    "meaning_vn": "tăng lên"
+  },
+  {
+    "kanji": "吹く",
+    "hiragana": "ふく",
+    "lesson": 4,
+    "meaning_en": "to blow",
+    "meaning_vn": "thổi"
+  },
+  {
+    "kanji": "フタをする",
+    "hiragana": "フタをする",
+    "lesson": 12,
+    "meaning_en": "to put the lid on",
+    "meaning_vn": "đậy nắp"
+  },
+  {
+    "kanji": "ぶつける",
+    "hiragana": "ぶつける",
+    "lesson": 15,
+    "meaning_en": "to bump",
+    "meaning_vn": "va, đụng"
+  },
+  {
+    "kanji": "降る",
+    "hiragana": "ふる",
+    "lesson": 3,
+    "meaning_en": "to fall (rain / snow, etc.)",
+    "meaning_vn": "rơi (mưa, tuyết)"
+  },
+  {
+    "kanji": "降る",
+    "hiragana": "ふる",
+    "lesson": 4,
+    "meaning_en": "to fall (rain / snow, etc.)",
+    "meaning_vn": "rơi (mưa, tuyết)"
+  },
+  {
+    "kanji": "噴射する",
+    "hiragana": "ふんしゃする",
+    "lesson": 16,
+    "meaning_en": "to spray",
+    "meaning_vn": "phun, xịt"
+  },
+  {
+    "kanji": "分別する",
+    "hiragana": "ぶんべつする",
+    "lesson": 15,
+    "meaning_en": "to sort",
+    "meaning_vn": "phân loại"
+  },
+  {
+    "kanji": "減らす",
+    "hiragana": "へらす",
+    "lesson": 15,
+    "meaning_en": "to reduce",
+    "meaning_vn": "giảm bớt"
+  },
+  {
+    "kanji": "勉強する",
+    "hiragana": "べんきょうする",
+    "lesson": 9,
+    "meaning_en": "to study",
+    "meaning_vn": "học"
+  },
+  {
+    "kanji": "勉強する",
+    "hiragana": "べんきょうする",
+    "lesson": 11,
+    "meaning_en": "to study",
+    "meaning_vn": "học"
+  },
+  {
+    "kanji": "勉強する",
+    "hiragana": "べんきょうする",
+    "lesson": 1,
+    "meaning_en": "to study",
+    "meaning_vn": "học"
+  },
+  {
+    "kanji": "勉強になる",
+    "hiragana": "べんきょうになる",
+    "lesson": 1,
+    "meaning_en": "to learn a lot",
+    "meaning_vn": "học hỏi được nhiều"
+  },
+  {
+    "kanji": "報告する",
+    "hiragana": "ほうこくする",
+    "lesson": 16,
+    "meaning_en": "to report",
+    "meaning_vn": "báo cáo"
+  },
+  {
+    "kanji": "ポストに入れる",
+    "hiragana": "ポストにいれる",
+    "lesson": 14,
+    "meaning_en": "to post / to mail",
+    "meaning_vn": "bỏ vào thùng thư"
+  },
+  {
+    "kanji": "曲がる",
+    "hiragana": "まがる",
+    "lesson": 6,
+    "meaning_en": "to turn",
+    "meaning_vn": "rẽ, quẹo"
+  },
+  {
+    "kanji": "巻く",
+    "hiragana": "まく",
+    "lesson": 4,
+    "meaning_en": "to roll",
+    "meaning_vn": "cuộn"
+  },
+  {
+    "kanji": "混ぜる",
+    "hiragana": "まぜる",
+    "lesson": 12,
+    "meaning_en": "to mix",
+    "meaning_vn": "trộn"
+  },
+  {
+    "kanji": "混ぜる",
+    "hiragana": "まぜる",
+    "lesson": 4,
+    "meaning_en": "to mix",
+    "meaning_vn": "trộn"
+  },
+  {
+    "kanji": "待ち合わせする",
+    "hiragana": "まちあわせする",
+    "lesson": 7,
+    "meaning_en": "to meet (each other)",
+    "meaning_vn": "hẹn gặp nhau"
+  },
+  {
+    "kanji": "まちがえる",
+    "hiragana": "まちがえる",
+    "lesson": 7,
+    "meaning_en": "to misunderstand",
+    "meaning_vn": "nhầm lẫn, hiểu sai"
+  },
+  {
+    "kanji": "待つ",
+    "hiragana": "まつ",
+    "lesson": 7,
+    "meaning_en": "to wait",
+    "meaning_vn": "chờ, đợi"
+  },
+  {
+    "kanji": "待つ",
+    "hiragana": "まつ",
+    "lesson": 10,
+    "meaning_en": "to wait",
+    "meaning_vn": "chờ, đợi"
+  },
+  {
+    "kanji": "マッサージする",
+    "hiragana": "マッサージする",
+    "lesson": 16,
+    "meaning_en": "to massage",
+    "meaning_vn": "mát-xa"
+  },
+  {
+    "kanji": "まとめる",
+    "hiragana": "まとめる",
+    "lesson": 15,
+    "meaning_en": "to gather",
+    "meaning_vn": "gom lại, tổng hợp"
+  },
+  {
+    "kanji": "まねをする",
+    "hiragana": "まねをする",
+    "lesson": 10,
+    "meaning_en": "to imitate",
+    "meaning_vn": "bắt chước"
+  },
+  {
+    "kanji": "守る",
+    "hiragana": "まもる",
+    "lesson": 15,
+    "meaning_en": "to protect",
+    "meaning_vn": "bảo vệ"
+  },
+  {
+    "kanji": "守る",
+    "hiragana": "まもる",
+    "lesson": 10,
+    "meaning_en": "to follow　(e.g. follow the rules)",
+    "meaning_vn": "tuân theo [quy tắc]"
+  },
+  {
+    "kanji": "守る",
+    "hiragana": "まもる",
+    "lesson": 16,
+    "meaning_en": "to protect　(e.g. protect oneself)",
+    "meaning_vn": "bảo vệ [bản thân]"
+  },
+  {
+    "kanji": "回す",
+    "hiragana": "まわす",
+    "lesson": 8,
+    "meaning_en": "to spin",
+    "meaning_vn": "xoay, quay"
+  },
+  {
+    "kanji": "見合わせる",
+    "hiragana": "みあわせる",
+    "lesson": 6,
+    "meaning_en": "to postpone",
+    "meaning_vn": "tạm hoãn"
+  },
+  {
+    "kanji": "見える",
+    "hiragana": "みえる",
+    "lesson": 6,
+    "meaning_en": "to see",
+    "meaning_vn": "nhìn thấy"
+  },
+  {
+    "kanji": "水を切る",
+    "hiragana": "みずをきる",
+    "lesson": 15,
+    "meaning_en": "to dry",
+    "meaning_vn": "để ráo nước"
+  },
+  {
+    "kanji": "見せる",
+    "hiragana": "みせる",
+    "lesson": 9,
+    "meaning_en": "to show",
+    "meaning_vn": "cho xem, chỉ cho thấy"
+  },
+  {
+    "kanji": "道に迷う",
+    "hiragana": "みちにまよう",
+    "lesson": 7,
+    "meaning_en": "to get lost",
+    "meaning_vn": "lạc đường"
+  },
+  {
+    "kanji": "見つかる",
+    "hiragana": "みつかる",
+    "lesson": 11,
+    "meaning_en": "to find",
+    "meaning_vn": "tìm thấy"
+  },
+  {
+    "kanji": "見つかる",
+    "hiragana": "みつかる",
+    "lesson": 12,
+    "meaning_en": "to find",
+    "meaning_vn": "tìm thấy"
+  },
+  {
+    "kanji": "見て回る",
+    "hiragana": "みてまわる",
+    "lesson": 16,
+    "meaning_en": "to look around",
+    "meaning_vn": "đi xem quanh, tham quan"
+  },
+  {
+    "kanji": "身につける",
+    "hiragana": "みにつける",
+    "lesson": 10,
+    "meaning_en": "to learn",
+    "meaning_vn": "trau dồi, tiếp thu"
+  },
+  {
+    "kanji": "見る",
+    "hiragana": "みる",
+    "lesson": 9,
+    "meaning_en": "to watch",
+    "meaning_vn": "xem"
+  },
+  {
+    "kanji": "見る",
+    "hiragana": "みる",
+    "lesson": 11,
+    "meaning_en": "to watch",
+    "meaning_vn": "xem"
+  },
+  {
+    "kanji": "見る",
+    "hiragana": "みる",
+    "lesson": 18,
+    "meaning_en": "to watch",
+    "meaning_vn": "xem"
+  },
+  {
+    "kanji": "見渡す",
+    "hiragana": "みわたす",
+    "lesson": 5,
+    "meaning_en": "to overlook",
+    "meaning_vn": "nhìn bao quát, ngắm nhìn"
+  },
+  {
+    "kanji": "むく",
+    "hiragana": "むく",
+    "lesson": 4,
+    "meaning_en": "to peel",
+    "meaning_vn": "gọt vỏ"
+  },
+  {
+    "kanji": "向ける",
+    "hiragana": "むける",
+    "lesson": 16,
+    "meaning_en": "to direct at",
+    "meaning_vn": "hướng về, chĩa vào"
+  },
+  {
+    "kanji": "蒸す",
+    "hiragana": "むす",
+    "lesson": 4,
+    "meaning_en": "to steam",
+    "meaning_vn": "hấp"
+  },
+  {
+    "kanji": "無理をする",
+    "hiragana": "むりをする",
+    "lesson": 16,
+    "meaning_en": "to force oneself",
+    "meaning_vn": "gắng sức, ép mình"
+  },
+  {
+    "kanji": "申し込む",
+    "hiragana": "もうしこむ",
+    "lesson": 7,
+    "meaning_en": "to sign up",
+    "meaning_vn": "đăng ký"
+  },
+  {
+    "kanji": "申し込む",
+    "hiragana": "もうしこむ",
+    "lesson": 14,
+    "meaning_en": "to request",
+    "meaning_vn": "đăng ký, yêu cầu"
+  },
+  {
+    "kanji": "申す",
+    "hiragana": "もうす",
+    "lesson": 1,
+    "meaning_en": "to be called",
+    "meaning_vn": "tên là (khiêm nhường)"
+  },
+  {
+    "kanji": "燃える",
+    "hiragana": "もえる",
+    "lesson": 15,
+    "meaning_en": "burnable　(e.g. burnable waste)",
+    "meaning_vn": "cháy được [rác]"
+  },
+  {
+    "kanji": "持ち上げる",
+    "hiragana": "もちあげる",
+    "lesson": 10,
+    "meaning_en": "to lift",
+    "meaning_vn": "nhấc lên"
+  },
+  {
+    "kanji": "持ち歩く",
+    "hiragana": "もちあるく",
+    "lesson": 15,
+    "meaning_en": "to carry",
+    "meaning_vn": "mang theo (khi đi)"
+  },
+  {
+    "kanji": "持ち出す",
+    "hiragana": "もちだす",
+    "lesson": 16,
+    "meaning_en": "to take out",
+    "meaning_vn": "mang ra ngoài"
+  },
+  {
+    "kanji": "持ち運ぶ",
+    "hiragana": "もちはこぶ",
+    "lesson": 12,
+    "meaning_en": "to carry",
+    "meaning_vn": "mang theo, vận chuyển"
+  },
+  {
+    "kanji": "餅をつく",
+    "hiragana": "もちをつく",
+    "lesson": 9,
+    "meaning_en": "to pound",
+    "meaning_vn": "giã bánh mochi"
+  },
+  {
+    "kanji": "もつ",
+    "hiragana": "もつ",
+    "lesson": 11,
+    "meaning_en": "to be good for",
+    "meaning_vn": "để được lâu"
+  },
+  {
+    "kanji": "持つ",
+    "hiragana": "もつ",
+    "lesson": 14,
+    "meaning_en": "to have",
+    "meaning_vn": "có, cầm"
+  },
+  {
+    "kanji": "持つ",
+    "hiragana": "もつ",
+    "lesson": 12,
+    "meaning_en": "to carry",
+    "meaning_vn": "mang, cầm"
+  },
+  {
+    "kanji": "持つ",
+    "hiragana": "もつ",
+    "lesson": 18,
+    "meaning_en": "to have　(e.g. have one's own shop)",
+    "meaning_vn": "sở hữu [cửa hàng riêng]"
+  },
+  {
+    "kanji": "持って行く",
+    "hiragana": "もっていく",
+    "lesson": 11,
+    "meaning_en": "to take (something with you)",
+    "meaning_vn": "mang theo"
+  },
+  {
+    "kanji": "持って来る",
+    "hiragana": "もってくる",
+    "lesson": 10,
+    "meaning_en": "to bring",
+    "meaning_vn": "mang đến"
+  },
+  {
+    "kanji": "戻す",
+    "hiragana": "もどす",
+    "lesson": 13,
+    "meaning_en": "to return",
+    "meaning_vn": "trả lại, đặt lại"
+  },
+  {
+    "kanji": "戻る",
+    "hiragana": "もどる",
+    "lesson": 14,
+    "meaning_en": "to return",
+    "meaning_vn": "quay lại, trở về"
+  },
+  {
+    "kanji": "戻る",
+    "hiragana": "もどる",
+    "lesson": 16,
+    "meaning_en": "to come back",
+    "meaning_vn": "quay lại, trở về"
+  },
+  {
+    "kanji": "もらう",
+    "hiragana": "もらう",
+    "lesson": 15,
+    "meaning_en": "to receive",
+    "meaning_vn": "nhận"
+  },
+  {
+    "kanji": "もらう",
+    "hiragana": "もらう",
+    "lesson": 17,
+    "meaning_en": "to receive",
+    "meaning_vn": "nhận"
+  },
+  {
+    "kanji": "盛り上がる",
+    "hiragana": "もりあがる",
+    "lesson": 9,
+    "meaning_en": "to have a blast",
+    "meaning_vn": "sôi nổi, náo nhiệt"
+  },
+  {
+    "kanji": "焼く",
+    "hiragana": "やく",
+    "lesson": 11,
+    "meaning_en": "to grill",
+    "meaning_vn": "nướng"
+  },
+  {
+    "kanji": "焼く",
+    "hiragana": "やく",
+    "lesson": 4,
+    "meaning_en": "to grill / to cook",
+    "meaning_vn": "nướng"
+  },
+  {
+    "kanji": "役に立つ",
+    "hiragana": "やくにたつ",
+    "lesson": 18,
+    "meaning_en": "useful",
+    "meaning_vn": "hữu ích, có ích"
+  },
+  {
+    "kanji": "休みを取る",
+    "hiragana": "やすみをとる",
+    "lesson": 14,
+    "meaning_en": "to take a day off / to get a leave",
+    "meaning_vn": "xin nghỉ phép"
+  },
+  {
+    "kanji": "休む",
+    "hiragana": "やすむ",
+    "lesson": 8,
+    "meaning_en": "to rest",
+    "meaning_vn": "nghỉ ngơi"
+  },
+  {
+    "kanji": "休む",
+    "hiragana": "やすむ",
+    "lesson": 14,
+    "meaning_en": "to take a day off / to get a leave",
+    "meaning_vn": "xin nghỉ phép"
+  },
+  {
+    "kanji": "やむ",
+    "hiragana": "やむ",
+    "lesson": 4,
+    "meaning_en": "to stop",
+    "meaning_vn": "tạnh, ngừng (mưa)"
+  },
+  {
+    "kanji": "やめる",
+    "hiragana": "やめる",
+    "lesson": 16,
+    "meaning_en": "to stop",
+    "meaning_vn": "dừng, bỏ (thói quen)"
+  },
+  {
+    "kanji": "やる",
+    "hiragana": "やる",
+    "lesson": 8,
+    "meaning_en": "to do",
+    "meaning_vn": "làm"
+  },
+  {
+    "kanji": "優勝する",
+    "hiragana": "ゆうしょうする",
+    "lesson": 8,
+    "meaning_en": "to win first prize",
+    "meaning_vn": "vô địch, đoạt giải nhất"
+  },
+  {
+    "kanji": "ゆがむ",
+    "hiragana": "ゆがむ",
+    "lesson": 16,
+    "meaning_en": "to get distorted",
+    "meaning_vn": "méo mó, biến dạng"
+  },
+  {
+    "kanji": "ゆっくりする",
+    "hiragana": "ゆっくりする",
+    "lesson": 11,
+    "meaning_en": "to relax",
+    "meaning_vn": "thư giãn, nghỉ ngơi thoải mái"
+  },
+  {
+    "kanji": "ゆっくりする",
+    "hiragana": "ゆっくりする",
+    "lesson": 17,
+    "meaning_en": "to relax",
+    "meaning_vn": "thư giãn, nghỉ ngơi thoải mái"
+  },
+  {
+    "kanji": "ゆでる",
+    "hiragana": "ゆでる",
+    "lesson": 4,
+    "meaning_en": "to boil",
+    "meaning_vn": "luộc"
+  },
+  {
+    "kanji": "揺れる",
+    "hiragana": "ゆれる",
+    "lesson": 16,
+    "meaning_en": "to shake",
+    "meaning_vn": "rung lắc"
+  },
+  {
+    "kanji": "用意する",
+    "hiragana": "よういする",
+    "lesson": 10,
+    "meaning_en": "to prepare / to offer",
+    "meaning_vn": "chuẩn bị"
+  },
+  {
+    "kanji": "汚れる",
+    "hiragana": "よごれる",
+    "lesson": 7,
+    "meaning_en": "to get dirty",
+    "meaning_vn": "bị bẩn"
+  },
+  {
+    "kanji": "予定する",
+    "hiragana": "よていする",
+    "lesson": 7,
+    "meaning_en": "to be scheduled",
+    "meaning_vn": "dự định, lên kế hoạch"
+  },
+  {
+    "kanji": "呼ぶ",
+    "hiragana": "よぶ",
+    "lesson": 18,
+    "meaning_en": "to call",
+    "meaning_vn": "gọi"
+  },
+  {
+    "kanji": "呼ぶ",
+    "hiragana": "よぶ",
+    "lesson": 1,
+    "meaning_en": "to call / to address",
+    "meaning_vn": "gọi, xưng hô"
+  },
+  {
+    "kanji": "予防する",
+    "hiragana": "よぼうする",
+    "lesson": 16,
+    "meaning_en": "to prevent",
+    "meaning_vn": "phòng ngừa"
+  },
+  {
+    "kanji": "読む",
+    "hiragana": "よむ",
+    "lesson": 11,
+    "meaning_en": "to read",
+    "meaning_vn": "đọc"
+  },
+  {
+    "kanji": "読む",
+    "hiragana": "よむ",
+    "lesson": 2,
+    "meaning_en": "to read",
+    "meaning_vn": "đọc"
+  },
+  {
+    "kanji": "予約する",
+    "hiragana": "よやくする",
+    "lesson": 18,
+    "meaning_en": "to make a reservation",
+    "meaning_vn": "đặt trước, đặt chỗ"
+  },
+  {
+    "kanji": "寄る",
+    "hiragana": "よる",
+    "lesson": 5,
+    "meaning_en": "to stop by",
+    "meaning_vn": "ghé qua"
+  },
+  {
+    "kanji": "楽にする",
+    "hiragana": "らくにする",
+    "lesson": 17,
+    "meaning_en": "to make yourself at home",
+    "meaning_vn": "thoải mái tự nhiên"
+  },
+  {
+    "kanji": "リサイクルする",
+    "hiragana": "リサイクルする",
+    "lesson": 15,
+    "meaning_en": "to recycle",
+    "meaning_vn": "tái chế"
+  },
+  {
+    "kanji": "留学する",
+    "hiragana": "りゅうがくする",
+    "lesson": 18,
+    "meaning_en": "to go abroad to study",
+    "meaning_vn": "du học"
+  },
+  {
+    "kanji": "流行する",
+    "hiragana": "りゅうこうする",
+    "lesson": 16,
+    "meaning_en": "to be prevalent",
+    "meaning_vn": "phổ biến, thịnh hành"
+  },
+  {
+    "kanji": "両替する",
+    "hiragana": "りょうがえする",
+    "lesson": 14,
+    "meaning_en": "(to) change money",
+    "meaning_vn": "đổi tiền"
+  },
+  {
+    "kanji": "利用する",
+    "hiragana": "りようする",
+    "lesson": 13,
+    "meaning_en": "(to) use",
+    "meaning_vn": "sử dụng"
+  },
+  {
+    "kanji": "旅行する",
+    "hiragana": "りょこうする",
+    "lesson": 18,
+    "meaning_en": "to travel",
+    "meaning_vn": "du lịch"
+  },
+  {
+    "kanji": "連絡する",
+    "hiragana": "れんらくする",
+    "lesson": 7,
+    "meaning_en": "to contact",
+    "meaning_vn": "liên lạc"
+  },
+  {
+    "kanji": "連絡する",
+    "hiragana": "れんらくする",
+    "lesson": 13,
+    "meaning_en": "to contact",
+    "meaning_vn": "liên lạc"
+  },
+  {
+    "kanji": "連絡をとる",
+    "hiragana": "れんらくをとる",
+    "lesson": 11,
+    "meaning_en": "to get in touch",
+    "meaning_vn": "liên lạc, liên hệ"
+  },
+  {
+    "kanji": "わかる",
+    "hiragana": "わかる",
+    "lesson": 8,
+    "meaning_en": "to understand",
+    "meaning_vn": "hiểu"
+  },
+  {
+    "kanji": "分ける",
+    "hiragana": "わける",
+    "lesson": 15,
+    "meaning_en": "to separate",
+    "meaning_vn": "chia, tách"
+  },
+  {
+    "kanji": "忘れる",
+    "hiragana": "わすれる",
+    "lesson": 14,
+    "meaning_en": "to forget",
+    "meaning_vn": "quên"
+  },
+  {
+    "kanji": "忘れる",
+    "hiragana": "わすれる",
+    "lesson": 18,
+    "meaning_en": "to forget",
+    "meaning_vn": "quên"
+  },
+  {
+    "kanji": "渡る",
+    "hiragana": "わたる",
+    "lesson": 6,
+    "meaning_en": "to cross / to go across",
+    "meaning_vn": "băng qua, đi qua"
+  },
+  {
+    "kanji": "輪になる",
+    "hiragana": "わになる",
+    "lesson": 7,
+    "meaning_en": "to form a circle",
+    "meaning_vn": "tạo thành vòng tròn"
+  },
+  {
+    "kanji": "笑う",
+    "hiragana": "わらう",
+    "lesson": 17,
+    "meaning_en": "to laugh",
+    "meaning_vn": "cười"
+  },
+  {
+    "kanji": "割れる",
+    "hiragana": "われる",
+    "lesson": 15,
+    "meaning_en": "to break",
+    "meaning_vn": "vỡ"
+  }
+]
