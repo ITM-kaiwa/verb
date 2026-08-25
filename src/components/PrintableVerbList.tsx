@@ -11,13 +11,13 @@ export default function PrintableVerbList({
 }) {
   return (
     <div className="hidden print:block">
-      <h1 className="mb-2 text-lg font-bold">動詞活用一覧（全{verbs.length}語）</h1>
+      <h1 className="mb-2 text-lg font-bold">Danh sách chia động từ（{verbs.length} từ）</h1>
       <table className="w-full border-collapse text-[9px]">
         <thead>
           <tr>
-            <th className="border border-black px-1 py-0.5 text-left">ます形</th>
-            <th className="border border-black px-1 py-0.5 text-left">漢字</th>
-            {showVietnamese && <th className="border border-black px-1 py-0.5 text-left">意味</th>}
+            <th className="border border-black px-1 py-0.5 text-left">Thể ます</th>
+            <th className="border border-black px-1 py-0.5 text-left">Chữ Hán</th>
+            {showVietnamese && <th className="border border-black px-1 py-0.5 text-left">Nghĩa</th>}
             {CONJUGATION_FORMS.map((f) => (
               <th key={f.id} className="border border-black px-1 py-0.5 text-left">
                 {f.labelJa}

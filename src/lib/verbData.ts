@@ -44,6 +44,15 @@ export function alreadyLearnedFilter(maxLesson: number) {
   return (v: VerbEntry) => v.source === "minna" && v.lesson <= maxLesson;
 }
 
+// みんなの日本語 has no lesson>25 data (Shokyu1 only) so 既習語のみ is a no-op
+// for forms taught later in the curriculum — this exposes that cap to UI code
+// that wants to explain/react to it (see ConjugationPractice's disabled state).
+export const MAX_MINNA_LESSON = Math.max(...VERBS.filter((v) => v.source === "minna").map((v) => v.lesson));
+
+export function findVerb(hiragana: string): VerbEntry | undefined {
+  return VERBS.find((v) => v.hiragana === hiragana);
+}
+
 export function combineFilters(
   ...fns: Array<((v: VerbEntry) => boolean) | undefined>
 ): ((v: VerbEntry) => boolean) | undefined {

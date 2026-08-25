@@ -142,3 +142,31 @@ export function kanjiMasuForm(entry: VerbEntry): string {
   if (boundary < 0 || boundary > masuForm.length) return masuForm;
   return stem + masuForm.slice(boundary);
 }
+
+// The ichidan (一段) ending for each form — wrongly applying these to a godan
+// verb's ます-stem is one of the most common beginner mistakes (e.g. 書きて
+// instead of 書いて). Used to generate a plausible "trap" wrong answer.
+const ICHIDAN_SUFFIX: Record<keyof ConjugatedForms, string> = {
+  te: "て",
+  nai: "ない",
+  dictionary: "る",
+  ta: "た",
+  potential: "られる",
+  volitional: "よう",
+  imperative: "ろ",
+  prohibitive: "るな",
+  conditional: "れば",
+};
+
+/**
+ * A plausible wrong answer for `formId`, built by (incorrectly) applying the
+ * ichidan conjugation pattern to a godan verb's ます-stem. Returns null for
+ * ichidan/irregular verbs, or if the trap happens to equal the real answer.
+ */
+export function naiveTrap(entry: VerbEntry, formId: keyof ConjugatedForms): string | null {
+  if (entry.group !== 1) return null;
+  const stem = stripSuffix(entry.masuForm, "ます");
+  const trap = stem + ICHIDAN_SUFFIX[formId];
+  const real = conjugate(entry)[formId];
+  return trap !== real ? trap : null;
+}

@@ -2,14 +2,14 @@
 
 import { useState } from "react";
 import ConjugationPractice from "@/components/ConjugationPractice";
-import FallingVerbGame from "@/components/FallingVerbGame";
-import MemoryMatchGame from "@/components/MemoryMatchGame";
+import GameSelector from "@/components/GameSelector";
+import TeachingMode from "@/components/TeachingMode";
 import SettingsModal from "@/components/SettingsModal";
 import PrintableVerbList from "@/components/PrintableVerbList";
 import { verbsForSource } from "@/lib/verbData";
 import type { DataSourceSetting } from "@/lib/types";
 
-type Mode = "practice" | "game" | "memory";
+type Mode = "practice" | "games" | "teaching";
 
 export default function Home() {
   const [mode, setMode] = useState<Mode>("practice");
@@ -21,24 +21,24 @@ export default function Home() {
     <>
       <main className="print:hidden mx-auto min-h-screen max-w-5xl px-4 py-6 sm:px-8">
         <header className="mb-6 flex flex-col items-center gap-3 sm:flex-row sm:justify-between">
-          <h1 className="font-kyokasho text-2xl text-kanjibrown sm:text-3xl">動詞活用練習</h1>
+          <h1 className="font-kyokasho text-2xl text-kanjibrown sm:text-3xl">Luyện tập chia động từ</h1>
           <div className="flex items-center gap-2">
             <nav className="flex gap-2 rounded-full border border-sand-300 bg-sand-50 p-1 shadow-card">
               <TabButton active={mode === "practice"} onClick={() => setMode("practice")}>
-                活用練習
+                Luyện tập
               </TabButton>
-              <TabButton active={mode === "game"} onClick={() => setMode("game")}>
-                ミニゲーム
+              <TabButton active={mode === "games"} onClick={() => setMode("games")}>
+                Trò chơi
               </TabButton>
-              <TabButton active={mode === "memory"} onClick={() => setMode("memory")}>
-                神経衰弱
+              <TabButton active={mode === "teaching"} onClick={() => setMode("teaching")}>
+                Ngữ pháp
               </TabButton>
             </nav>
             <button
               type="button"
               onClick={() => setSettingsOpen(true)}
-              aria-label="設定"
-              title="設定"
+              aria-label="Cài đặt"
+              title="Cài đặt"
               className="btn-press rounded-full border border-sand-300 bg-sand-50 p-2 text-lg text-sand-700 shadow-card hover:bg-sand-200"
             >
               ⚙
@@ -53,8 +53,8 @@ export default function Home() {
             dataSource={dataSource}
           />
         )}
-        {mode === "game" && <FallingVerbGame dataSource={dataSource} />}
-        {mode === "memory" && <MemoryMatchGame showVietnamese={showVietnamese} dataSource={dataSource} />}
+        {mode === "games" && <GameSelector dataSource={dataSource} showVietnamese={showVietnamese} />}
+        {mode === "teaching" && <TeachingMode />}
       </main>
 
       {settingsOpen && (

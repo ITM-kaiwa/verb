@@ -1,0 +1,178 @@
+import type { ConjugationFormId } from "./types";
+
+export interface ContextSentence {
+  id: string;
+  hiragana: string; // looks up the verb in VERBS by its ます形-entry hiragana headword
+  dictHint: string; // dictionary-form hint shown in parentheses, as in textbooks
+  formId: ConjugationFormId;
+  before: string; // sentence text before the blank
+  after: string; // sentence text after the blank
+  translationVn: string;
+}
+
+// Every `hiragana` here must exist in みんなの日本語 (verbData) so conjugate()
+// can derive the real answer — see findVerb() in lib/verbData.ts.
+export const CONTEXT_SENTENCES: ContextSentence[] = [
+  {
+    id: "te-1",
+    hiragana: "のむ",
+    dictHint: "飲む",
+    formId: "te",
+    before: "コーヒーを",
+    after: "、宿題をします。",
+    translationVn: "Uống cà phê xong rồi làm bài tập.",
+  },
+  {
+    id: "te-2",
+    hiragana: "あらう",
+    dictHint: "洗う",
+    formId: "te",
+    before: "手を",
+    after: "、ご飯を食べます。",
+    translationVn: "Rửa tay xong rồi ăn cơm.",
+  },
+  {
+    id: "nai-1",
+    hiragana: "くる",
+    dictHint: "来る",
+    formId: "nai",
+    before: "危ないですから、ここに",
+    after: "でください。",
+    translationVn: "Vì nguy hiểm nên xin đừng đến đây.",
+  },
+  {
+    id: "nai-2",
+    hiragana: "やすむ",
+    dictHint: "休む",
+    formId: "nai",
+    before: "今日は",
+    after: "で、学校へ行きます。",
+    translationVn: "Hôm nay không nghỉ, sẽ đi học.",
+  },
+  {
+    id: "dict-1",
+    hiragana: "べんきょうする",
+    dictHint: "勉強する",
+    formId: "dictionary",
+    before: "私は日本語を",
+    after: "ことが好きです。",
+    translationVn: "Tôi thích việc học tiếng Nhật.",
+  },
+  {
+    id: "dict-2",
+    hiragana: "よむ",
+    dictHint: "読む",
+    formId: "dictionary",
+    before: "毎朝、新聞を",
+    after: "ことにしています。",
+    translationVn: "Tôi có thói quen đọc báo mỗi sáng.",
+  },
+  {
+    id: "ta-1",
+    hiragana: "てつだう",
+    dictHint: "手伝う",
+    formId: "ta",
+    before: "昨日、友達を",
+    after: "。",
+    translationVn: "Hôm qua đã giúp bạn.",
+  },
+  {
+    id: "ta-2",
+    hiragana: "かう",
+    dictHint: "買う",
+    formId: "ta",
+    before: "先週、新しい本を",
+    after: "。",
+    translationVn: "Tuần trước đã mua một quyển sách mới.",
+  },
+  {
+    id: "potential-1",
+    hiragana: "よむ",
+    dictHint: "読む",
+    formId: "potential",
+    before: "私は漢字を",
+    after: "。",
+    translationVn: "Tôi có thể đọc chữ Hán.",
+  },
+  {
+    id: "potential-2",
+    hiragana: "はなす",
+    dictHint: "話す",
+    formId: "potential",
+    before: "彼は日本語を上手に",
+    after: "。",
+    translationVn: "Anh ấy có thể nói tiếng Nhật giỏi.",
+  },
+  {
+    id: "volitional-1",
+    hiragana: "たべる",
+    dictHint: "食べる",
+    formId: "volitional",
+    before: "みんなで晩ご飯を",
+    after: "と思っています。",
+    translationVn: "Tôi đang định cùng mọi người ăn tối.",
+  },
+  {
+    id: "volitional-2",
+    hiragana: "いく",
+    dictHint: "行く",
+    formId: "volitional",
+    before: "来年、日本へ",
+    after: "と思います。",
+    translationVn: "Tôi định sang năm sẽ đi Nhật.",
+  },
+  {
+    id: "imperative-1",
+    hiragana: "すわる",
+    dictHint: "座る",
+    formId: "imperative",
+    before: "そこに",
+    after: "！",
+    translationVn: "Ngồi xuống đó!",
+  },
+  {
+    id: "imperative-2",
+    hiragana: "かく",
+    dictHint: "書く",
+    formId: "imperative",
+    before: "早く",
+    after: "！",
+    translationVn: "Viết nhanh lên!",
+  },
+  {
+    id: "prohibitive-1",
+    hiragana: "さわる",
+    dictHint: "触る",
+    formId: "prohibitive",
+    before: "これに",
+    after: "！",
+    translationVn: "Đừng chạm vào cái này!",
+  },
+  {
+    id: "prohibitive-2",
+    hiragana: "はなす",
+    dictHint: "話す",
+    formId: "prohibitive",
+    before: "教室で",
+    after: "！",
+    translationVn: "Đừng nói chuyện trong lớp học!",
+  },
+  {
+    id: "conditional-1",
+    hiragana: "よむ",
+    dictHint: "読む",
+    formId: "conditional",
+    before: "この本を",
+    after: "、漢字が分かります。",
+    translationVn: "Nếu đọc quyển sách này, sẽ hiểu chữ Hán.",
+  },
+  {
+    id: "conditional-2",
+    hiragana: "のむ",
+    dictHint: "飲む",
+    formId: "conditional",
+    before: "薬を",
+    after: "、元気になります。",
+    translationVn: "Nếu uống thuốc, sẽ khỏe lại.",
+  },
+];

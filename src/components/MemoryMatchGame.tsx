@@ -4,7 +4,15 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { CONJUGATION_FORMS } from "@/lib/forms";
 import { conjugate, kanjiMasuForm } from "@/lib/conjugate";
 import { pickRandomVerbs, sourceFilter } from "@/lib/verbData";
+import HelpButton from "@/components/HelpButton";
 import type { ConjugationFormId, DataSourceSetting, VerbEntry } from "@/lib/types";
+
+const HELP_BODY = [
+  "45 thẻ (5 động từ × 9 thể chia) được úp trên bàn chơi.",
+  "Rút một thẻ 「ます形」từ chồng bài để làm đề bài, rồi lật từng thẻ trên bàn để tìm thẻ chia đúng của động từ đó.",
+  "Đoán đúng thì được đi tiếp; đoán sai thì đổi lượt cho đối thủ (máy tính).",
+  "Khi lấy hết 9 thẻ của một đề bài, đề bài mới sẽ được rút ra. Ai lấy được nhiều thẻ hơn sẽ thắng.",
+];
 
 const VERB_COUNT = 5;
 const REVEAL_MS = 900;
@@ -222,25 +230,25 @@ export default function MemoryMatchGame({
   }, [turn, phase, target, board]);
 
   if (verbs.length === 0) {
-    return <div className="p-8 text-center text-sand-600">準備中…</div>;
+    return <div className="p-8 text-center text-sand-600">Đang tải…</div>;
   }
 
   if (phase === "finished") {
     const you = scores.player;
     const cpu = scores.computer;
-    const resultLabel = you > cpu ? "あなたの勝ち！" : you < cpu ? "コンピュータの勝ち" : "引き分け";
+    const resultLabel = you > cpu ? "Bạn thắng!" : you < cpu ? "Máy tính thắng" : "Hòa";
     return (
       <div className="mx-auto max-w-md space-y-4 rounded-2xl border border-sand-300 bg-sand-50 p-8 text-center shadow-card">
         <p className="text-lg font-semibold text-sand-700">{resultLabel}</p>
         <p className="text-sand-600">
-          あなた {you} － {cpu} コンピュータ
+          Bạn {you} － {cpu} Máy tính
         </p>
         <button
           type="button"
           onClick={restart}
           className="btn-press rounded-full bg-sand-600 px-5 py-2 text-sm font-semibold text-sand-50 hover:brightness-95"
         >
-          もう一度遊ぶ
+          Chơi lại
         </button>
       </div>
     );
@@ -249,21 +257,24 @@ export default function MemoryMatchGame({
   return (
     <div className="mx-auto w-full max-w-4xl">
       <div className="mb-3 flex flex-wrap items-center justify-between gap-2 text-sm text-sand-600">
-        <span className={`rounded-full px-3 py-1 font-semibold ${turn === "player" ? "bg-leaf-200 text-kanjibrown" : "bg-sand-200 text-sand-700"}`}>
-          {turn === "player" ? "あなたの番" : "コンピュータの番"}
+        <span className="flex items-center gap-2">
+          <span className={`rounded-full px-3 py-1 font-semibold ${turn === "player" ? "bg-leaf-200 text-kanjibrown" : "bg-sand-200 text-sand-700"}`}>
+            {turn === "player" ? "Lượt của bạn" : "Lượt của máy tính"}
+          </span>
+          <HelpButton title="Lật thẻ trí nhớ" body={HELP_BODY} />
         </span>
         <span>
-          残り山札: {deck.length + (target ? 1 : 0)}枚
+          Còn lại: {deck.length + (target ? 1 : 0)} lá
         </span>
         <span className="font-semibold text-sand-700">
-          あなた {scores.player} － {scores.computer} コンピュータ
+          Bạn {scores.player} － {scores.computer} Máy tính
         </span>
       </div>
 
       <div className="flex flex-col gap-4 rounded-3xl border border-lemon-300/70 bg-lemon-100 p-4 shadow-card sm:p-5">
         <div className="flex items-center justify-center gap-4 rounded-2xl border border-dashed border-leaf-300 bg-lemon-200/60 p-3">
           <div className="text-center">
-            <p className="text-[11px] font-medium text-sand-600">お題（ます形）</p>
+            <p className="text-[11px] font-medium text-sand-600">Đề bài（ます形）</p>
             {target ? (
               <>
                 <p className="font-kyokasho text-2xl text-kanjibrown">{target.verb.masuForm}</p>
@@ -282,7 +293,7 @@ export default function MemoryMatchGame({
               onClick={handlePlayerDraw}
               className="btn-press rounded-full bg-sand-600 px-4 py-2 text-sm font-semibold text-sand-50 shadow hover:brightness-95"
             >
-              山札から引く
+              Rút bài
             </button>
           )}
         </div>

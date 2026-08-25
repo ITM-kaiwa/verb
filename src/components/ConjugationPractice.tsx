@@ -105,7 +105,7 @@ export default function ConjugationPractice({
   }
 
   if (!current) {
-    return <div className="p-8 text-center text-sand-600">読み込み中…</div>;
+    return <div className="p-8 text-center text-sand-600">Đang tải…</div>;
   }
 
   return (
@@ -113,7 +113,7 @@ export default function ConjugationPractice({
       <div className="mb-4 flex flex-wrap items-center gap-x-4 gap-y-2">
         <div className="flex items-center gap-2">
           <label className="text-sm font-semibold text-sand-700" htmlFor="form-select">
-            活用形：
+            Thể chia：
           </label>
           <select
             id="form-select"
@@ -140,7 +140,7 @@ export default function ConjugationPractice({
             onChange={(e) => setLearnedOnly(e.target.checked)}
             className="h-4 w-4 accent-sand-600"
           />
-          既習語のみ
+          Chỉ từ đã học
         </label>
 
         <label className="flex items-center gap-1.5 text-sm text-sand-700">
@@ -150,7 +150,7 @@ export default function ConjugationPractice({
             onChange={(e) => onShowVietnameseChange(e.target.checked)}
             className="h-4 w-4 accent-sand-600"
           />
-          ベトナム語訳を表示
+          Hiện nghĩa tiếng Việt
         </label>
       </div>
 
@@ -160,7 +160,7 @@ export default function ConjugationPractice({
           onClick={handleBack}
           disabled={index === 0}
           className="btn-press flex shrink-0 items-center rounded-2xl border border-leaf-300 bg-leaf-100 px-2 text-lg font-bold text-kanjibrown shadow-card hover:bg-leaf-200 disabled:cursor-not-allowed disabled:opacity-40 sm:px-3"
-          aria-label="前に戻る"
+          aria-label="Quay lại"
         >
           ≪
         </button>
@@ -184,7 +184,7 @@ export default function ConjugationPractice({
           type="button"
           onClick={handleNext}
           className="btn-press flex shrink-0 items-center rounded-2xl border border-leaf-300 bg-leaf-100 px-2 text-lg font-bold text-kanjibrown shadow-card hover:bg-leaf-200 sm:px-3"
-          aria-label="次へ進む"
+          aria-label="Tiếp theo"
         >
           ≫
         </button>
@@ -233,7 +233,7 @@ function VerbRow({
                 onCheck();
               }
             }}
-            placeholder="ひらがなで入力"
+            placeholder="Nhập bằng hiragana"
             className="w-full min-w-0 rounded-xl border border-sand-300 bg-white px-2 py-1.5 font-kyokasho text-base text-sand-800 shadow-inner focus:outline-none focus:ring-2 focus:ring-sand-400"
           />
           <span
@@ -245,7 +245,7 @@ function VerbRow({
           </span>
         </div>
         {checked === false && (
-          <p className="pl-1 text-xs text-wrong">正解：{correctAnswer}</p>
+          <p className="pl-1 text-xs text-wrong">Đáp án：{correctAnswer}</p>
         )}
       </div>
     </div>
