@@ -35,9 +35,11 @@ function newRound(
 
 export default function ConjugationPractice({
   showVietnamese,
+  onShowVietnameseChange,
   dataSource,
 }: {
   showVietnamese: boolean;
+  onShowVietnameseChange: (v: boolean) => void;
   dataSource: DataSourceSetting;
 }) {
   const [formId, setFormId] = useState<ConjugationFormId>("te");
@@ -45,11 +47,13 @@ export default function ConjugationPractice({
   const [history, setHistory] = useState<RoundState[]>([]);
   const [index, setIndex] = useState(0);
 
+  // データソースや既習語のみを切り替えたら、今表示中のカードにもすぐ反映する
+  // （活用形の切り替えは意図的に据え置き — 同じ語のまま活用形だけ変わる）。
   useEffect(() => {
     setHistory([newRound(new Set(), formId, learnedOnly, dataSource)]);
     setIndex(0);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [learnedOnly, dataSource]);
 
   const current = history[index];
 
@@ -137,6 +141,16 @@ export default function ConjugationPractice({
             className="h-4 w-4 accent-sand-600"
           />
           既習語のみ
+        </label>
+
+        <label className="flex items-center gap-1.5 text-sm text-sand-700">
+          <input
+            type="checkbox"
+            checked={showVietnamese}
+            onChange={(e) => onShowVietnameseChange(e.target.checked)}
+            className="h-4 w-4 accent-sand-600"
+          />
+          ベトナム語訳を表示
         </label>
       </div>
 

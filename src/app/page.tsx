@@ -46,15 +46,19 @@ export default function Home() {
           </div>
         </header>
 
-        {mode === "practice" && <ConjugationPractice showVietnamese={showVietnamese} dataSource={dataSource} />}
+        {mode === "practice" && (
+          <ConjugationPractice
+            showVietnamese={showVietnamese}
+            onShowVietnameseChange={setShowVietnamese}
+            dataSource={dataSource}
+          />
+        )}
         {mode === "game" && <FallingVerbGame dataSource={dataSource} />}
         {mode === "memory" && <MemoryMatchGame showVietnamese={showVietnamese} dataSource={dataSource} />}
       </main>
 
       {settingsOpen && (
         <SettingsModal
-          showVietnamese={showVietnamese}
-          onShowVietnameseChange={setShowVietnamese}
           dataSource={dataSource}
           onDataSourceChange={setDataSource}
           onPrint={() => {

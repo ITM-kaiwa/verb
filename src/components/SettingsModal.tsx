@@ -3,8 +3,6 @@
 import type { DataSourceSetting } from "@/lib/types";
 
 interface Props {
-  showVietnamese: boolean;
-  onShowVietnameseChange: (v: boolean) => void;
   dataSource: DataSourceSetting;
   onDataSourceChange: (v: DataSourceSetting) => void;
   onPrint: () => void;
@@ -18,8 +16,6 @@ const SOURCE_OPTIONS: { value: DataSourceSetting; label: string }[] = [
 ];
 
 export default function SettingsModal({
-  showVietnamese,
-  onShowVietnameseChange,
   dataSource,
   onDataSourceChange,
   onPrint,
@@ -47,16 +43,6 @@ export default function SettingsModal({
         </div>
 
         <div className="space-y-5 text-sm text-sand-700">
-          <label className="flex items-center gap-2">
-            <input
-              type="checkbox"
-              checked={showVietnamese}
-              onChange={(e) => onShowVietnameseChange(e.target.checked)}
-              className="h-4 w-4 accent-sand-600"
-            />
-            ベトナム語訳を表示
-          </label>
-
           <div>
             <p className="mb-2 font-semibold text-sand-700">動詞データの範囲</p>
             <div className="space-y-1.5">

@@ -114,7 +114,7 @@ export default function FallingVerbGame({ dataSource }: { dataSource: DataSource
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [dataSource]);
 
   function handleCatch(candidate: string) {
     if (phase !== "falling" || !roundData || settledRef.current) return;
