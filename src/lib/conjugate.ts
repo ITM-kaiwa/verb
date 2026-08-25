@@ -113,3 +113,32 @@ export function conjugate(entry: VerbEntry): ConjugatedForms {
     conditional: rest + eRow + "ば",
   };
 }
+
+const HIRAGANA_RE = /[぀-ゟ]/;
+
+/**
+ * The source data's `kanji` field is the dictionary-form headword (e.g. 分別する
+ * for ぶんべつします). The UI displays the ます形, so this reconstructs a kanji
+ * version aligned to the ます形 instead of the dictionary form, by finding the
+ * trailing hiragana (okurigana) common to both the kanji and hiragana headwords
+ * and re-attaching the ます形's own tail after the same kanji stem.
+ */
+export function kanjiMasuForm(entry: VerbEntry): string {
+  const { kanji, hiragana, masuForm, group, naiForm } = entry;
+
+  // 来る/来ます etc: 来 changes reading (くる/きます/こない...), so the general
+  // okurigana-alignment approach below would wrongly keep it read as く.
+  if (group === 3 && naiForm.endsWith("こない") && kanji.endsWith("来る")) {
+    return kanji.slice(0, -2) + "来ます";
+  }
+
+  let okuriLen = 0;
+  for (let i = kanji.length - 1; i >= 0; i--) {
+    if (HIRAGANA_RE.test(kanji[i])) okuriLen++;
+    else break;
+  }
+  const stem = kanji.slice(0, kanji.length - okuriLen);
+  const boundary = hiragana.length - okuriLen;
+  if (boundary < 0 || boundary > masuForm.length) return masuForm;
+  return stem + masuForm.slice(boundary);
+}

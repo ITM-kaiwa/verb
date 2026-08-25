@@ -2,9 +2,9 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { CONJUGATION_FORMS } from "@/lib/forms";
-import { conjugate } from "@/lib/conjugate";
-import { pickRandomVerbs } from "@/lib/verbData";
-import type { ConjugationFormId } from "@/lib/types";
+import { conjugate, kanjiMasuForm } from "@/lib/conjugate";
+import { pickRandomVerbs, sourceFilter } from "@/lib/verbData";
+import type { ConjugationFormId, DataSourceSetting } from "@/lib/types";
 
 const TOTAL_ROUNDS = 5;
 const FALL_DURATION_MS = 9000;
@@ -32,9 +32,9 @@ function shuffle<T>(arr: T[]): T[] {
   return copy;
 }
 
-function buildRound(): RoundData {
+function buildRound(dataSource: DataSourceSetting): RoundData {
   const formMeta = CONJUGATION_FORMS[Math.floor(Math.random() * CONJUGATION_FORMS.length)];
-  const [target, ...decoyPool] = pickRandomVerbs(CANDIDATE_COUNT * 3);
+  const [target, ...decoyPool] = pickRandomVerbs(CANDIDATE_COUNT * 3, new Set(), sourceFilter(dataSource));
 
   const correctAnswer = conjugate(target)[formMeta.id];
 
@@ -53,13 +53,13 @@ function buildRound(): RoundData {
   return {
     formId: formMeta.id,
     masuForm: target.masuForm,
-    kanji: target.kanji,
+    kanji: kanjiMasuForm(target),
     correctAnswer,
     candidates,
   };
 }
 
-export default function FallingVerbGame() {
+export default function FallingVerbGame({ dataSource }: { dataSource: DataSourceSetting }) {
   const [round, setRound] = useState(1);
   const [score, setScore] = useState(0);
   const [roundData, setRoundData] = useState<RoundData | null>(null);
@@ -100,11 +100,11 @@ export default function FallingVerbGame() {
   }, []);
 
   const startRound = useCallback(() => {
-    setRoundData(buildRound());
+    setRoundData(buildRound(dataSource));
     setResult(null);
     setPhase("falling");
     startFall();
-  }, [startFall]);
+  }, [startFall, dataSource]);
 
   useEffect(() => {
     setRound(1);

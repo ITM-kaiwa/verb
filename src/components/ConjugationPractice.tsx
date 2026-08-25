@@ -2,9 +2,9 @@
 
 import { useEffect, useState } from "react";
 import { CONJUGATION_FORMS } from "@/lib/forms";
-import { conjugate } from "@/lib/conjugate";
-import { pickRandomVerbs } from "@/lib/verbData";
-import type { ConjugationFormId, VerbEntry } from "@/lib/types";
+import { conjugate, kanjiMasuForm } from "@/lib/conjugate";
+import { alreadyLearnedFilter, combineFilters, pickRandomVerbs, sourceFilter } from "@/lib/verbData";
+import type { ConjugationFormId, DataSourceSetting, VerbEntry } from "@/lib/types";
 
 const ROWS = 5;
 
@@ -14,8 +14,18 @@ interface RoundState {
   checked: (boolean | null)[];
 }
 
-function newRound(usedIds: Set<string>): RoundState {
-  const verbs = pickRandomVerbs(ROWS, usedIds);
+function newRound(
+  usedIds: Set<string>,
+  formId: ConjugationFormId,
+  learnedOnly: boolean,
+  dataSource: DataSourceSetting
+): RoundState {
+  const formMeta = CONJUGATION_FORMS.find((f) => f.id === formId)!;
+  // 既習語のみ only makes sense against みんなの日本語's lesson numbers, so it's
+  // a no-op when いろどり is the sole selected source (see alreadyLearnedFilter).
+  const learnedFilter = learnedOnly && dataSource !== "irodori" ? alreadyLearnedFilter(formMeta.lesson) : undefined;
+  const filterFn = combineFilters(sourceFilter(dataSource), learnedFilter);
+  const verbs = pickRandomVerbs(ROWS, usedIds, filterFn);
   return {
     verbs,
     answers: Array(ROWS).fill(""),
@@ -23,14 +33,22 @@ function newRound(usedIds: Set<string>): RoundState {
   };
 }
 
-export default function ConjugationPractice() {
+export default function ConjugationPractice({
+  showVietnamese,
+  dataSource,
+}: {
+  showVietnamese: boolean;
+  dataSource: DataSourceSetting;
+}) {
   const [formId, setFormId] = useState<ConjugationFormId>("te");
+  const [learnedOnly, setLearnedOnly] = useState(true);
   const [history, setHistory] = useState<RoundState[]>([]);
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
-    setHistory([newRound(new Set())]);
+    setHistory([newRound(new Set(), formId, learnedOnly, dataSource)]);
     setIndex(0);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const current = history[index];
@@ -78,7 +96,7 @@ export default function ConjugationPractice() {
       return;
     }
     const usedIds = new Set(history.flatMap((r) => r.verbs.map((v) => v.id)));
-    setHistory((h) => [...h, newRound(usedIds)]);
+    setHistory((h) => [...h, newRound(usedIds, formId, learnedOnly, dataSource)]);
     setIndex(index + 1);
   }
 
@@ -88,22 +106,38 @@ export default function ConjugationPractice() {
 
   return (
     <div className="mx-auto w-full max-w-3xl">
-      <div className="mb-4 flex flex-wrap items-center gap-2">
-        <label className="text-sm font-semibold text-sand-700" htmlFor="form-select">
-          活用形：
-        </label>
-        <select
-          id="form-select"
-          value={formId}
-          onChange={(e) => handleFormChange(e.target.value as ConjugationFormId)}
-          className="rounded-full border border-sand-300 bg-lemon-100 px-4 py-1.5 text-sm font-semibold text-sand-800 shadow-sm focus:outline-none focus:ring-2 focus:ring-sand-400"
+      <div className="mb-4 flex flex-wrap items-center gap-x-4 gap-y-2">
+        <div className="flex items-center gap-2">
+          <label className="text-sm font-semibold text-sand-700" htmlFor="form-select">
+            活用形：
+          </label>
+          <select
+            id="form-select"
+            value={formId}
+            onChange={(e) => handleFormChange(e.target.value as ConjugationFormId)}
+            className="rounded-full border border-sand-300 bg-lemon-100 px-4 py-1.5 text-sm font-semibold text-sand-800 shadow-sm focus:outline-none focus:ring-2 focus:ring-sand-400"
+          >
+            {CONJUGATION_FORMS.map((f) => (
+              <option key={f.id} value={f.id}>
+                {f.labelJa}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <label
+          className={`flex items-center gap-1.5 text-sm text-sand-700 ${dataSource === "irodori" ? "opacity-40" : ""}`}
+          title={dataSource === "irodori" ? "いろどりの課はみんなの日本語と番号が対応していないため無効です" : undefined}
         >
-          {CONJUGATION_FORMS.map((f) => (
-            <option key={f.id} value={f.id}>
-              {f.labelJa}
-            </option>
-          ))}
-        </select>
+          <input
+            type="checkbox"
+            checked={learnedOnly}
+            disabled={dataSource === "irodori"}
+            onChange={(e) => setLearnedOnly(e.target.checked)}
+            className="h-4 w-4 accent-sand-600"
+          />
+          既習語のみ
+        </label>
       </div>
 
       <div className="flex items-stretch gap-2 sm:gap-4">
@@ -124,6 +158,8 @@ export default function ConjugationPractice() {
               verb={verb}
               answer={current.answers[i]}
               checked={current.checked[i]}
+              correctAnswer={conjugate(verb)[formId]}
+              showVietnamese={showVietnamese}
               onChange={(v) => handleAnswerChange(i, v)}
               onCheck={() => handleCheck(i)}
             />
@@ -147,45 +183,56 @@ function VerbRow({
   verb,
   answer,
   checked,
+  correctAnswer,
+  showVietnamese,
   onChange,
   onCheck,
 }: {
   verb: VerbEntry;
   answer: string;
   checked: boolean | null;
+  correctAnswer: string;
+  showVietnamese: boolean;
   onChange: (v: string) => void;
   onCheck: () => void;
 }) {
   return (
     <div className="flex items-center gap-3 rounded-2xl border border-sand-200 bg-sand-50 p-3 sm:gap-4">
-      <div className="w-2/5 min-w-0 sm:w-1/3">
-        <p className="truncate font-kyokasho text-2xl text-kanjibrown sm:text-3xl">{verb.masuForm}</p>
-        <p className="truncate text-xs text-sand-500 sm:text-sm">{verb.kanji}</p>
-        <p className="truncate font-vietnamese text-xs italic text-sand-500 sm:text-sm">{verb.meaningVn}</p>
+      <div className="w-1/2 min-w-0 sm:w-2/5">
+        <p className="truncate font-kyokasho text-xl text-kanjibrown sm:text-2xl">{verb.masuForm}</p>
+        <p className="truncate text-xs text-sand-500 sm:text-sm">{kanjiMasuForm(verb)}</p>
+        {showVietnamese && (
+          <p className="truncate font-vietnamese text-xs italic text-sand-500 sm:text-sm">{verb.meaningVn}</p>
+        )}
       </div>
 
-      <div className="flex flex-1 items-center gap-2">
-        <input
-          type="text"
-          value={answer}
-          onChange={(e) => onChange(e.target.value)}
-          onBlur={onCheck}
-          onKeyDown={(e) => {
-            if (e.key === "Enter") {
-              e.preventDefault();
-              onCheck();
-            }
-          }}
-          placeholder="ひらがなで入力"
-          className="w-full min-w-0 rounded-xl border border-sand-300 bg-white px-3 py-2 font-kyokasho text-lg text-sand-800 shadow-inner focus:outline-none focus:ring-2 focus:ring-sand-400"
-        />
-        <span
-          className={`w-6 shrink-0 text-center text-2xl font-bold ${
-            checked === true ? "text-correct" : checked === false ? "text-wrong" : "text-transparent"
-          }`}
-        >
-          {checked === true ? "レ" : checked === false ? "×" : "・"}
-        </span>
+      <div className="flex flex-1 flex-col gap-1">
+        <div className="flex items-center gap-2">
+          <input
+            type="text"
+            value={answer}
+            onChange={(e) => onChange(e.target.value)}
+            onBlur={onCheck}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                e.preventDefault();
+                onCheck();
+              }
+            }}
+            placeholder="ひらがなで入力"
+            className="w-full min-w-0 rounded-xl border border-sand-300 bg-white px-2 py-1.5 font-kyokasho text-base text-sand-800 shadow-inner focus:outline-none focus:ring-2 focus:ring-sand-400"
+          />
+          <span
+            className={`w-6 shrink-0 text-center text-2xl font-bold ${
+              checked === true ? "text-correct" : checked === false ? "text-wrong" : "text-transparent"
+            }`}
+          >
+            {checked === true ? "✓" : checked === false ? "×" : "・"}
+          </span>
+        </div>
+        {checked === false && (
+          <p className="pl-1 text-xs text-wrong">正解：{correctAnswer}</p>
+        )}
       </div>
     </div>
   );

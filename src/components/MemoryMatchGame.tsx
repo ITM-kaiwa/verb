@@ -2,9 +2,9 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { CONJUGATION_FORMS } from "@/lib/forms";
-import { conjugate } from "@/lib/conjugate";
-import { pickRandomVerbs } from "@/lib/verbData";
-import type { ConjugationFormId, VerbEntry } from "@/lib/types";
+import { conjugate, kanjiMasuForm } from "@/lib/conjugate";
+import { pickRandomVerbs, sourceFilter } from "@/lib/verbData";
+import type { ConjugationFormId, DataSourceSetting, VerbEntry } from "@/lib/types";
 
 const VERB_COUNT = 5;
 const REVEAL_MS = 900;
@@ -35,8 +35,8 @@ function shuffle<T>(arr: T[]): T[] {
   return copy;
 }
 
-function setupRound() {
-  const verbs = pickRandomVerbs(VERB_COUNT);
+function setupRound(dataSource: DataSourceSetting) {
+  const verbs = pickRandomVerbs(VERB_COUNT, new Set(), sourceFilter(dataSource));
   const deck: DeckCard[] = shuffle(verbs.map((verb, verbIndex) => ({ verbIndex, verb })));
 
   const board: BoardCard[] = shuffle(
@@ -55,7 +55,40 @@ function setupRound() {
   return { verbs, deck, board };
 }
 
-export default function MemoryMatchGame() {
+function playTurnChime() {
+  try {
+    const AudioCtx =
+      window.AudioContext || (window as unknown as { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
+    if (!AudioCtx) return;
+    const ctx = new AudioCtx();
+    const now = ctx.currentTime;
+    [660, 880].forEach((freq, i) => {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = "sine";
+      osc.frequency.value = freq;
+      const start = now + i * 0.14;
+      gain.gain.setValueAtTime(0.0001, start);
+      gain.gain.exponentialRampToValueAtTime(0.2, start + 0.02);
+      gain.gain.exponentialRampToValueAtTime(0.0001, start + 0.28);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start(start);
+      osc.stop(start + 0.3);
+    });
+    window.setTimeout(() => ctx.close(), 800);
+  } catch {
+    // Autoplay restrictions or an unsupported browser — silently skip the chime.
+  }
+}
+
+export default function MemoryMatchGame({
+  showVietnamese,
+  dataSource,
+}: {
+  showVietnamese: boolean;
+  dataSource: DataSourceSetting;
+}) {
   const [verbs, setVerbs] = useState<VerbEntry[]>([]);
   const [deck, setDeck] = useState<DeckCard[]>([]);
   const [board, setBoard] = useState<BoardCard[]>([]);
@@ -67,9 +100,10 @@ export default function MemoryMatchGame() {
 
   const memoryRef = useRef<Map<string, number>>(new Map());
   const busyRef = useRef(false);
+  const prevTurnRef = useRef<Turn>("player");
 
   const restart = useCallback(() => {
-    const { verbs, deck, board } = setupRound();
+    const { verbs, deck, board } = setupRound(dataSource);
     setVerbs(verbs);
     setDeck(deck);
     setBoard(board);
@@ -80,11 +114,20 @@ export default function MemoryMatchGame() {
     setRevealing(null);
     memoryRef.current = new Map();
     busyRef.current = false;
-  }, []);
+  }, [dataSource]);
 
   useEffect(() => {
     restart();
   }, [restart]);
+
+  // Chime whenever the turn comes back around to the player (not on the
+  // initial mount, only on an actual computer -> player handoff).
+  useEffect(() => {
+    if (prevTurnRef.current === "computer" && turn === "player") {
+      playTurnChime();
+    }
+    prevTurnRef.current = turn;
+  }, [turn]);
 
   const drawNext = useCallback(
     () => {
@@ -225,7 +268,8 @@ export default function MemoryMatchGame() {
               <>
                 <p className="font-kyokasho text-2xl text-kanjibrown">{target.verb.masuForm}</p>
                 <p className="text-xs text-sand-500">
-                  {target.verb.kanji} ／ {target.verb.meaningVn}
+                  {kanjiMasuForm(target.verb)}
+                  {showVietnamese && ` ／ ${target.verb.meaningVn}`}
                 </p>
               </>
             ) : (

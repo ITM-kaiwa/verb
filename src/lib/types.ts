@@ -2,6 +2,8 @@ export type VerbGroup = 1 | 2 | 3;
 
 export type VerbSource = "minna" | "irodori";
 
+export type DataSourceSetting = "both" | VerbSource;
+
 export interface VerbEntry {
   id: string;
   source: VerbSource;
