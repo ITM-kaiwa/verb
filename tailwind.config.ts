@@ -51,6 +51,10 @@ const config: Config = {
           '"HG教科書体"',
           '"游教科書体"',
           '"YuKyokasho Yoko"',
+          // Substitute when no real 教科書体 font is installed (most non-Japanese
+          // OSes) — "Klee One" is a free, Google-hosted font styled after the
+          // handwritten textbook look, loaded via a <link> in the root layout.
+          '"Klee One"',
           "serif",
         ],
         vietnamese: ['"Times New Roman"', "Times", "serif"],

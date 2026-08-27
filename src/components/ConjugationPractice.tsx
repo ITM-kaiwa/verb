@@ -3,16 +3,43 @@
 import { useEffect, useState } from "react";
 import { CONJUGATION_FORMS } from "@/lib/forms";
 import { conjugate, kanjiMasuForm } from "@/lib/conjugate";
-import { alreadyLearnedFilter, combineFilters, pickRandomVerbs, sourceFilter } from "@/lib/verbData";
+import { alreadyLearnedFilter, combineFilters, sourceFilter, VERBS } from "@/lib/verbData";
 import Furigana from "@/components/Furigana";
-import type { ConjugationFormId, DataSourceSetting, VerbEntry } from "@/lib/types";
+import type { ConjugationFormId, DataSourceSetting, VerbEntry, VerbGroup } from "@/lib/types";
 
-const ROWS = 5;
+const ROWS = 3;
+// One verb per group each round (五段 / 一段 / 不規則), so all three
+// conjugation patterns are always represented — falls back to Group 1 for
+// the 3rd slot when the filters leave no Group 3 verb available.
+const ROW_GROUPS: [VerbGroup, VerbGroup | undefined][] = [
+  [1, undefined],
+  [2, undefined],
+  [3, 1],
+];
 
 interface RoundState {
   verbs: VerbEntry[];
   answers: string[];
   checked: (boolean | null)[];
+}
+
+function pickForGroup(
+  used: Set<string>,
+  baseFilter: ((v: VerbEntry) => boolean) | undefined,
+  group: VerbGroup,
+  fallbackGroup?: VerbGroup
+): VerbEntry {
+  const tryPool = (filterFn?: (v: VerbEntry) => boolean) =>
+    VERBS.filter((v) => !used.has(v.id) && (!filterFn || filterFn(v)));
+
+  let pool = tryPool(combineFilters(baseFilter, (v) => v.group === group));
+  if (pool.length === 0 && fallbackGroup !== undefined) {
+    pool = tryPool(combineFilters(baseFilter, (v) => v.group === fallbackGroup));
+  }
+  if (pool.length === 0) pool = tryPool(baseFilter);
+  if (pool.length === 0) pool = tryPool(undefined);
+
+  return pool[Math.floor(Math.random() * pool.length)];
 }
 
 function newRound(
@@ -25,8 +52,15 @@ function newRound(
   // 既習語のみ only makes sense against みんなの日本語's lesson numbers, so it's
   // a no-op when いろどり is the sole selected source (see alreadyLearnedFilter).
   const learnedFilter = learnedOnly && dataSource !== "irodori" ? alreadyLearnedFilter(formMeta.lesson) : undefined;
-  const filterFn = combineFilters(sourceFilter(dataSource), learnedFilter);
-  const verbs = pickRandomVerbs(ROWS, usedIds, filterFn);
+  const baseFilter = combineFilters(sourceFilter(dataSource), learnedFilter);
+
+  const used = new Set(usedIds);
+  const verbs = ROW_GROUPS.map(([group, fallback]) => {
+    const v = pickForGroup(used, baseFilter, group, fallback);
+    used.add(v.id);
+    return v;
+  });
+
   return {
     verbs,
     answers: Array(ROWS).fill(""),
