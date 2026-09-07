@@ -92,11 +92,13 @@ const HELP_BODY = [
   "Phía trên hiển thị động từ thể ます và tên thể chia cần bắn hạ (ví dụ「て形」).",
   "4 máy bay địch bay bên phải, mỗi chiếc mang một thể chia khác nhau — chỉ 1 chiếc là đúng.",
   "Di chuyển bằng 4 phím mũi tên ←↑↓→.",
-  "Vulcan (giữ phím X): tầm bắn ngắn (~1/3 màn hình). Bắn trúng liên tục ~2 giây hạ được máy bay địch (máy bay của bạn cần ~3 giây); bắn trúng tên lửa thì hạ ngay lập tức.",
+  "Vulcan (giữ phím X): tầm bắn ngắn (~1/3 màn hình). Sát thương lên máy bay địch được cộng dồn vĩnh viễn (không hồi phục) — chỉ cần đủ ~2 giây bắn trúng tính gộp là hạ được, kể cả bắn ngắt quãng. Máy bay của bạn thì ngược lại: phải bị bắn trúng liên tục ~3 giây không ngắt quãng mới nổ. Bắn trúng tên lửa (của cả 2 bên) thì hạ ngay lập tức bất kể bên nào bắn.",
   "Tên lửa (phím Z, bạn có 4 quả, mỗi máy bay địch có 2 quả): khi có vòng khóa mục tiêu màu xanh lá hiện trên địch (trong tầm 2/3 màn hình, ngay phía trước), bắn 1 phát là hạ luôn.",
-  "Chaff/flare (phím C): đánh lừa mọi tên lửa địch đang bay tới, khiến chúng mất khóa và bay thẳng trượt qua.",
+  "Chaff/flare (phím C): mở một vùng gây nhiễu quanh máy bay của bạn trong 2 giây — tên lửa địch bay vào vùng đó trong lúc còn hiệu lực sẽ mất khóa vĩnh viễn và bay thẳng trượt qua.",
+  "Gọi僚機 hỗ trợ (phím S): một máy bay đồng đội xuất hiện trong 10 giây và tự bắn vào máy bay địch gần nhất một cách không phân biệt đúng/sai — có thể vô tình bắn hạ đúng mục tiêu (được tính vào chuỗi) hoặc bắn nhầm (mất chuỗi). Có thời gian hồi sau khi hết hiệu lực.",
   "Địch cũng được trang bị y hệt bạn — chúng sẽ bắn vulcan và tên lửa lại bạn theo đúng luật trên.",
   "Bắn hạ đúng 5 chiếc liên tiếp để qua màn (bắn trúng địch sai sẽ làm mất chuỗi). Tổng cộng 5 màn, càng lên cao địch càng nhanh và bắn trả nhiều hơn.",
+  "Nhấn phím Space bất cứ lúc nào để tạm dừng／tiếp tục.",
 ];
 
 // Fixed logical resolution — the canvas element scales to its container via
@@ -116,10 +118,12 @@ const VULCAN_COOLDOWN_MS = 110;
 const MISSILE_COOLDOWN_MS = 1400;
 const VULCAN_SPEED = 13;
 const MISSILE_SPEED = 4;
-// Enemy aircraft go down after ~2s of continuous vulcan hits; the player's own
-// aircraft can take ~3s. A gap longer than VULCAN_HIT_GAP_MS between hits
-// resets the count (must be sustained fire, not just any accumulated hits).
-// A missile, by contrast, is destroyed by a single vulcan hit (see collisions).
+// Enemy aircraft go down after the equivalent of ~2s of vulcan hits, and that
+// damage is cumulative — it never resets, hits can land across separate
+// bursts. The player's own aircraft is tougher (~3s) but must take that fire
+// continuously: any gap longer than VULCAN_HIT_GAP_MS between hits resets it
+// back to zero (see registerVulcanHit's resetOnGap param). A missile, by
+// contrast, is destroyed by a single vulcan hit on either side (see collisions).
 const ENEMY_VULCAN_KILL_MS = 2000;
 const PLAYER_VULCAN_KILL_MS = 3000;
 const ENEMY_VULCAN_HITS_TO_KILL = Math.ceil(ENEMY_VULCAN_KILL_MS / VULCAN_COOLDOWN_MS);
@@ -127,8 +131,13 @@ const PLAYER_VULCAN_HITS_TO_KILL = Math.ceil(PLAYER_VULCAN_KILL_MS / VULCAN_COOL
 const VULCAN_HIT_GAP_MS = 300;
 const HIT_RADIUS = 22;
 const CHAFF_COOLDOWN_MS = 3000;
+const CHAFF_DURATION_MS = 2000;
+const CHAFF_RADIUS = 90;
 const PLAYER_MISSILE_AMMO = 4;
 const ENEMY_MISSILE_AMMO = 2;
+const WINGMAN_DURATION_MS = 10000;
+const WINGMAN_COOLDOWN_MS = 8000; // starts once the wingman leaves
+const WINGMAN_FIRE_INTERVAL_MS = 260;
 
 interface Combatant {
   vulcanHits: number;
@@ -165,6 +174,21 @@ interface Cloud {
   y: number;
   scale: number;
   speed: number;
+}
+// Directional (aimed-at-fire-time, non-homing) shot fired by the wingman at
+// whichever enemy is nearest when it fires — unlike the player's own vulcan,
+// which only ever travels straight right.
+interface WingmanBullet {
+  x: number;
+  y: number;
+  vx: number;
+  vy: number;
+}
+interface Wingman {
+  x: number;
+  y: number;
+  expiresAt: number;
+  nextShotAt: number;
 }
 
 type Phase = "playing" | "stage-clear" | "game-clear" | "game-over";
@@ -243,8 +267,8 @@ function findMissileLock(enemies: Enemy[], p: { x: number; y: number }): Enemy |
 
 /** Registers one vulcan hit on a combatant; returns true once sustained fire
  * has reached the kill threshold (resets on gaps longer than the grace period). */
-function registerVulcanHit(entity: Combatant, now: number, hitsToKill: number): boolean {
-  if (now - entity.lastVulcanHitAt > VULCAN_HIT_GAP_MS) entity.vulcanHits = 0;
+function registerVulcanHit(entity: Combatant, now: number, hitsToKill: number, resetOnGap: boolean): boolean {
+  if (resetOnGap && now - entity.lastVulcanHitAt > VULCAN_HIT_GAP_MS) entity.vulcanHits = 0;
   entity.lastVulcanHitAt = now;
   entity.vulcanHits += 1;
   return entity.vulcanHits >= hitsToKill;
@@ -288,7 +312,11 @@ export default function AirCombatGame({ dataSource }: { dataSource: DataSourceSe
     flash: { text: string; color: string; until: number } | null;
     playerHitUntil: number;
     playerMissilesLeft: number;
-    chaffFlashUntil: number;
+    chaffActiveUntil: number;
+    wingman: Wingman | null;
+    wingmanBullets: WingmanBullet[];
+    wingmanNextAvailableAt: number;
+    paused: boolean;
   } | null>(null);
 
   const initStage = useCallback(
@@ -358,7 +386,11 @@ export default function AirCombatGame({ dataSource }: { dataSource: DataSourceSe
       flash: null,
       playerHitUntil: 0,
       playerMissilesLeft: PLAYER_MISSILE_AMMO,
-      chaffFlashUntil: 0,
+      chaffActiveUntil: 0,
+      wingman: null,
+      wingmanBullets: [],
+      wingmanNextAvailableAt: 0,
+      paused: false,
     };
     initStage(1);
   }, [initStage]);
@@ -438,7 +470,7 @@ export default function AirCombatGame({ dataSource }: { dataSource: DataSourceSe
       if (!g) return;
       const now = performance.now();
 
-      if (g.phase === "playing") {
+      if (g.phase === "playing" && !g.paused) {
         // Player movement (arrow keys)
         const p = g.player;
         if (g.keys["ArrowUp"]) p.y -= PLAYER_SPEED;
@@ -493,6 +525,45 @@ export default function AirCombatGame({ dataSource }: { dataSource: DataSourceSe
         for (const b of g.enemyBullets) b.x += b.vx;
         g.enemyBullets = g.enemyBullets.filter((b) => b.x > -20);
 
+        // Wingman (S key): hovers near the player and fires indiscriminately
+        // at whichever enemy is nearest, for a limited time.
+        if (g.wingman) {
+          if (now > g.wingman.expiresAt) {
+            g.wingman = null;
+            g.wingmanNextAvailableAt = now + WINGMAN_COOLDOWN_MS;
+          } else {
+            g.wingman.x = p.x + 34;
+            g.wingman.y = p.y - 46;
+            if (now > g.wingman.nextShotAt && g.enemies.length > 0) {
+              g.wingman.nextShotAt = now + WINGMAN_FIRE_INTERVAL_MS;
+              let nearest = g.enemies[0];
+              let bestDist = Math.hypot(nearest.x - g.wingman.x, nearest.y - g.wingman.y);
+              for (const e of g.enemies) {
+                const d = Math.hypot(e.x - g.wingman.x, e.y - g.wingman.y);
+                if (d < bestDist) {
+                  bestDist = d;
+                  nearest = e;
+                }
+              }
+              const dx = nearest.x - g.wingman.x;
+              const dy = nearest.y - g.wingman.y;
+              const dist = Math.hypot(dx, dy) || 1;
+              g.wingmanBullets.push({
+                x: g.wingman.x,
+                y: g.wingman.y,
+                vx: (dx / dist) * VULCAN_SPEED,
+                vy: (dy / dist) * VULCAN_SPEED,
+              });
+              playVulcanShot(audioCtxRef);
+            }
+          }
+        }
+        for (const b of g.wingmanBullets) {
+          b.x += b.vx;
+          b.y += b.vy;
+        }
+        g.wingmanBullets = g.wingmanBullets.filter((b) => b.x > -20 && b.x < W + 20 && b.y > -20 && b.y < H + 20);
+
         // Player missiles: home toward their locked enemy
         for (const m of g.missiles) {
           const target = g.enemies.find((e) => e.id === m.homing);
@@ -508,9 +579,15 @@ export default function AirCombatGame({ dataSource }: { dataSource: DataSourceSe
         }
         g.missiles = g.missiles.filter((m) => m.x < W + 20 && m.x > -20 && m.y > -20 && m.y < H + 20);
 
-        // Enemy missiles: home toward the player, unless chaff/flare (phím C)
-        // has already broken their lock — those just fly straight and miss.
+        // Enemy missiles: home toward the player. Chaff/flare (phím C) opens
+        // a jamming field around the player for CHAFF_DURATION_MS — any
+        // still-homing missile that enters it permanently loses its lock and
+        // just flies straight on from then on.
+        const chaffActive = now < g.chaffActiveUntil;
         for (const m of g.enemyMissiles) {
+          if (chaffActive && m.homing === "player" && Math.hypot(m.x - p.x, m.y - p.y) <= CHAFF_RADIUS) {
+            m.homing = null;
+          }
           if (m.homing === "player") {
             const dx = p.x - m.x;
             const dy = p.y - m.y;
@@ -552,8 +629,20 @@ export default function AirCombatGame({ dataSource }: { dataSource: DataSourceSe
           for (const e of g.enemies) {
             if (Math.hypot(b.x - e.x, b.y - e.y) < HIT_RADIUS) {
               g.bullets.splice(i, 1);
-              if (registerVulcanHit(e, now, ENEMY_VULCAN_HITS_TO_KILL)) handleHit(e);
+              if (registerVulcanHit(e, now, ENEMY_VULCAN_HITS_TO_KILL, false)) handleHit(e);
               break;
+            }
+          }
+        }
+        // Wingman fire: same cumulative-damage rule as the player's own
+        // vulcan, but indiscriminate — it doesn't know which enemy is correct.
+        outerWingmanHits: for (let i = g.wingmanBullets.length - 1; i >= 0; i--) {
+          const b = g.wingmanBullets[i];
+          for (const e of g.enemies) {
+            if (Math.hypot(b.x - e.x, b.y - e.y) < HIT_RADIUS) {
+              g.wingmanBullets.splice(i, 1);
+              if (registerVulcanHit(e, now, ENEMY_VULCAN_HITS_TO_KILL, false)) handleHit(e);
+              continue outerWingmanHits;
             }
           }
         }
@@ -590,7 +679,7 @@ export default function AirCombatGame({ dataSource }: { dataSource: DataSourceSe
             if (now > g.playerHitUntil && Math.hypot(b.x - p.x, b.y - p.y) < HIT_RADIUS) {
               g.enemyBullets.splice(i, 1);
               g.playerHitUntil = now + 120;
-              if (registerVulcanHit(p, now, PLAYER_VULCAN_HITS_TO_KILL)) {
+              if (registerVulcanHit(p, now, PLAYER_VULCAN_HITS_TO_KILL, true)) {
                 playExplosion(audioCtxRef);
                 g.phase = "game-over";
                 setHud((h) => ({ ...h, phase: "game-over" }));
@@ -626,10 +715,17 @@ export default function AirCombatGame({ dataSource }: { dataSource: DataSourceSe
     function onKeyDown(e: KeyboardEvent) {
       const g = gameRef.current;
       if (!g) return;
+      if (e.key === " " || e.code === "Space") {
+        e.preventDefault(); // Space normally scrolls the page
+        togglePause();
+        return;
+      }
+      if (e.key.startsWith("Arrow")) e.preventDefault();
       g.keys[e.key] = true;
       if (e.key === "x" || e.key === "X") g.firingVulcan = true;
       if (e.key === "z" || e.key === "Z") fireMissile();
       if (e.key === "c" || e.key === "C") deployChaff();
+      if (e.key === "s" || e.key === "S") summonWingman();
     }
     function onKeyUp(e: KeyboardEvent) {
       const g = gameRef.current;
@@ -648,7 +744,7 @@ export default function AirCombatGame({ dataSource }: { dataSource: DataSourceSe
 
   function fireMissile() {
     const g = gameRef.current;
-    if (!g || g.phase !== "playing") return;
+    if (!g || g.phase !== "playing" || g.paused) return;
     const now = performance.now();
     if (now - g.lastMissile < MISSILE_COOLDOWN_MS) return;
     if (g.playerMissilesLeft <= 0) return;
@@ -663,18 +759,34 @@ export default function AirCombatGame({ dataSource }: { dataSource: DataSourceSe
     playMissileLaunch(audioCtxRef);
   }
 
-  /** Chaff/flare: breaks the lock of every enemy missile currently in the
-   * air, so they carry on in a straight line instead of homing in. */
+  /** Chaff/flare: opens a jamming field around the player for
+   * CHAFF_DURATION_MS — any enemy missile that comes within CHAFF_RADIUS of
+   * the player while it's active permanently loses its lock (see the
+   * enemy-missile update in the main loop) and just flies straight on. */
   function deployChaff() {
     const g = gameRef.current;
-    if (!g || g.phase !== "playing") return;
+    if (!g || g.phase !== "playing" || g.paused) return;
     const now = performance.now();
     if (now - g.lastChaff < CHAFF_COOLDOWN_MS) return;
     g.lastChaff = now;
-    g.chaffFlashUntil = now + 400;
-    for (const m of g.enemyMissiles) {
-      if (m.homing === "player") m.homing = null;
-    }
+    g.chaffActiveUntil = now + CHAFF_DURATION_MS;
+  }
+
+  /** Wingman: a support jet that shows up for a while and fires at whatever
+   * enemy is nearest, indiscriminately (correct or not — same handleHit path
+   * as the player's own kills, so it can help or accidentally cost a streak). */
+  function summonWingman() {
+    const g = gameRef.current;
+    if (!g || g.phase !== "playing" || g.paused) return;
+    const now = performance.now();
+    if (g.wingman || now < g.wingmanNextAvailableAt) return;
+    g.wingman = { x: g.player.x + 34, y: g.player.y - 46, expiresAt: now + WINGMAN_DURATION_MS, nextShotAt: now + 300 };
+  }
+
+  function togglePause() {
+    const g = gameRef.current;
+    if (!g || g.phase !== "playing") return;
+    g.paused = !g.paused;
   }
 
   function setDirKey(key: string, down: boolean) {
@@ -728,6 +840,31 @@ export default function AirCombatGame({ dataSource }: { dataSource: DataSourceSe
       ctx.fill();
       ctx.restore();
     }
+
+    // Wingman (S key): a smaller jet in a lighter, distinct color
+    if (g.wingman) {
+      ctx.save();
+      ctx.translate(g.wingman.x, g.wingman.y);
+      ctx.scale(0.75, 0.75);
+      ctx.fillStyle = "#6FA8C4";
+      ctx.strokeStyle = "#2C5A70";
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      ctx.moveTo(30, 0);
+      ctx.lineTo(-10, -6);
+      ctx.lineTo(-22, -16);
+      ctx.lineTo(-16, -4);
+      ctx.lineTo(-26, -2);
+      ctx.lineTo(-26, 2);
+      ctx.lineTo(-16, 4);
+      ctx.lineTo(-22, 16);
+      ctx.lineTo(-10, 6);
+      ctx.closePath();
+      ctx.fill();
+      ctx.stroke();
+      ctx.restore();
+    }
+
     // Sustained-fire exposure ring on the player
     if (p.vulcanHits > 0 && now - p.lastVulcanHitAt < VULCAN_HIT_GAP_MS) {
       ctx.strokeStyle = "rgba(193,68,58,0.7)";
@@ -737,14 +874,15 @@ export default function AirCombatGame({ dataSource }: { dataSource: DataSourceSe
       ctx.stroke();
     }
 
-    // Chaff/flare burst
-    if (now < g.chaffFlashUntil) {
-      const t = 1 - (g.chaffFlashUntil - now) / 400;
-      ctx.strokeStyle = `rgba(230,230,230,${1 - t})`;
+    // Chaff/flare jamming field, visible for its whole active duration
+    if (now < g.chaffActiveUntil) {
+      ctx.strokeStyle = "rgba(230,230,230,0.8)";
       ctx.lineWidth = 2;
+      ctx.setLineDash([6, 5]);
       ctx.beginPath();
-      ctx.arc(p.x - 20, p.y, 8 + t * 30, 0, Math.PI * 2);
+      ctx.arc(p.x, p.y, CHAFF_RADIUS, 0, Math.PI * 2);
       ctx.stroke();
+      ctx.setLineDash([]);
     }
 
     // Range guides (subtle)
@@ -780,7 +918,9 @@ export default function AirCombatGame({ dataSource }: { dataSource: DataSourceSe
       ctx.stroke();
       ctx.restore();
 
-      if (e.vulcanHits > 0 && now - e.lastVulcanHitAt < VULCAN_HIT_GAP_MS) {
+      // Enemy damage is cumulative (never resets), so show it whenever any
+      // has landed — not just right after the most recent hit.
+      if (e.vulcanHits > 0) {
         ctx.strokeStyle = "rgba(193,68,58,0.7)";
         ctx.lineWidth = 3;
         ctx.beginPath();
@@ -789,7 +929,7 @@ export default function AirCombatGame({ dataSource }: { dataSource: DataSourceSe
       }
 
       // Label pill
-      ctx.font = "600 15px var(--font-kyokasho, serif)";
+      ctx.font = "600 15px 'Klee One', serif";
       const textW = ctx.measureText(e.text).width;
       const pillW = textW + 14;
       ctx.fillStyle = "rgba(250,243,184,0.95)";
@@ -827,11 +967,19 @@ export default function AirCombatGame({ dataSource }: { dataSource: DataSourceSe
       ctx.restore();
     }
 
-    // Bullets (player yellow, enemy orange-red)
-    ctx.fillStyle = "#FFD23F";
+    // Bullets (player deep orange, enemy orange-red)
+    ctx.fillStyle = "#C2540A";
     for (const b of g.bullets) ctx.fillRect(b.x - 6, b.y - 2, 12, 4);
     ctx.fillStyle = "#E85B3B";
     for (const b of g.enemyBullets) ctx.fillRect(b.x - 6, b.y - 2, 12, 4);
+    ctx.fillStyle = "#3FB6C4";
+    for (const b of g.wingmanBullets) {
+      ctx.save();
+      ctx.translate(b.x, b.y);
+      ctx.rotate(Math.atan2(b.vy, b.vx));
+      ctx.fillRect(-6, -2, 12, 4);
+      ctx.restore();
+    }
 
     // Missiles
     for (const [list, color] of [
@@ -854,6 +1002,32 @@ export default function AirCombatGame({ dataSource }: { dataSource: DataSourceSe
       ctx.font = "bold 26px sans-serif";
       ctx.textAlign = "center";
       ctx.fillText(g.flash.text, W / 2, 60);
+    }
+
+    // Pause overlay
+    if (g.phase === "playing" && g.paused) {
+      ctx.fillStyle = "rgba(76,58,34,0.45)";
+      ctx.fillRect(0, 0, W, H);
+      ctx.fillStyle = "#FBF8F1";
+      ctx.font = "bold 32px sans-serif";
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      ctx.fillText("⏸ Tạm dừng（Space để tiếp tục）", W / 2, H / 2);
+    }
+
+    // Wingman status (phím S)
+    ctx.font = "13px sans-serif";
+    ctx.textAlign = "left";
+    ctx.textBaseline = "alphabetic";
+    if (g.wingman) {
+      ctx.fillStyle = "#2C5A70";
+      ctx.fillText(`僚機 (S): còn ${Math.ceil((g.wingman.expiresAt - now) / 1000)}s`, 12, H - 12);
+    } else if (now < g.wingmanNextAvailableAt) {
+      ctx.fillStyle = "rgba(76,58,34,0.55)";
+      ctx.fillText(`僚機 (S): hồi ${Math.ceil((g.wingmanNextAvailableAt - now) / 1000)}s`, 12, H - 12);
+    } else {
+      ctx.fillStyle = "#4C3A22";
+      ctx.fillText("僚機 (S): sẵn sàng", 12, H - 12);
     }
   }
 
@@ -932,7 +1106,7 @@ export default function AirCombatGame({ dataSource }: { dataSource: DataSourceSe
           <TouchButton label="▶" onDown={() => setDirKey("ArrowRight", true)} onUp={() => setDirKey("ArrowRight", false)} />
         </div>
         <p className="text-center text-[11px] text-sand-500">
-          Di chuyển: ←↑↓→　Vulcan: giữ phím X　Tên lửa: phím Z　Chaff/flare (tránh tên lửa): phím C
+          Di chuyển: ←↑↓→　Vulcan: giữ X　Tên lửa: Z　Chaff/flare: C　Gọi僚機 hỗ trợ: S　Tạm dừng: Space
         </p>
         <div className="flex gap-2">
           <TouchButton
@@ -949,6 +1123,8 @@ export default function AirCombatGame({ dataSource }: { dataSource: DataSourceSe
           />
           <TouchButton label="Z" wide onDown={fireMissile} onUp={() => {}} />
           <TouchButton label="C" wide onDown={deployChaff} onUp={() => {}} />
+          <TouchButton label="S" wide onDown={summonWingman} onUp={() => {}} />
+          <TouchButton label="⏸" wide onDown={togglePause} onUp={() => {}} />
         </div>
       </div>
     </div>
