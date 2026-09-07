@@ -152,14 +152,16 @@ function buildHelpBody(km: Keymap): string[] {
     "Phía trên hiển thị động từ thể ます và tên thể chia cần bắn hạ (ví dụ「て形」).",
     "4 máy bay địch bay bên phải, mỗi chiếc mang một thể chia khác nhau — chỉ 1 chiếc là đúng.",
     `Di chuyển bằng 4 phím mũi tên ←↑↓→. Giữ phím ${k("boost")} để tăng tốc độ di chuyển gấp đôi.`,
-    `Vulcan (giữ phím ${k("vulcan")}, 350 viên đạn, tiếp đạn đầy mỗi 2 màn): tầm bắn ngắn (~1/3 màn hình). Số đạn còn lại hiện nhỏ ở góc trên bên phải máy bay của bạn. Sát thương lên máy bay địch được cộng dồn vĩnh viễn (không hồi phục) — chỉ cần đủ ~2 giây bắn trúng tính gộp là hạ được, kể cả bắn ngắt quãng. Máy bay của bạn thì ngược lại: phải bị bắn trúng liên tục ~3 giây không ngắt quãng mới nổ. Bắn trúng tên lửa (của cả 2 bên) thì hạ ngay lập tức bất kể bên nào bắn.`,
-    `Tên lửa (phím ${k("missile")}, bạn có 8 quả, mỗi máy bay địch có 2 quả): khi có vòng khóa mục tiêu màu xanh lá hiện trên địch (trong tầm 2/3 màn hình, ngay phía trước), bắn 1 phát là hạ luôn. Cứ qua 2 màn là được tiếp đạn đầy lại 8 quả.`,
+    `Vulcan (giữ phím ${k("vulcan")}, 350 viên đạn): tầm bắn ngắn (~1/3 màn hình). Số đạn còn lại hiện nhỏ ở góc trên bên phải máy bay của bạn. Sát thương lên máy bay địch được cộng dồn vĩnh viễn (không hồi phục) — chỉ cần đủ ~2 giây bắn trúng tính gộp là hạ được, kể cả bắn ngắt quãng. Máy bay của bạn thì ngược lại: phải bị bắn trúng liên tục ~3 giây không ngắt quãng mới nổ. Bắn trúng tên lửa (của cả 2 bên) thì hạ ngay lập tức bất kể bên nào bắn.`,
+    `Tên lửa (phím ${k("missile")}, bạn có 8 quả, mỗi máy bay địch có 2 quả): khi có vòng khóa mục tiêu màu xanh lá hiện trên địch (trong tầm 2/3 màn hình, ngay phía trước), bắn 1 phát là hạ luôn.`,
     `Laser màu hồng (phím ${k("laser")}, 10 phát): bắn xuyên suốt tới tận rìa màn hình theo đúng độ cao của bạn, trúng 2 phát là hạ một máy bay địch; trúng tên lửa địch thì tên lửa nổ ngay lập tức. Thanh ngang nhỏ dưới máy bay của bạn hiện số đạn laser còn lại.`,
-    `Chaff/flare (phím ${k("chaff")}): bấm là bắn ngay lập tức, không cần chờ hồi — tỏa ra một chùm mồi bẫy xung quanh máy bay của bạn, chỉ đánh lừa được tên lửa bay tới từ phía sau／trên／dưới. Tên lửa bay thẳng từ chính diện (đối đầu) sẽ không bị mồi bẫy đánh lừa — phải dùng vulcan để bắn hạ loại này. Ngay khi tên lửa của bạn khóa mục tiêu vào một máy bay địch, địch đó có 25% cơ hội tự bắn chaff phòng thủ theo đúng luật tương tự.`,
+    `Chaff/flare (phím ${k("chaff")}, 15 lượt): bấm là bắn ngay lập tức, không cần chờ hồi — tỏa ra một chùm mồi bẫy xung quanh máy bay của bạn, chỉ đánh lừa được tên lửa bay tới từ phía sau／trên／dưới. Tên lửa bay thẳng từ chính diện (đối đầu) sẽ không bị mồi bẫy đánh lừa — phải dùng vulcan để bắn hạ loại này. Ngay khi tên lửa của bạn khóa mục tiêu vào một máy bay địch, địch đó có 25% cơ hội tự bắn chaff phòng thủ theo đúng luật tương tự.`,
+    "Cứ bắn hạ đúng 2 chiếc là vulcan／tên lửa／laser／chaff đều được tiếp đầy trở lại.",
     `Khiên chắn (phím ${k("barrier")}): dùng được 1 lần mỗi màn, kích hoạt trong 5 giây và chặn TOÀN BỘ đòn tấn công từ mọi hướng trong lúc đó.`,
     `Bom chống quái vật (phím ${k("bomb")}): chỉ dùng được khi đang chiến đấu với quái vật cuối cùng (kaiju), có 4 quả — nếu cả 4 quả đều trúng thì hạ gục nó ngay lập tức, bất kể các mốc sát thương khác.`,
     `Gọi僚機 hỗ trợ (phím ${k("wingman")}): một máy bay đồng đội gia nhập đội hình, tự bay theo ý riêng (không cần bám theo bạn) và mang vũ trang giống hệt bạn — vulcan bắn thẳng liên tục, tên lửa khóa mục tiêu, và cả laser — không phân biệt đúng/sai nên có thể vô tình bắn hạ đúng mục tiêu (được tính vào chuỗi) hoặc bắn nhầm (mất chuỗi). Mỗi僚機 tự nhắm vào một máy bay địch khác nhau để bắn tên lửa/laser (không dồn hết vào một chiếc). Mỗi lần bấm ${k("wingman")} (hoặc mỗi lần bắn hạ đúng mục tiêu) sẽ thêm 1僚機 vào đội hình, tối đa 5 chiếc cùng lúc.僚機 không tự biến mất — nếu không bị địch bắn hạ trong màn, nó sẽ theo bạn sang màn tiếp theo và được hồi đầy sát thương lẫn toàn bộ đạn dược. Địch cũng có thể nhắm bắn僚機 giống như nhắm bắn bạn (cùng luật vulcan/tên lửa) và có thể bắn hạ nó.`,
     "Địch cũng được trang bị y hệt bạn — chúng sẽ bắn vulcan và tên lửa lại bạn theo đúng luật trên.",
+    "Điểm số: bắn hạ 1 máy bay địch được 5 điểm, bắn hạ đúng mục tiêu được 10 điểm, hạ trung boss được 30 điểm, hạ quái vật cuối cùng được 100 điểm. Cứ đủ 50 điểm là được thưởng thêm 1 phát laser.",
     "Bắn hạ đúng 5 chiếc liên tiếp để qua màn (bắn trúng địch sai sẽ làm mất chuỗi).",
     "Sau màn 5 sẽ xuất hiện trung boss: to lớn, bắn vulcan tứ phía và có 10 quả tên lửa.",
     "Sau màn 10 sẽ xuất hiện quái vật cuối cùng (kaiju): đứng dưới đất, thỉnh thoảng nhảy lên nhưng không tiến tới, thỉnh thoảng phun tia sáng nhắm thẳng vào bạn — dính 3 lần là bạn bị hạ. Nó chỉ gục ngã khi đạt MỘT trong các mốc: 100 phát vulcan, 5 quả tên lửa, 5 phát laser, hoặc cả 4 quả bom.",
@@ -173,6 +175,13 @@ function buildHelpBody(km: Keymap): string[] {
 const W = 960;
 const H = 450;
 const STREAK_GOAL = 5;
+// Scoring: any enemy kill scores, the correct one scores more; bosses score
+// a lot more. Every SCORE_BONUS_BEAM_STEP points earns one bonus laser shot.
+const SCORE_WRONG_KILL = 5;
+const SCORE_CORRECT_KILL = 10;
+const SCORE_MID_BOSS = 30;
+const SCORE_FINAL_BOSS = 100;
+const SCORE_BONUS_BEAM_STEP = 50;
 // Each "loop": 5 normal stages → mid-boss → 5 more normal stages → final
 // boss (kaiju) → loop back to stage 1 with permanent weapon upgrades.
 const STAGES_PER_LOOP = 10;
@@ -183,7 +192,7 @@ const VULCAN_RANGE = W / 3;
 const MISSILE_RANGE = (W * 2) / 3;
 const ALIGN_TOLERANCE = 70;
 const PLAYER_SPEED = 4.2;
-const PLAYER_BOUNDS = { minX: 24, maxX: W * 0.26, minY: 28, maxY: H - 28 };
+const PLAYER_BOUNDS = { minX: 24, maxX: W - 40, minY: 28, maxY: H - 28 };
 const ENEMY_BOUNDS = { minX: W * 0.42, maxX: W - 40, minY: 34, maxY: H - 34 };
 // The wingman wanders on its own within the friendly (left) side of the
 // screen — it doesn't lock onto the player's exact position.
@@ -207,6 +216,7 @@ const HIT_RADIUS = 22;
 const CHAFF_PARTICLE_COUNT = 15;
 const CHAFF_PARTICLE_LIFETIME_MS = 900;
 const CHAFF_SCATTER_RADIUS = 60; // how far particles start from the player
+const CHAFF_AMMO_BASE = 15;
 const PLAYER_MISSILE_AMMO = 8;
 const ENEMY_MISSILE_AMMO = 2;
 const PLAYER_VULCAN_AMMO_BASE = 350;
@@ -576,11 +586,13 @@ export default function AirCombatGame({ dataSource }: { dataSource: DataSourceSe
     formLabelJa: "",
     formLabelVn: "",
     streak: 0,
+    score: 0,
     stage: 1,
     phase: "playing" as Phase,
     missilesLeft: PLAYER_MISSILE_AMMO,
     vulcanAmmo: PLAYER_VULCAN_AMMO_BASE,
     laserAmmo: LASER_AMMO,
+    chaffAmmo: CHAFF_AMMO_BASE,
     loopCount: 1,
     bossHp: null as { current: number; max: number; label: string } | null,
   });
@@ -609,6 +621,10 @@ export default function AirCombatGame({ dataSource }: { dataSource: DataSourceSe
     playerMaxMissiles: number;
     playerVulcanAmmo: number;
     playerMaxVulcanAmmo: number;
+    chaffAmmo: number;
+    correctKills: number; // every 2 correct kills fully resupplies vulcan/missile/laser/chaff
+    score: number;
+    beamBonusTiers: number; // how many SCORE_BONUS_BEAM_STEP bonuses already granted
     chaffParticles: ChaffParticle[];
     enemyChaffParticles: ChaffParticle[];
     wingmen: Wingman[];
@@ -652,14 +668,8 @@ export default function AirCombatGame({ dataSource }: { dataSource: DataSourceSe
       // Barrier (phím B) gets one fresh use every stage.
       g.barrierUsed = false;
       g.barrierUntil = 0;
-      // Missiles and vulcan ammo resupply to full every 2 stages cleared
-      // (i.e. entering an odd-numbered stage within the loop) — otherwise
-      // whatever's left carries over. Laser only refills at the start of a
-      // new loop (see the final-boss defeat handling).
-      if (stage % 2 === 1) {
-        g.playerMissilesLeft = g.playerMaxMissiles;
-        g.playerVulcanAmmo = g.playerMaxVulcanAmmo;
-      }
+      // Missiles/vulcan/laser/chaff resupply every 2 correct kills — see the
+      // counter in handleHit(), not tied to stage transitions here.
       // Wingmen that survived the previous stage carry over into this one,
       // with their accumulated damage and all ammo (vulcan/missile/laser)
       // fully restored.
@@ -675,11 +685,13 @@ export default function AirCombatGame({ dataSource }: { dataSource: DataSourceSe
         formLabelJa: formMeta.labelJa,
         formLabelVn: formMeta.labelVn,
         streak: 0,
+        score: g.score,
         stage,
         phase: "playing",
         missilesLeft: g.playerMissilesLeft,
         vulcanAmmo: g.playerVulcanAmmo,
         laserAmmo: g.laserAmmo,
+        chaffAmmo: g.chaffAmmo,
         loopCount: g.loopCount,
         bossHp: null,
       });
@@ -726,6 +738,10 @@ export default function AirCombatGame({ dataSource }: { dataSource: DataSourceSe
       playerMaxMissiles: PLAYER_MISSILE_AMMO,
       playerVulcanAmmo: PLAYER_VULCAN_AMMO_BASE,
       playerMaxVulcanAmmo: PLAYER_VULCAN_AMMO_BASE,
+      chaffAmmo: CHAFF_AMMO_BASE,
+      correctKills: 0,
+      score: 0,
+      beamBonusTiers: 0,
       chaffParticles: [],
       enemyChaffParticles: [],
       wingmen: [],
@@ -779,6 +795,7 @@ export default function AirCombatGame({ dataSource }: { dataSource: DataSourceSe
 
       if (enemy.correct) {
         g.streak += 1;
+        addScore(g, SCORE_CORRECT_KILL);
         g.flash = { text: "Trúng!", color: "#2F7D3C", until: performance.now() + 500 };
         // Every correct kill adds a new wingman to the formation (up to
         // WINGMAN_MAX) alongside any that already survived earlier stages.
@@ -786,21 +803,37 @@ export default function AirCombatGame({ dataSource }: { dataSource: DataSourceSe
           const prev = g.wingmen[g.wingmen.length - 1];
           g.wingmen.push(spawnWingman(prev?.x, prev?.y, performance.now()));
         }
+        // Every 2 correct kills fully resupplies vulcan/missile/laser/chaff.
+        g.correctKills += 1;
+        let ammoUpdate: Partial<typeof hud> = {};
+        if (g.correctKills % 2 === 0) {
+          g.playerMissilesLeft = g.playerMaxMissiles;
+          g.playerVulcanAmmo = g.playerMaxVulcanAmmo;
+          g.laserAmmo = g.maxLaserAmmo;
+          g.chaffAmmo = CHAFF_AMMO_BASE;
+          ammoUpdate = {
+            missilesLeft: g.playerMissilesLeft,
+            vulcanAmmo: g.playerVulcanAmmo,
+            laserAmmo: g.laserAmmo,
+            chaffAmmo: g.chaffAmmo,
+          };
+        }
         if (g.streak >= STREAK_GOAL) {
           if (g.stage === MID_BOSS_AT_STAGE || g.stage === FINAL_BOSS_AT_STAGE) {
             g.pendingBossKind = g.stage === FINAL_BOSS_AT_STAGE ? "final" : "mid";
             g.phase = "boss-intro";
-            setHud((h) => ({ ...h, streak: g.streak, phase: "boss-intro" }));
+            setHud((h) => ({ ...h, streak: g.streak, phase: "boss-intro", ...ammoUpdate }));
           } else {
             g.phase = "stage-clear";
-            setHud((h) => ({ ...h, streak: g.streak, phase: "stage-clear" }));
+            setHud((h) => ({ ...h, streak: g.streak, phase: "stage-clear", ...ammoUpdate }));
           }
           return;
         }
         nextTarget();
-        setHud((h) => ({ ...h, streak: g.streak }));
+        setHud((h) => ({ ...h, streak: g.streak, ...ammoUpdate }));
       } else {
         g.streak = 0;
+        addScore(g, SCORE_WRONG_KILL);
         g.flash = { text: "Sai!", color: "#C1443A", until: performance.now() + 500 };
         const decoyPool = pickRandomVerbs(6, new Set(), sourceFilter(dataSource));
         const existingTexts = new Set(g.enemies.map((e) => e.text));
@@ -1472,14 +1505,17 @@ export default function AirCombatGame({ dataSource }: { dataSource: DataSourceSe
     laserSweep(g, g.player.x, g.player.y);
   }
 
-  /** Chaff/flare: always fires immediately on button press (no cooldown) —
-   * scatters a burst of short-lived particles around the player; any enemy
-   * missile that touches one while it's still burning explodes against it
-   * (see the collision check in the main loop). */
+  /** Chaff/flare: always fires immediately on button press (no cooldown),
+   * as long as ammo remains — scatters a burst of short-lived particles
+   * around the player; any enemy missile that touches one while it's still
+   * burning explodes against it (see the collision check in the main loop). */
   function deployChaff() {
     const g = gameRef.current;
     if (!g || (g.phase !== "playing" && g.phase !== "boss") || g.paused || !gateAnsweredRef.current) return;
+    if (g.chaffAmmo <= 0) return;
     const now = performance.now();
+    g.chaffAmmo -= 1;
+    setHud((h) => ({ ...h, chaffAmmo: g.chaffAmmo }));
     for (let i = 0; i < CHAFF_PARTICLE_COUNT; i++) {
       const angle = (Math.PI * 2 * i) / CHAFF_PARTICLE_COUNT + Math.random() * 0.4;
       const dist = 10 + Math.random() * CHAFF_SCATTER_RADIUS;
@@ -1539,12 +1575,26 @@ export default function AirCombatGame({ dataSource }: { dataSource: DataSourceSe
     playMissileLaunch(audioCtxRef);
   }
 
+  /** Adds points to the running score; every SCORE_BONUS_BEAM_STEP points
+   * crossed grants that many bonus laser shots (added to current ammo, not
+   * the max — a one-off bonus, not a permanent upgrade). */
+  function addScore(g: NonNullable<typeof gameRef.current>, points: number) {
+    g.score += points;
+    const tiers = Math.floor(g.score / SCORE_BONUS_BEAM_STEP);
+    if (tiers > g.beamBonusTiers) {
+      g.laserAmmo += tiers - g.beamBonusTiers;
+      g.beamBonusTiers = tiers;
+    }
+    setHud((h) => ({ ...h, score: g.score, laserAmmo: g.laserAmmo }));
+  }
+
   /** Boss defeated: mid-boss clears the stage as usual; the final boss
    * (kaiju) instead grants permanent weapon upgrades and loops back to
    * stage 1 (see LOOP_* constants). */
   function defeatBoss(g: NonNullable<typeof gameRef.current>, boss: Boss) {
     g.boss = null;
     g.pendingBossKind = null;
+    addScore(g, boss.kind === "mid" ? SCORE_MID_BOSS : SCORE_FINAL_BOSS);
     if (boss.kind === "mid") {
       g.phase = "stage-clear";
       setHud((h) => ({ ...h, phase: "stage-clear" }));
@@ -2026,9 +2076,11 @@ export default function AirCombatGame({ dataSource }: { dataSource: DataSourceSe
           <span>Vulcan: {hud.vulcanAmmo}</span>
           <span>Tên lửa: {hud.missilesLeft}</span>
           <span>Laser: {hud.laserAmmo}</span>
+          <span>Chaff: {hud.chaffAmmo}</span>
           <span>
             Chuỗi: {hud.streak}/{STREAK_GOAL}
           </span>
+          <span className="font-semibold text-sand-700">Điểm: {hud.score}</span>
         </span>
       </div>
 
