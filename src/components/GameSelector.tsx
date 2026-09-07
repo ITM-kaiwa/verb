@@ -7,9 +7,10 @@ import SlashGame from "@/components/games/SlashGame";
 import GroupSortGame from "@/components/games/GroupSortGame";
 import FillBlankBattleGame from "@/components/games/FillBlankBattleGame";
 import ComboRelayGame from "@/components/games/ComboRelayGame";
+import AirCombatGame from "@/components/games/AirCombatGame";
 import type { DataSourceSetting } from "@/lib/types";
 
-type GameId = "matching" | "memory" | "slash" | "groupsort" | "battle" | "combo";
+type GameId = "matching" | "memory" | "slash" | "groupsort" | "battle" | "combo" | "aircombat";
 
 const GAMES: { id: GameId; title: string; desc: string; emoji: string }[] = [
   { id: "matching", title: "Đoán thể chia", desc: "Bắt đúng thể chia của động từ đang rơi.", emoji: "🍃" },
@@ -18,6 +19,7 @@ const GAMES: { id: GameId; title: string; desc: string; emoji: string }[] = [
   { id: "groupsort", title: "Phân loại nhóm động từ", desc: "Xếp động từ rơi xuống vào đúng nhóm I／II／III.", emoji: "🧩" },
   { id: "battle", title: "Đấu trường điền từ", desc: "Chọn đúng thể chia hợp ngữ cảnh để tấn công quái vật.", emoji: "⚔️" },
   { id: "combo", title: "Chuyền combo chia động từ", desc: "Trả lời liên tiếp thật nhanh để giữ combo.", emoji: "🎵" },
+  { id: "aircombat", title: "Không chiến chia động từ", desc: "Lái máy bay, bắn hạ đúng thể chia giữa 4 máy bay địch bắn trả.", emoji: "🛩️" },
 ];
 
 export default function GameSelector({
@@ -66,6 +68,7 @@ export default function GameSelector({
       {active === "groupsort" && <GroupSortGame dataSource={dataSource} />}
       {active === "battle" && <FillBlankBattleGame />}
       {active === "combo" && <ComboRelayGame dataSource={dataSource} />}
+      {active === "aircombat" && <AirCombatGame dataSource={dataSource} />}
     </div>
   );
 }
