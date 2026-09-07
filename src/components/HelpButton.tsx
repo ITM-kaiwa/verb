@@ -23,10 +23,10 @@ export default function HelpButton({ title, body }: { title: string; body: strin
           onClick={() => setOpen(false)}
         >
           <div
-            className="w-full max-w-sm rounded-3xl border border-sand-300 bg-sand-50 p-5 shadow-card"
+            className="flex max-h-[85vh] w-full max-w-sm flex-col rounded-3xl border border-sand-300 bg-sand-50 p-5 shadow-card"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="mb-3 flex items-center justify-between">
+            <div className="mb-3 flex shrink-0 items-center justify-between">
               <h2 className="font-kyokasho text-lg text-kanjibrown">{title}</h2>
               <button
                 type="button"
@@ -37,7 +37,7 @@ export default function HelpButton({ title, body }: { title: string; body: strin
                 ✕
               </button>
             </div>
-            <div className="space-y-2 text-sm text-sand-700">
+            <div className="space-y-2 overflow-y-auto text-sm text-sand-700">
               {body.map((line) => (
                 <p key={line}>{line}</p>
               ))}
