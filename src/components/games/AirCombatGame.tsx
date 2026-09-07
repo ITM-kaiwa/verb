@@ -92,16 +92,16 @@ const HELP_BODY = [
   "Phía trên hiển thị động từ thể ます và tên thể chia cần bắn hạ (ví dụ「て形」).",
   "4 máy bay địch bay bên phải, mỗi chiếc mang một thể chia khác nhau — chỉ 1 chiếc là đúng.",
   "Di chuyển bằng 4 phím mũi tên ←↑↓→. Giữ phím A để tăng tốc độ di chuyển gấp đôi.",
-  "Vulcan (giữ phím X, 250 viên đạn, tiếp đạn đầy mỗi 2 màn): tầm bắn ngắn (~1/3 màn hình). Sát thương lên máy bay địch được cộng dồn vĩnh viễn (không hồi phục) — chỉ cần đủ ~2 giây bắn trúng tính gộp là hạ được, kể cả bắn ngắt quãng. Máy bay của bạn thì ngược lại: phải bị bắn trúng liên tục ~3 giây không ngắt quãng mới nổ. Bắn trúng tên lửa (của cả 2 bên) thì hạ ngay lập tức bất kể bên nào bắn.",
+  "Vulcan (giữ phím X, 350 viên đạn, tiếp đạn đầy mỗi 2 màn): tầm bắn ngắn (~1/3 màn hình). Số đạn còn lại hiện nhỏ ở góc trên bên phải máy bay của bạn. Sát thương lên máy bay địch được cộng dồn vĩnh viễn (không hồi phục) — chỉ cần đủ ~2 giây bắn trúng tính gộp là hạ được, kể cả bắn ngắt quãng. Máy bay của bạn thì ngược lại: phải bị bắn trúng liên tục ~3 giây không ngắt quãng mới nổ. Bắn trúng tên lửa (của cả 2 bên) thì hạ ngay lập tức bất kể bên nào bắn.",
   "Tên lửa (phím Z, bạn có 8 quả, mỗi máy bay địch có 2 quả): khi có vòng khóa mục tiêu màu xanh lá hiện trên địch (trong tầm 2/3 màn hình, ngay phía trước), bắn 1 phát là hạ luôn. Cứ qua 2 màn là được tiếp đạn đầy lại 8 quả.",
-  "Laser màu hồng (phím S, 10 phát): bắn xuyên suốt tới tận rìa màn hình theo đúng độ cao của bạn, trúng 2 phát là hạ một máy bay địch.",
-  "Chaff/flare (phím C): bắn ra một chùm mồi bẫy xung quanh máy bay của bạn — chỉ đánh lừa được tên lửa bay tới từ phía sau／trên／dưới. Tên lửa bay thẳng từ chính diện (đối đầu) sẽ không bị mồi bẫy đánh lừa — phải dùng vulcan để bắn hạ loại này. Máy bay địch cũng thỉnh thoảng (~15%) tự bắn chaff để né tên lửa của bạn, theo đúng luật tương tự.",
+  "Laser màu hồng (phím S, 10 phát): bắn xuyên suốt tới tận rìa màn hình theo đúng độ cao của bạn, trúng 2 phát là hạ một máy bay địch. Thanh ngang nhỏ dưới máy bay của bạn hiện số đạn laser còn lại.",
+  "Chaff/flare (phím C): bấm là bắn ngay lập tức, không cần chờ hồi — tỏa ra một chùm mồi bẫy xung quanh máy bay của bạn, chỉ đánh lừa được tên lửa bay tới từ phía sau／trên／dưới. Tên lửa bay thẳng từ chính diện (đối đầu) sẽ không bị mồi bẫy đánh lừa — phải dùng vulcan để bắn hạ loại này. Ngay khi tên lửa của bạn khóa mục tiêu vào một máy bay địch, địch đó có 25% cơ hội tự bắn chaff phòng thủ theo đúng luật tương tự.",
   "Gọi僚機 hỗ trợ (phím D): một máy bay đồng đội xuất hiện trong 10 giây, tự bay theo ý riêng (không cần bám theo bạn) và tự bắn vào máy bay địch gần nhất trong tầm vulcan giống hệt bạn, không phân biệt đúng/sai — có thể vô tình bắn hạ đúng mục tiêu (được tính vào chuỗi) hoặc bắn nhầm (mất chuỗi). Mỗi lần bạn bắn hạ đúng mục tiêu, một僚機 mới cũng tự động được điều đến (không cần chờ hồi).",
   "Địch cũng được trang bị y hệt bạn — chúng sẽ bắn vulcan và tên lửa lại bạn theo đúng luật trên.",
   "Bắn hạ đúng 5 chiếc liên tiếp để qua màn (bắn trúng địch sai sẽ làm mất chuỗi).",
   "Sau màn 5 sẽ xuất hiện trung boss: to lớn, bắn vulcan tứ phía và có 10 quả tên lửa.",
   "Sau màn 10 sẽ xuất hiện quái vật cuối cùng (kaiju): đứng dưới đất, thỉnh thoảng nhảy lên nhưng không tiến tới, thỉnh thoảng phun tia sáng nhắm thẳng vào bạn — dính 3 lần là bạn bị hạ. Nó chỉ gục ngã khi đạt MỘT trong các mốc: 100 phát vulcan, 5 quả tên lửa, hoặc 5 phát laser.",
-  "Đánh bại quái vật cuối cùng sẽ quay lại màn 1 với nâng cấp vĩnh viễn: thêm 4 quả tên lửa, thêm 10 phát laser, tầm bắn vulcan xa hơn, và đạn vulcan tăng gấp đôi (500 viên).",
+  "Đánh bại quái vật cuối cùng sẽ quay lại màn 1 với nâng cấp vĩnh viễn: thêm 4 quả tên lửa, thêm 10 phát laser, tầm bắn vulcan xa hơn, và đạn vulcan tăng gấp đôi (700 viên).",
   "Nhấn phím Space bất cứ lúc nào để tạm dừng／tiếp tục.",
 ];
 
@@ -141,14 +141,15 @@ const ENEMY_VULCAN_HITS_TO_KILL = Math.ceil(ENEMY_VULCAN_KILL_MS / VULCAN_COOLDO
 const PLAYER_VULCAN_HITS_TO_KILL = Math.ceil(PLAYER_VULCAN_KILL_MS / VULCAN_COOLDOWN_MS);
 const VULCAN_HIT_GAP_MS = 300;
 const HIT_RADIUS = 22;
-const CHAFF_COOLDOWN_MS = 3000;
 const CHAFF_PARTICLE_COUNT = 10;
 const CHAFF_PARTICLE_LIFETIME_MS = 900;
 const CHAFF_SCATTER_RADIUS = 60; // how far particles start from the player
 const PLAYER_MISSILE_AMMO = 8;
 const ENEMY_MISSILE_AMMO = 2;
-const PLAYER_VULCAN_AMMO_BASE = 250;
-const ENEMY_CHAFF_CHANCE = 0.15;
+const PLAYER_VULCAN_AMMO_BASE = 350;
+// Chance an enemy deploys defensive chaff the moment a player missile locks
+// onto it (rolled once per missile — see Missile.chaffRolled).
+const ENEMY_CHAFF_CHANCE = 0.25;
 const WINGMAN_DURATION_MS = 10000;
 const WINGMAN_COOLDOWN_MS = 8000; // starts once the wingman leaves
 const WINGMAN_FIRE_INTERVAL_MS = 260;
@@ -205,7 +206,6 @@ interface Enemy extends Combatant {
   redirectAt: number;
   nextVulcanAt: number;
   nextMissileAt: number;
-  nextChaffAt: number;
   missilesLeft: number;
   laserHits: number;
 }
@@ -222,6 +222,8 @@ interface Missile {
   vx: number;
   vy: number;
   homing: "player" | number; // "player", or an enemy id
+  chaffRolled?: boolean; // player missiles only: has the target enemy's
+  // 25%-chance defensive-chaff roll already happened for this missile?
 }
 interface Cloud {
   x: number;
@@ -305,7 +307,6 @@ function spawnEnemy(text: string, correct: boolean, speedMul: number, now: numbe
     redirectAt: now + 700 + Math.random() * 1200,
     nextVulcanAt: now + 500 + Math.random() * 1000,
     nextMissileAt: now + 1500 + Math.random() * 2000,
-    nextChaffAt: now + 1500 + Math.random() * 2000,
     missilesLeft: ENEMY_MISSILE_AMMO,
     laserHits: 0,
     vulcanHits: 0,
@@ -447,7 +448,7 @@ export default function AirCombatGame({ dataSource }: { dataSource: DataSourceSe
     stage: 1,
     phase: "playing" as Phase,
     missilesLeft: PLAYER_MISSILE_AMMO,
-    vulcanAmmo: 250,
+    vulcanAmmo: PLAYER_VULCAN_AMMO_BASE,
     laserAmmo: LASER_AMMO,
     loopCount: 1,
     bossHp: null as { current: number; max: number; label: string } | null,
@@ -468,7 +469,6 @@ export default function AirCombatGame({ dataSource }: { dataSource: DataSourceSe
     speedMul: number;
     lastVulcan: number;
     lastMissile: number;
-    lastChaff: number;
     firingVulcan: boolean;
     phase: Phase;
     flash: { text: string; color: string; until: number } | null;
@@ -567,7 +567,6 @@ export default function AirCombatGame({ dataSource }: { dataSource: DataSourceSe
       speedMul: 1,
       lastVulcan: 0,
       lastMissile: 0,
-      lastChaff: 0,
       firingVulcan: false,
       phase: "playing",
       flash: null,
@@ -912,24 +911,24 @@ export default function AirCombatGame({ dataSource }: { dataSource: DataSourceSe
           }
         }
 
-        // Enemies also occasionally deploy their own chaff (~15% chance on
-        // each periodic check) to defend against the player's homing missiles.
-        for (const e of g.enemies) {
-          if (now > e.nextChaffAt) {
-            e.nextChaffAt = now + 1500 + Math.random() * 2000;
-            if (Math.random() < ENEMY_CHAFF_CHANCE) {
-              for (let i = 0; i < CHAFF_PARTICLE_COUNT; i++) {
-                const angle = (Math.PI * 2 * i) / CHAFF_PARTICLE_COUNT + Math.random() * 0.4;
-                const dist = 10 + Math.random() * CHAFF_SCATTER_RADIUS;
-                g.enemyChaffParticles.push({
-                  x: e.x + Math.cos(angle) * dist,
-                  y: e.y + Math.sin(angle) * dist,
-                  vx: Math.cos(angle) * 0.4,
-                  vy: Math.sin(angle) * 0.4,
-                  expiresAt: now + CHAFF_PARTICLE_LIFETIME_MS,
-                });
-              }
-            }
+        // The moment a player missile locks onto an enemy, that enemy gets a
+        // one-time 25% chance to deploy defensive chaff against it (rolled
+        // once per missile — see Missile.chaffRolled).
+        for (const m of g.missiles) {
+          if (m.chaffRolled || typeof m.homing !== "number" || m.homing < 0) continue;
+          m.chaffRolled = true;
+          const target = g.enemies.find((e) => e.id === m.homing);
+          if (!target || Math.random() >= ENEMY_CHAFF_CHANCE) continue;
+          for (let i = 0; i < CHAFF_PARTICLE_COUNT; i++) {
+            const angle = (Math.PI * 2 * i) / CHAFF_PARTICLE_COUNT + Math.random() * 0.4;
+            const dist = 10 + Math.random() * CHAFF_SCATTER_RADIUS;
+            g.enemyChaffParticles.push({
+              x: target.x + Math.cos(angle) * dist,
+              y: target.y + Math.sin(angle) * dist,
+              vx: Math.cos(angle) * 0.4,
+              vy: Math.sin(angle) * 0.4,
+              expiresAt: now + CHAFF_PARTICLE_LIFETIME_MS,
+            });
           }
         }
         for (const c of g.enemyChaffParticles) {
@@ -1187,15 +1186,14 @@ export default function AirCombatGame({ dataSource }: { dataSource: DataSourceSe
     }
   }
 
-  /** Chaff/flare: scatters a burst of short-lived particles around the
-   * player — any enemy missile that touches one while it's still burning
-   * explodes against it (see the collision check in the main loop). */
+  /** Chaff/flare: always fires immediately on button press (no cooldown) —
+   * scatters a burst of short-lived particles around the player; any enemy
+   * missile that touches one while it's still burning explodes against it
+   * (see the collision check in the main loop). */
   function deployChaff() {
     const g = gameRef.current;
     if (!g || (g.phase !== "playing" && g.phase !== "boss") || g.paused) return;
     const now = performance.now();
-    if (now - g.lastChaff < CHAFF_COOLDOWN_MS) return;
-    g.lastChaff = now;
     for (let i = 0; i < CHAFF_PARTICLE_COUNT; i++) {
       const angle = (Math.PI * 2 * i) / CHAFF_PARTICLE_COUNT + Math.random() * 0.4;
       const dist = 10 + Math.random() * CHAFF_SCATTER_RADIUS;
@@ -1321,6 +1319,22 @@ export default function AirCombatGame({ dataSource }: { dataSource: DataSourceSe
       ctx.fill();
       ctx.restore();
     }
+
+    // Vulcan ammo count, small, at the player's upper-right.
+    ctx.font = "10px sans-serif";
+    ctx.textAlign = "left";
+    ctx.textBaseline = "alphabetic";
+    ctx.fillStyle = "#4C3A22";
+    ctx.fillText(`${g.playerVulcanAmmo}`, p.x + 16, p.y - 18);
+
+    // Laser ammo bar, small, just below the player.
+    const laserPct = Math.max(0, Math.min(1, g.laserAmmo / g.maxLaserAmmo));
+    ctx.strokeStyle = "rgba(76,58,34,0.5)";
+    ctx.lineWidth = 1;
+    roundRect(ctx, p.x - 16, p.y + 20, 32, 5, 2);
+    ctx.stroke();
+    ctx.fillStyle = "#F05AC8";
+    ctx.fillRect(p.x - 15, p.y + 21, 30 * laserPct, 3);
 
     // Wingman (S key): a smaller jet in a lighter, distinct color
     if (g.wingman) {
