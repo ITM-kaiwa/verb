@@ -1,12 +1,17 @@
 import type { ConjugationFormId } from "./types";
 
+export interface TextSegment {
+  text: string;
+  reading?: string; // present only for kanji segments, rendered as furigana
+}
+
 export interface ContextSentence {
   id: string;
   hiragana: string; // looks up the verb in VERBS by its ます形-entry hiragana headword
   dictHint: string; // dictionary-form hint shown in parentheses, as in textbooks
   formId: ConjugationFormId;
-  before: string; // sentence text before the blank
-  after: string; // sentence text after the blank
+  beforeSegments: TextSegment[]; // sentence text before the blank
+  afterSegments: TextSegment[]; // sentence text after the blank
   translationVn: string;
 }
 
@@ -18,8 +23,8 @@ export const CONTEXT_SENTENCES: ContextSentence[] = [
     hiragana: "のむ",
     dictHint: "飲む",
     formId: "te",
-    before: "コーヒーを",
-    after: "、宿題をします。",
+    beforeSegments: [{ text: "コーヒーを" }],
+    afterSegments: [{ text: "、" }, { text: "宿題", reading: "しゅくだい" }, { text: "をします。" }],
     translationVn: "Uống cà phê xong rồi làm bài tập.",
   },
   {
@@ -27,8 +32,14 @@ export const CONTEXT_SENTENCES: ContextSentence[] = [
     hiragana: "あらう",
     dictHint: "洗う",
     formId: "te",
-    before: "手を",
-    after: "、ご飯を食べます。",
+    beforeSegments: [{ text: "手", reading: "て" }, { text: "を" }],
+    afterSegments: [
+      { text: "、ご" },
+      { text: "飯", reading: "はん" },
+      { text: "を" },
+      { text: "食", reading: "た" },
+      { text: "べます。" },
+    ],
     translationVn: "Rửa tay xong rồi ăn cơm.",
   },
   {
@@ -36,8 +47,11 @@ export const CONTEXT_SENTENCES: ContextSentence[] = [
     hiragana: "くる",
     dictHint: "来る",
     formId: "nai",
-    before: "危ないですから、ここに",
-    after: "でください。",
+    beforeSegments: [
+      { text: "危", reading: "あぶ" },
+      { text: "ないですから、ここに" },
+    ],
+    afterSegments: [{ text: "でください。" }],
     translationVn: "Vì nguy hiểm nên xin đừng đến đây.",
   },
   {
@@ -45,8 +59,14 @@ export const CONTEXT_SENTENCES: ContextSentence[] = [
     hiragana: "やすむ",
     dictHint: "休む",
     formId: "nai",
-    before: "今日は",
-    after: "で、学校へ行きます。",
+    beforeSegments: [{ text: "今日", reading: "きょう" }, { text: "は" }],
+    afterSegments: [
+      { text: "で、" },
+      { text: "学校", reading: "がっこう" },
+      { text: "へ" },
+      { text: "行", reading: "い" },
+      { text: "きます。" },
+    ],
     translationVn: "Hôm nay không nghỉ, sẽ đi học.",
   },
   {
@@ -54,8 +74,13 @@ export const CONTEXT_SENTENCES: ContextSentence[] = [
     hiragana: "べんきょうする",
     dictHint: "勉強する",
     formId: "dictionary",
-    before: "私は日本語を",
-    after: "ことが好きです。",
+    beforeSegments: [
+      { text: "私", reading: "わたし" },
+      { text: "は" },
+      { text: "日本語", reading: "にほんご" },
+      { text: "を" },
+    ],
+    afterSegments: [{ text: "ことが" }, { text: "好", reading: "す" }, { text: "きです。" }],
     translationVn: "Tôi thích việc học tiếng Nhật.",
   },
   {
@@ -63,8 +88,13 @@ export const CONTEXT_SENTENCES: ContextSentence[] = [
     hiragana: "よむ",
     dictHint: "読む",
     formId: "dictionary",
-    before: "毎朝、新聞を",
-    after: "ことにしています。",
+    beforeSegments: [
+      { text: "毎朝", reading: "まいあさ" },
+      { text: "、" },
+      { text: "新聞", reading: "しんぶん" },
+      { text: "を" },
+    ],
+    afterSegments: [{ text: "ことにしています。" }],
     translationVn: "Tôi có thói quen đọc báo mỗi sáng.",
   },
   {
@@ -72,8 +102,13 @@ export const CONTEXT_SENTENCES: ContextSentence[] = [
     hiragana: "てつだう",
     dictHint: "手伝う",
     formId: "ta",
-    before: "昨日、友達を",
-    after: "。",
+    beforeSegments: [
+      { text: "昨日", reading: "きのう" },
+      { text: "、" },
+      { text: "友達", reading: "ともだち" },
+      { text: "を" },
+    ],
+    afterSegments: [{ text: "。" }],
     translationVn: "Hôm qua đã giúp bạn.",
   },
   {
@@ -81,8 +116,15 @@ export const CONTEXT_SENTENCES: ContextSentence[] = [
     hiragana: "かう",
     dictHint: "買う",
     formId: "ta",
-    before: "先週、新しい本を",
-    after: "。",
+    beforeSegments: [
+      { text: "先週", reading: "せんしゅう" },
+      { text: "、" },
+      { text: "新", reading: "あたら" },
+      { text: "しい" },
+      { text: "本", reading: "ほん" },
+      { text: "を" },
+    ],
+    afterSegments: [{ text: "。" }],
     translationVn: "Tuần trước đã mua một quyển sách mới.",
   },
   {
@@ -90,8 +132,13 @@ export const CONTEXT_SENTENCES: ContextSentence[] = [
     hiragana: "よむ",
     dictHint: "読む",
     formId: "potential",
-    before: "私は漢字を",
-    after: "。",
+    beforeSegments: [
+      { text: "私", reading: "わたし" },
+      { text: "は" },
+      { text: "漢字", reading: "かんじ" },
+      { text: "を" },
+    ],
+    afterSegments: [{ text: "。" }],
     translationVn: "Tôi có thể đọc chữ Hán.",
   },
   {
@@ -99,8 +146,15 @@ export const CONTEXT_SENTENCES: ContextSentence[] = [
     hiragana: "はなす",
     dictHint: "話す",
     formId: "potential",
-    before: "彼は日本語を上手に",
-    after: "。",
+    beforeSegments: [
+      { text: "彼", reading: "かれ" },
+      { text: "は" },
+      { text: "日本語", reading: "にほんご" },
+      { text: "を" },
+      { text: "上手", reading: "じょうず" },
+      { text: "に" },
+    ],
+    afterSegments: [{ text: "。" }],
     translationVn: "Anh ấy có thể nói tiếng Nhật giỏi.",
   },
   {
@@ -108,8 +162,14 @@ export const CONTEXT_SENTENCES: ContextSentence[] = [
     hiragana: "たべる",
     dictHint: "食べる",
     formId: "volitional",
-    before: "みんなで晩ご飯を",
-    after: "と思っています。",
+    beforeSegments: [
+      { text: "みんなで" },
+      { text: "晩", reading: "ばん" },
+      { text: "ご" },
+      { text: "飯", reading: "はん" },
+      { text: "を" },
+    ],
+    afterSegments: [{ text: "と" }, { text: "思", reading: "おも" }, { text: "っています。" }],
     translationVn: "Tôi đang định cùng mọi người ăn tối.",
   },
   {
@@ -117,8 +177,13 @@ export const CONTEXT_SENTENCES: ContextSentence[] = [
     hiragana: "いく",
     dictHint: "行く",
     formId: "volitional",
-    before: "来年、日本へ",
-    after: "と思います。",
+    beforeSegments: [
+      { text: "来年", reading: "らいねん" },
+      { text: "、" },
+      { text: "日本", reading: "にほん" },
+      { text: "へ" },
+    ],
+    afterSegments: [{ text: "と" }, { text: "思", reading: "おも" }, { text: "います。" }],
     translationVn: "Tôi định sang năm sẽ đi Nhật.",
   },
   {
@@ -126,8 +191,8 @@ export const CONTEXT_SENTENCES: ContextSentence[] = [
     hiragana: "すわる",
     dictHint: "座る",
     formId: "imperative",
-    before: "そこに",
-    after: "！",
+    beforeSegments: [{ text: "そこに" }],
+    afterSegments: [{ text: "！" }],
     translationVn: "Ngồi xuống đó!",
   },
   {
@@ -135,8 +200,8 @@ export const CONTEXT_SENTENCES: ContextSentence[] = [
     hiragana: "かく",
     dictHint: "書く",
     formId: "imperative",
-    before: "早く",
-    after: "！",
+    beforeSegments: [{ text: "早", reading: "はや" }, { text: "く" }],
+    afterSegments: [{ text: "！" }],
     translationVn: "Viết nhanh lên!",
   },
   {
@@ -144,8 +209,8 @@ export const CONTEXT_SENTENCES: ContextSentence[] = [
     hiragana: "さわる",
     dictHint: "触る",
     formId: "prohibitive",
-    before: "これに",
-    after: "！",
+    beforeSegments: [{ text: "これに" }],
+    afterSegments: [{ text: "！" }],
     translationVn: "Đừng chạm vào cái này!",
   },
   {
@@ -153,8 +218,8 @@ export const CONTEXT_SENTENCES: ContextSentence[] = [
     hiragana: "はなす",
     dictHint: "話す",
     formId: "prohibitive",
-    before: "教室で",
-    after: "！",
+    beforeSegments: [{ text: "教室", reading: "きょうしつ" }, { text: "で" }],
+    afterSegments: [{ text: "！" }],
     translationVn: "Đừng nói chuyện trong lớp học!",
   },
   {
@@ -162,8 +227,14 @@ export const CONTEXT_SENTENCES: ContextSentence[] = [
     hiragana: "よむ",
     dictHint: "読む",
     formId: "conditional",
-    before: "この本を",
-    after: "、漢字が分かります。",
+    beforeSegments: [{ text: "この" }, { text: "本", reading: "ほん" }, { text: "を" }],
+    afterSegments: [
+      { text: "、" },
+      { text: "漢字", reading: "かんじ" },
+      { text: "が" },
+      { text: "分", reading: "わ" },
+      { text: "かります。" },
+    ],
     translationVn: "Nếu đọc quyển sách này, sẽ hiểu chữ Hán.",
   },
   {
@@ -171,8 +242,8 @@ export const CONTEXT_SENTENCES: ContextSentence[] = [
     hiragana: "のむ",
     dictHint: "飲む",
     formId: "conditional",
-    before: "薬を",
-    after: "、元気になります。",
+    beforeSegments: [{ text: "薬", reading: "くすり" }, { text: "を" }],
+    afterSegments: [{ text: "、" }, { text: "元気", reading: "げんき" }, { text: "になります。" }],
     translationVn: "Nếu uống thuốc, sẽ khỏe lại.",
   },
 ];

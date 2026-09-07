@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import { CONTEXT_SENTENCES, type ContextSentence } from "@/lib/contextSentences";
+import { CONTEXT_SENTENCES, type ContextSentence, type TextSegment } from "@/lib/contextSentences";
 import { CONJUGATION_FORMS } from "@/lib/forms";
 import { conjugate } from "@/lib/conjugate";
 import { findVerb } from "@/lib/verbData";
@@ -22,6 +22,16 @@ interface RoundData {
   sentence: ContextSentence;
   correctAnswer: string;
   choices: string[];
+}
+
+function renderSegments(segments: TextSegment[]) {
+  return segments.map((seg, i) =>
+    seg.reading ? (
+      <Furigana key={i} kanji={seg.text} reading={seg.reading} />
+    ) : (
+      <span key={i}>{seg.text}</span>
+    )
+  );
 }
 
 function shuffle<T>(arr: T[]): T[] {
@@ -161,11 +171,11 @@ export default function FillBlankBattleGame() {
 
         <div className="mb-4 rounded-2xl border border-sand-200 bg-sand-50 p-4 text-center">
           <p className="font-kyokasho text-xl leading-relaxed text-kanjibrown">
-            {roundData.sentence.before}
+            {renderSegments(roundData.sentence.beforeSegments)}
             <span className="mx-1 inline-block min-w-[3em] border-b-2 border-dashed border-sand-400 align-middle">
               &nbsp;
             </span>
-            {roundData.sentence.after}
+            {renderSegments(roundData.sentence.afterSegments)}
           </p>
           <p className="mt-2 text-xs text-sand-500">
             （<Furigana kanji={roundData.sentence.dictHint} reading={roundData.sentence.hiragana} />）
