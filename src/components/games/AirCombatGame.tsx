@@ -88,22 +88,85 @@ function playExplosion(ref: React.MutableRefObject<AudioContext | null>) {
   }
 }
 
-const HELP_BODY = [
-  "Phía trên hiển thị động từ thể ます và tên thể chia cần bắn hạ (ví dụ「て形」).",
-  "4 máy bay địch bay bên phải, mỗi chiếc mang một thể chia khác nhau — chỉ 1 chiếc là đúng.",
-  "Di chuyển bằng 4 phím mũi tên ←↑↓→. Giữ phím A để tăng tốc độ di chuyển gấp đôi.",
-  "Vulcan (giữ phím X, 350 viên đạn, tiếp đạn đầy mỗi 2 màn): tầm bắn ngắn (~1/3 màn hình). Số đạn còn lại hiện nhỏ ở góc trên bên phải máy bay của bạn. Sát thương lên máy bay địch được cộng dồn vĩnh viễn (không hồi phục) — chỉ cần đủ ~2 giây bắn trúng tính gộp là hạ được, kể cả bắn ngắt quãng. Máy bay của bạn thì ngược lại: phải bị bắn trúng liên tục ~3 giây không ngắt quãng mới nổ. Bắn trúng tên lửa (của cả 2 bên) thì hạ ngay lập tức bất kể bên nào bắn.",
-  "Tên lửa (phím Z, bạn có 8 quả, mỗi máy bay địch có 2 quả): khi có vòng khóa mục tiêu màu xanh lá hiện trên địch (trong tầm 2/3 màn hình, ngay phía trước), bắn 1 phát là hạ luôn. Cứ qua 2 màn là được tiếp đạn đầy lại 8 quả.",
-  "Laser màu hồng (phím S, 10 phát): bắn xuyên suốt tới tận rìa màn hình theo đúng độ cao của bạn, trúng 2 phát là hạ một máy bay địch; trúng tên lửa địch thì tên lửa nổ ngay lập tức. Thanh ngang nhỏ dưới máy bay của bạn hiện số đạn laser còn lại.",
-  "Chaff/flare (phím C): bấm là bắn ngay lập tức, không cần chờ hồi — tỏa ra một chùm mồi bẫy xung quanh máy bay của bạn, chỉ đánh lừa được tên lửa bay tới từ phía sau／trên／dưới. Tên lửa bay thẳng từ chính diện (đối đầu) sẽ không bị mồi bẫy đánh lừa — phải dùng vulcan để bắn hạ loại này. Ngay khi tên lửa của bạn khóa mục tiêu vào một máy bay địch, địch đó có 25% cơ hội tự bắn chaff phòng thủ theo đúng luật tương tự.",
-  "Gọi僚機 hỗ trợ (phím D): một máy bay đồng đội gia nhập đội hình, tự bay theo ý riêng (không cần bám theo bạn) và tự bắn vào máy bay địch gần nhất trong tầm vulcan giống hệt bạn, không phân biệt đúng/sai — có thể vô tình bắn hạ đúng mục tiêu (được tính vào chuỗi) hoặc bắn nhầm (mất chuỗi). Mỗi lần bạn bắn hạ đúng mục tiêu, thêm một僚機 mới gia nhập. Mỗi lần bấm D (hoặc mỗi lần bắn hạ đúng) sẽ thêm 1僚機 vào đội hình, tối đa 5 chiếc cùng lúc.僚機 không tự biến mất — nếu không bị địch bắn hạ trong màn, nó sẽ theo bạn sang màn tiếp theo và được hồi đầy sát thương lẫn đạn dược. Địch cũng có thể nhắm bắn僚機 giống như nhắm bắn bạn (cùng luật vulcan/tên lửa) và có thể bắn hạ nó. Đạn của僚機 có giới hạn nhưng cũng được tiếp đầy mỗi khi sang màn mới.",
-  "Địch cũng được trang bị y hệt bạn — chúng sẽ bắn vulcan và tên lửa lại bạn theo đúng luật trên.",
-  "Bắn hạ đúng 5 chiếc liên tiếp để qua màn (bắn trúng địch sai sẽ làm mất chuỗi).",
-  "Sau màn 5 sẽ xuất hiện trung boss: to lớn, bắn vulcan tứ phía và có 10 quả tên lửa.",
-  "Sau màn 10 sẽ xuất hiện quái vật cuối cùng (kaiju): đứng dưới đất, thỉnh thoảng nhảy lên nhưng không tiến tới, thỉnh thoảng phun tia sáng nhắm thẳng vào bạn — dính 3 lần là bạn bị hạ. Nó chỉ gục ngã khi đạt MỘT trong các mốc: 100 phát vulcan, 5 quả tên lửa, hoặc 5 phát laser.",
-  "Đánh bại quái vật cuối cùng sẽ quay lại màn 1 với nâng cấp vĩnh viễn: thêm 4 quả tên lửa, thêm 10 phát laser, tầm bắn vulcan xa hơn, và đạn vulcan tăng gấp đôi (700 viên).",
-  "Nhấn phím Space bất cứ lúc nào để tạm dừng／tiếp tục.",
+// Remappable controls: each action is bound to a KeyboardEvent.code (layout
+// independent, unlike .key) so rebinding never has to worry about Shift/case.
+// Movement (arrow keys) and pause (Space) are fixed and not remappable.
+type KeymapAction = "vulcan" | "missile" | "laser" | "boost" | "chaff" | "wingman" | "barrier" | "bomb";
+type Keymap = Record<KeymapAction, string>;
+
+const DEFAULT_KEYMAP: Keymap = {
+  vulcan: "KeyC",
+  missile: "KeyX",
+  laser: "KeyZ",
+  boost: "KeyA",
+  chaff: "KeyS",
+  wingman: "KeyD",
+  barrier: "KeyB",
+  bomb: "KeyV",
+};
+
+const KEYMAP_ACTIONS: { id: KeymapAction; label: string }[] = [
+  { id: "vulcan", label: "Vulcan (giữ để bắn)" },
+  { id: "missile", label: "Tên lửa" },
+  { id: "laser", label: "Laser" },
+  { id: "boost", label: "Tăng tốc (afterburner)" },
+  { id: "chaff", label: "Chaff/flare" },
+  { id: "wingman", label: "Gọi僚機" },
+  { id: "barrier", label: "Khiên chắn" },
+  { id: "bomb", label: "Bom (chống quái vật)" },
 ];
+
+const KEYMAP_STORAGE_KEY = "aircombat-keymap";
+
+function loadKeymap(): Keymap {
+  try {
+    const raw = localStorage.getItem(KEYMAP_STORAGE_KEY);
+    if (!raw) return { ...DEFAULT_KEYMAP };
+    return { ...DEFAULT_KEYMAP, ...JSON.parse(raw) };
+  } catch {
+    return { ...DEFAULT_KEYMAP };
+  }
+}
+
+function saveKeymap(km: Keymap) {
+  try {
+    localStorage.setItem(KEYMAP_STORAGE_KEY, JSON.stringify(km));
+  } catch {
+    // ignore
+  }
+}
+
+/** A short, human-readable label for a KeyboardEvent.code, e.g. "KeyC" → "C". */
+function keyCodeLabel(code: string): string {
+  if (code.startsWith("Key")) return code.slice(3);
+  if (code.startsWith("Digit")) return code.slice(5);
+  if (code === "Space") return "Space";
+  return code;
+}
+
+/** HELP_BODY depends on the current (possibly remapped) keymap, so it's
+ * built as a function rather than a static array. */
+function buildHelpBody(km: Keymap): string[] {
+  const k = (a: KeymapAction) => keyCodeLabel(km[a]);
+  return [
+    "Phía trên hiển thị động từ thể ます và tên thể chia cần bắn hạ (ví dụ「て形」).",
+    "4 máy bay địch bay bên phải, mỗi chiếc mang một thể chia khác nhau — chỉ 1 chiếc là đúng.",
+    `Di chuyển bằng 4 phím mũi tên ←↑↓→. Giữ phím ${k("boost")} để tăng tốc độ di chuyển gấp đôi.`,
+    `Vulcan (giữ phím ${k("vulcan")}, 350 viên đạn, tiếp đạn đầy mỗi 2 màn): tầm bắn ngắn (~1/3 màn hình). Số đạn còn lại hiện nhỏ ở góc trên bên phải máy bay của bạn. Sát thương lên máy bay địch được cộng dồn vĩnh viễn (không hồi phục) — chỉ cần đủ ~2 giây bắn trúng tính gộp là hạ được, kể cả bắn ngắt quãng. Máy bay của bạn thì ngược lại: phải bị bắn trúng liên tục ~3 giây không ngắt quãng mới nổ. Bắn trúng tên lửa (của cả 2 bên) thì hạ ngay lập tức bất kể bên nào bắn.`,
+    `Tên lửa (phím ${k("missile")}, bạn có 8 quả, mỗi máy bay địch có 2 quả): khi có vòng khóa mục tiêu màu xanh lá hiện trên địch (trong tầm 2/3 màn hình, ngay phía trước), bắn 1 phát là hạ luôn. Cứ qua 2 màn là được tiếp đạn đầy lại 8 quả.`,
+    `Laser màu hồng (phím ${k("laser")}, 10 phát): bắn xuyên suốt tới tận rìa màn hình theo đúng độ cao của bạn, trúng 2 phát là hạ một máy bay địch; trúng tên lửa địch thì tên lửa nổ ngay lập tức. Thanh ngang nhỏ dưới máy bay của bạn hiện số đạn laser còn lại.`,
+    `Chaff/flare (phím ${k("chaff")}): bấm là bắn ngay lập tức, không cần chờ hồi — tỏa ra một chùm mồi bẫy xung quanh máy bay của bạn, chỉ đánh lừa được tên lửa bay tới từ phía sau／trên／dưới. Tên lửa bay thẳng từ chính diện (đối đầu) sẽ không bị mồi bẫy đánh lừa — phải dùng vulcan để bắn hạ loại này. Ngay khi tên lửa của bạn khóa mục tiêu vào một máy bay địch, địch đó có 25% cơ hội tự bắn chaff phòng thủ theo đúng luật tương tự.`,
+    `Khiên chắn (phím ${k("barrier")}): dùng được 1 lần mỗi màn, kích hoạt trong 5 giây và chặn TOÀN BỘ đòn tấn công từ mọi hướng trong lúc đó.`,
+    `Bom chống quái vật (phím ${k("bomb")}): chỉ dùng được khi đang chiến đấu với quái vật cuối cùng (kaiju), có 4 quả — nếu cả 4 quả đều trúng thì hạ gục nó ngay lập tức, bất kể các mốc sát thương khác.`,
+    `Gọi僚機 hỗ trợ (phím ${k("wingman")}): một máy bay đồng đội gia nhập đội hình, tự bay theo ý riêng (không cần bám theo bạn) và mang vũ trang giống hệt bạn — vulcan bắn thẳng liên tục, tên lửa khóa mục tiêu, và cả laser — không phân biệt đúng/sai nên có thể vô tình bắn hạ đúng mục tiêu (được tính vào chuỗi) hoặc bắn nhầm (mất chuỗi). Mỗi僚機 tự nhắm vào một máy bay địch khác nhau để bắn tên lửa/laser (không dồn hết vào một chiếc). Mỗi lần bấm ${k("wingman")} (hoặc mỗi lần bắn hạ đúng mục tiêu) sẽ thêm 1僚機 vào đội hình, tối đa 5 chiếc cùng lúc.僚機 không tự biến mất — nếu không bị địch bắn hạ trong màn, nó sẽ theo bạn sang màn tiếp theo và được hồi đầy sát thương lẫn toàn bộ đạn dược. Địch cũng có thể nhắm bắn僚機 giống như nhắm bắn bạn (cùng luật vulcan/tên lửa) và có thể bắn hạ nó.`,
+    "Địch cũng được trang bị y hệt bạn — chúng sẽ bắn vulcan và tên lửa lại bạn theo đúng luật trên.",
+    "Bắn hạ đúng 5 chiếc liên tiếp để qua màn (bắn trúng địch sai sẽ làm mất chuỗi).",
+    "Sau màn 5 sẽ xuất hiện trung boss: to lớn, bắn vulcan tứ phía và có 10 quả tên lửa.",
+    "Sau màn 10 sẽ xuất hiện quái vật cuối cùng (kaiju): đứng dưới đất, thỉnh thoảng nhảy lên nhưng không tiến tới, thỉnh thoảng phun tia sáng nhắm thẳng vào bạn — dính 3 lần là bạn bị hạ. Nó chỉ gục ngã khi đạt MỘT trong các mốc: 100 phát vulcan, 5 quả tên lửa, 5 phát laser, hoặc cả 4 quả bom.",
+    "Đánh bại quái vật cuối cùng sẽ quay lại màn 1 với nâng cấp vĩnh viễn: thêm 4 quả tên lửa, thêm 10 phát laser, tầm bắn vulcan xa hơn, và đạn vulcan tăng gấp đôi (700 viên).",
+    "Nhấn phím Space bất cứ lúc nào để tạm dừng／tiếp tục. Có thể đổi tất cả các phím trên bằng nút cài đặt (⚙) ở góc trên bên phải.",
+  ];
+}
 
 // Fixed logical resolution — the canvas element scales to its container via
 // CSS while physics/positions stay in this coordinate space.
@@ -141,7 +204,7 @@ const ENEMY_VULCAN_HITS_TO_KILL = Math.ceil(ENEMY_VULCAN_KILL_MS / VULCAN_COOLDO
 const PLAYER_VULCAN_HITS_TO_KILL = Math.ceil(PLAYER_VULCAN_KILL_MS / VULCAN_COOLDOWN_MS);
 const VULCAN_HIT_GAP_MS = 300;
 const HIT_RADIUS = 22;
-const CHAFF_PARTICLE_COUNT = 10;
+const CHAFF_PARTICLE_COUNT = 15;
 const CHAFF_PARTICLE_LIFETIME_MS = 900;
 const CHAFF_SCATTER_RADIUS = 60; // how far particles start from the player
 const PLAYER_MISSILE_AMMO = 8;
@@ -150,7 +213,6 @@ const PLAYER_VULCAN_AMMO_BASE = 350;
 // Chance an enemy deploys defensive chaff the moment a player missile locks
 // onto it (rolled once per missile — see Missile.chaffRolled).
 const ENEMY_CHAFF_CHANCE = 0.25;
-const WINGMAN_FIRE_INTERVAL_MS = 260;
 // Wingmen no longer expire on a timer — they persist across stages until
 // shot down, and stack (one more per summon, or per correct kill) up to
 // this cap; a surviving wingman's damage and ammo are restored each stage.
@@ -160,6 +222,11 @@ const LASER_AMMO = 10;
 const LASER_HITS_TO_KILL = 2;
 const LASER_BEAM_FADE_MS = 180;
 const LASER_COOLDOWN_MS = 260;
+// Wingmen carry the exact same armament as the player: vulcan, missiles,
+// and laser — vulcan ammo uses WINGMAN_AMMO_BASE above; these mirror the
+// player's own missile/laser ammo pools.
+const WINGMAN_MISSILE_AMMO_BASE = PLAYER_MISSILE_AMMO;
+const WINGMAN_LASER_AMMO_BASE = LASER_AMMO;
 const BOSS_MAX_HP = 40;
 const BOSS_VULCAN_DAMAGE = 1;
 const BOSS_MISSILE_DAMAGE = 8;
@@ -192,6 +259,17 @@ const LASTBOSS_BEAM_HITS_TO_KILL = 3;
 const LOOP_MISSILE_BONUS = 4;
 const LOOP_LASER_BONUS = 10;
 const LOOP_VULCAN_RANGE_BONUS = 60;
+
+// Barrier (phím B): one use per stage, blocks every attack from every
+// direction for a few seconds.
+const BARRIER_DURATION_MS = 5000;
+
+// Bomb (phím V): a rare anti-kaiju weapon, usable only against the final
+// boss — landing all of them defeats it outright, independent of the usual
+// per-weapon thresholds.
+const BOMB_COUNT = 4;
+const BOMB_COOLDOWN_MS = 800;
+const BOMB_SPEED = 4;
 
 interface Combatant {
   vulcanHits: number;
@@ -250,8 +328,12 @@ interface Wingman extends Combatant {
   vx: number;
   vy: number;
   redirectAt: number;
-  nextShotAt: number;
-  ammo: number;
+  nextShotAt: number; // vulcan cooldown
+  ammo: number; // vulcan ammo
+  nextMissileAt: number;
+  missileAmmo: number;
+  nextLaserAt: number;
+  laserAmmo: number;
 }
 // A scattered chaff/flare speck — any enemy missile that touches one while
 // it's still alive explodes against it.
@@ -274,6 +356,7 @@ interface Boss {
   vulcanHitsTaken: number; // final boss: independent per-weapon thresholds —
   missileHitsTaken: number; // it dies as soon as ANY ONE of these reaches its
   laserHitsTaken: number; // own limit (see BOSS_LASTBOSS_*_HITS).
+  bombHitsTaken: number; // final boss only: dies if all BOMB_COUNT land.
   missilesLeft: number;
   nextVulcanBurstAt: number;
   nextMissileAt: number;
@@ -282,6 +365,14 @@ interface Boss {
   jumpStartedAt: number;
 }
 interface BossBeam {
+  x: number;
+  y: number;
+  vx: number;
+  vy: number;
+}
+// Anti-kaiju bomb (phím V) — homes toward the final boss like a missile,
+// but its hits are tracked separately (see Boss.bombHitsTaken).
+interface Bomb {
   x: number;
   y: number;
   vx: number;
@@ -329,6 +420,10 @@ function spawnWingman(prevX: number | undefined, prevY: number | undefined, now:
     redirectAt: now + 500 + Math.random() * 1000,
     nextShotAt: now + 300,
     ammo: WINGMAN_AMMO_BASE,
+    nextMissileAt: now + 800 + Math.random() * 800,
+    missileAmmo: WINGMAN_MISSILE_AMMO_BASE,
+    nextLaserAt: now + 1000 + Math.random() * 1000,
+    laserAmmo: WINGMAN_LASER_AMMO_BASE,
     vulcanHits: 0,
     lastVulcanHitAt: -Infinity,
   };
@@ -345,6 +440,7 @@ function spawnBoss(kind: "mid" | "final", now: number): Boss {
     vulcanHitsTaken: 0,
     missileHitsTaken: 0,
     laserHitsTaken: 0,
+    bombHitsTaken: 0,
     missilesLeft: kind === "final" ? 0 : BOSS_MISSILE_AMMO,
     nextVulcanBurstAt: now + 800,
     nextMissileAt: now + 1500,
@@ -448,6 +544,33 @@ export default function AirCombatGame({ dataSource }: { dataSource: DataSourceSe
   const bgmRef = useRef<HTMLAudioElement | null>(null);
   const [muted, setMuted] = useState(false);
 
+  // Pre-game comprehension check: nothing in the simulation moves until the
+  // player confirms they understand the controls (see gateAnsweredRef, read
+  // by the main loop's top-level gate).
+  const [gateAnswered, setGateAnswered] = useState(false);
+  const [showGateHelp, setShowGateHelp] = useState(false);
+  const gateAnsweredRef = useRef(false);
+  useEffect(() => {
+    gateAnsweredRef.current = gateAnswered;
+  }, [gateAnswered]);
+
+  // Remappable controls: state drives the settings UI, refs let the
+  // keydown handler (registered once) always see the latest values.
+  const [keymap, setKeymap] = useState<Keymap>(DEFAULT_KEYMAP);
+  const [showKeySettings, setShowKeySettings] = useState(false);
+  const [rebindingAction, setRebindingAction] = useState<KeymapAction | null>(null);
+  const keymapRef = useRef<Keymap>(DEFAULT_KEYMAP);
+  const rebindingRef = useRef<KeymapAction | null>(null);
+  useEffect(() => {
+    setKeymap(loadKeymap());
+  }, []);
+  useEffect(() => {
+    keymapRef.current = keymap;
+  }, [keymap]);
+  useEffect(() => {
+    rebindingRef.current = rebindingAction;
+  }, [rebindingAction]);
+
   const [hud, setHud] = useState({
     masuForm: "",
     formLabelJa: "",
@@ -478,6 +601,7 @@ export default function AirCombatGame({ dataSource }: { dataSource: DataSourceSe
     lastVulcan: number;
     lastMissile: number;
     firingVulcan: boolean;
+    boosting: boolean;
     phase: Phase;
     flash: { text: string; color: string; until: number } | null;
     playerHitUntil: number;
@@ -490,7 +614,7 @@ export default function AirCombatGame({ dataSource }: { dataSource: DataSourceSe
     wingmen: Wingman[];
     wingmanBullets: WingmanBullet[];
     paused: boolean;
-    laserBeams: { y: number; until: number }[];
+    laserBeams: { y: number; until: number; fromX: number }[];
     laserAmmo: number;
     maxLaserAmmo: number;
     lastLaser: number;
@@ -500,6 +624,11 @@ export default function AirCombatGame({ dataSource }: { dataSource: DataSourceSe
     playerBeamHits: number;
     vulcanRangeBonus: number;
     loopCount: number;
+    barrierUntil: number;
+    barrierUsed: boolean;
+    bombs: Bomb[];
+    bombAmmo: number;
+    lastBomb: number;
   } | null>(null);
 
   const initStage = useCallback(
@@ -518,7 +647,11 @@ export default function AirCombatGame({ dataSource }: { dataSource: DataSourceSe
       g.missiles = [];
       g.enemyBullets = [];
       g.enemyMissiles = [];
+      g.bombs = [];
       g.phase = "playing";
+      // Barrier (phím B) gets one fresh use every stage.
+      g.barrierUsed = false;
+      g.barrierUntil = 0;
       // Missiles and vulcan ammo resupply to full every 2 stages cleared
       // (i.e. entering an odd-numbered stage within the loop) — otherwise
       // whatever's left carries over. Laser only refills at the start of a
@@ -528,11 +661,14 @@ export default function AirCombatGame({ dataSource }: { dataSource: DataSourceSe
         g.playerVulcanAmmo = g.playerMaxVulcanAmmo;
       }
       // Wingmen that survived the previous stage carry over into this one,
-      // with their accumulated damage and spent ammo fully restored.
+      // with their accumulated damage and all ammo (vulcan/missile/laser)
+      // fully restored.
       for (const wm of g.wingmen) {
         wm.vulcanHits = 0;
         wm.lastVulcanHitAt = -Infinity;
         wm.ammo = WINGMAN_AMMO_BASE;
+        wm.missileAmmo = WINGMAN_MISSILE_AMMO_BASE;
+        wm.laserAmmo = WINGMAN_LASER_AMMO_BASE;
       }
       setHud({
         masuForm: verb.masuForm,
@@ -582,6 +718,7 @@ export default function AirCombatGame({ dataSource }: { dataSource: DataSourceSe
       lastVulcan: 0,
       lastMissile: 0,
       firingVulcan: false,
+      boosting: false,
       phase: "playing",
       flash: null,
       playerHitUntil: 0,
@@ -604,6 +741,11 @@ export default function AirCombatGame({ dataSource }: { dataSource: DataSourceSe
       playerBeamHits: 0,
       vulcanRangeBonus: 0,
       loopCount: 1,
+      barrierUntil: 0,
+      barrierUsed: false,
+      bombs: [],
+      bombAmmo: 0,
+      lastBomb: 0,
     };
     initStage(1);
   }, [initStage]);
@@ -690,10 +832,10 @@ export default function AirCombatGame({ dataSource }: { dataSource: DataSourceSe
       if (!g) return;
       const now = performance.now();
 
-      if ((g.phase === "playing" || g.phase === "boss") && !g.paused) {
+      if ((g.phase === "playing" || g.phase === "boss") && !g.paused && gateAnsweredRef.current) {
         // Player movement (arrow keys) — phím A doubles speed while held.
         const p = g.player;
-        const speed = (g.keys["a"] || g.keys["A"]) ? PLAYER_SPEED * 2 : PLAYER_SPEED;
+        const speed = g.boosting ? PLAYER_SPEED * 2 : PLAYER_SPEED;
         if (g.keys["ArrowUp"]) p.y -= speed;
         if (g.keys["ArrowDown"]) p.y += speed;
         if (g.keys["ArrowLeft"]) p.x -= speed;
@@ -816,7 +958,7 @@ export default function AirCombatGame({ dataSource }: { dataSource: DataSourceSe
           beam.y += beam.vy;
         }
         g.bossBeams = g.bossBeams.filter((b) => b.x > -20 && b.x < W + 20 && b.y > -20 && b.y < H + 20);
-        if (g.boss && now > g.playerHitUntil) {
+        if (g.boss && now > g.playerHitUntil && now > g.barrierUntil) {
           for (let i = g.bossBeams.length - 1; i >= 0; i--) {
             const b = g.bossBeams[i];
             if (Math.hypot(b.x - p.x, b.y - p.y) < HIT_RADIUS) {
@@ -846,9 +988,12 @@ export default function AirCombatGame({ dataSource }: { dataSource: DataSourceSe
 
         // Wingmen (D key, or auto-added on every correct kill, up to
         // WINGMAN_MAX): each wanders on its own (not locked to the player's
-        // position) and fires indiscriminately at the nearest enemy within
-        // its own vulcan range, until its ammo runs out or it's shot down.
-        for (const wm of g.wingmen) {
+        // position) and carries the exact same armament as the player —
+        // vulcan, missiles, and laser — until its ammo runs out or it's shot
+        // down. Each wingman is assigned a different enemy (by formation
+        // index, wrapping if there are more wingmen than enemies) so they
+        // don't all pile their missiles/laser onto the same target.
+        g.wingmen.forEach((wm, wmIndex) => {
           if (now > wm.redirectAt) {
             wm.vx = (Math.random() - 0.5) * 1.8;
             wm.vy = (Math.random() - 0.5) * 1.8;
@@ -861,32 +1006,39 @@ export default function AirCombatGame({ dataSource }: { dataSource: DataSourceSe
           wm.x = Math.min(WINGMAN_BOUNDS.maxX, Math.max(WINGMAN_BOUNDS.minX, wm.x));
           wm.y = Math.min(WINGMAN_BOUNDS.maxY, Math.max(WINGMAN_BOUNDS.minY, wm.y));
 
-          if (now > wm.nextShotAt && wm.ammo > 0 && g.enemies.length > 0) {
-            let nearest: Enemy | null = null;
-            let bestDist = Infinity;
-            for (const e of g.enemies) {
-              const d = Math.hypot(e.x - wm.x, e.y - wm.y);
-              if (d < bestDist) {
-                bestDist = d;
-                nearest = e;
-              }
-            }
-            if (nearest && bestDist <= VULCAN_RANGE) {
-              wm.nextShotAt = now + WINGMAN_FIRE_INTERVAL_MS;
-              wm.ammo -= 1;
-              const dx = nearest.x - wm.x;
-              const dy = nearest.y - wm.y;
-              const dist = Math.hypot(dx, dy) || 1;
-              g.wingmanBullets.push({
-                x: wm.x,
-                y: wm.y,
-                vx: (dx / dist) * VULCAN_SPEED,
-                vy: (dy / dist) * VULCAN_SPEED,
-              });
-              playVulcanShot(audioCtxRef);
+          // Vulcan: fires straight ahead continuously, exactly like the
+          // player's own (no target lock needed) — this is what makes the
+          // wingman visibly "attack" at all times, ammo permitting.
+          if (now > wm.nextShotAt && wm.ammo > 0) {
+            wm.nextShotAt = now + VULCAN_COOLDOWN_MS;
+            wm.ammo -= 1;
+            g.wingmanBullets.push({ x: wm.x + 26, y: wm.y, vx: VULCAN_SPEED, vy: 0 });
+            playVulcanShot(audioCtxRef);
+          }
+
+          const target = g.enemies.length > 0 ? g.enemies[wmIndex % g.enemies.length] : null;
+
+          // Missile: locks onto this wingman's own assigned enemy, same
+          // range/alignment rule as the player's missile lock.
+          if (target && now > wm.nextMissileAt && wm.missileAmmo > 0) {
+            const dx = target.x - wm.x;
+            if (dx > 0 && dx <= MISSILE_RANGE && Math.abs(target.y - wm.y) <= ALIGN_TOLERANCE) {
+              wm.nextMissileAt = now + MISSILE_COOLDOWN_MS;
+              wm.missileAmmo -= 1;
+              g.missiles.push({ x: wm.x + 26, y: wm.y, vx: MISSILE_SPEED, vy: 0, homing: target.id });
+              playMissileLaunch(audioCtxRef);
             }
           }
-        }
+
+          // Laser: instant hitscan sweep at this wingman's own altitude.
+          if (now > wm.nextLaserAt && wm.laserAmmo > 0) {
+            wm.nextLaserAt = now + LASER_COOLDOWN_MS;
+            wm.laserAmmo -= 1;
+            g.laserBeams.push({ y: wm.y, until: now + LASER_BEAM_FADE_MS, fromX: wm.x });
+            playVulcanShot(audioCtxRef);
+            laserSweep(g, wm.x, wm.y);
+          }
+        });
         for (const b of g.wingmanBullets) {
           b.x += b.vx;
           b.y += b.vy;
@@ -915,6 +1067,34 @@ export default function AirCombatGame({ dataSource }: { dataSource: DataSourceSe
           m.y += m.vy;
         }
         g.missiles = g.missiles.filter((m) => m.x < W + 20 && m.x > -20 && m.y > -20 && m.y < H + 20);
+
+        // Bombs (phím V): home toward the final boss only.
+        for (const b of g.bombs) {
+          if (g.boss) {
+            const dx = g.boss.x - b.x;
+            const dy = g.boss.y - b.y;
+            const dist = Math.hypot(dx, dy) || 1;
+            b.vx = (dx / dist) * BOMB_SPEED;
+            b.vy = (dy / dist) * BOMB_SPEED;
+          }
+          b.x += b.vx;
+          b.y += b.vy;
+        }
+        g.bombs = g.bombs.filter((b) => b.x < W + 20 && b.x > -20 && b.y > -20 && b.y < H + 20);
+        if (g.boss && g.boss.kind === "final") {
+          const boss = g.boss;
+          for (let i = g.bombs.length - 1; i >= 0 && g.boss; i--) {
+            const b = g.bombs[i];
+            if (Math.hypot(b.x - boss.x, b.y - boss.y) < LASTBOSS_RADIUS) {
+              g.bombs.splice(i, 1);
+              boss.bombHitsTaken += 1;
+              playExplosion(audioCtxRef);
+              if (boss.bombHitsTaken >= BOMB_COUNT) {
+                defeatBoss(g, boss);
+              }
+            }
+          }
+        }
 
         // Enemy missiles: home toward the player, or toward whichever
         // wingman they locked onto (see the enemy-targeting logic above).
@@ -1029,10 +1209,20 @@ export default function AirCombatGame({ dataSource }: { dataSource: DataSourceSe
             }
           }
         }
-        // Wingman fire: same cumulative-damage rule as the player's own
-        // vulcan, but indiscriminate — it doesn't know which enemy is correct.
+        // Wingman fire: same rules as the player's own vulcan — can shoot
+        // down an incoming enemy missile in one hit, otherwise chips away at
+        // an enemy's cumulative-damage threshold, indiscriminately (it
+        // doesn't know which enemy is correct).
         outerWingmanHits: for (let i = g.wingmanBullets.length - 1; i >= 0; i--) {
           const b = g.wingmanBullets[i];
+          for (let j = g.enemyMissiles.length - 1; j >= 0; j--) {
+            if (Math.hypot(b.x - g.enemyMissiles[j].x, b.y - g.enemyMissiles[j].y) < HIT_RADIUS) {
+              g.enemyMissiles.splice(j, 1);
+              g.wingmanBullets.splice(i, 1);
+              playExplosion(audioCtxRef);
+              continue outerWingmanHits;
+            }
+          }
           for (const e of g.enemies) {
             if (Math.hypot(b.x - e.x, b.y - e.y) < HIT_RADIUS) {
               g.wingmanBullets.splice(i, 1);
@@ -1084,7 +1274,7 @@ export default function AirCombatGame({ dataSource }: { dataSource: DataSourceSe
         if (g.phase === "playing" || g.phase === "boss") {
           outerEnemyMissileHits: for (let i = g.enemyMissiles.length - 1; i >= 0; i--) {
             const m = g.enemyMissiles[i];
-            if (now > g.playerHitUntil && Math.hypot(m.x - p.x, m.y - p.y) < HIT_RADIUS) {
+            if (now > g.playerHitUntil && now > g.barrierUntil && Math.hypot(m.x - p.x, m.y - p.y) < HIT_RADIUS) {
               g.enemyMissiles.splice(i, 1);
               playExplosion(audioCtxRef);
               g.phase = "game-over";
@@ -1115,7 +1305,7 @@ export default function AirCombatGame({ dataSource }: { dataSource: DataSourceSe
                 continue outerEnemyBullets;
               }
             }
-            if (now > g.playerHitUntil && Math.hypot(b.x - p.x, b.y - p.y) < HIT_RADIUS) {
+            if (now > g.playerHitUntil && now > g.barrierUntil && Math.hypot(b.x - p.x, b.y - p.y) < HIT_RADIUS) {
               g.enemyBullets.splice(i, 1);
               g.playerHitUntil = now + 120;
               if (registerVulcanHit(p, now, PLAYER_VULCAN_HITS_TO_KILL, true)) {
@@ -1148,7 +1338,7 @@ export default function AirCombatGame({ dataSource }: { dataSource: DataSourceSe
         }
       }
 
-      draw(ctx!, g, now);
+      draw(ctx!, g, now, keymapRef.current);
       rafRef.current = requestAnimationFrame(frame);
     }
 
@@ -1158,30 +1348,49 @@ export default function AirCombatGame({ dataSource }: { dataSource: DataSourceSe
     };
   }, [handleHit]);
 
-  // Keyboard input — movement is the 4 arrow keys; X = vulcan, Z = missile,
-  // C = chaff/flare (breaks the lock of any incoming enemy missiles).
+  // Keyboard input — movement is the 4 arrow keys and Space always pauses;
+  // every other action goes through the remappable keymap (see keymapRef).
   useEffect(() => {
     function onKeyDown(e: KeyboardEvent) {
       const g = gameRef.current;
       if (!g) return;
+      if (rebindingRef.current) {
+        // Settings UI is capturing the next keypress as a new binding.
+        e.preventDefault();
+        const action = rebindingRef.current;
+        setKeymap((km) => {
+          const next = { ...km, [action]: e.code };
+          saveKeymap(next);
+          return next;
+        });
+        setRebindingAction(null);
+        return;
+      }
       if (e.key === " " || e.code === "Space") {
         e.preventDefault(); // Space normally scrolls the page
         togglePause();
         return;
       }
+      if (!gateAnsweredRef.current) return; // controls locked until confirmed
       if (e.key.startsWith("Arrow")) e.preventDefault();
       g.keys[e.key] = true;
-      if (e.key === "x" || e.key === "X") g.firingVulcan = true;
-      if (e.key === "z" || e.key === "Z") fireMissile();
-      if (e.key === "c" || e.key === "C") deployChaff();
-      if (e.key === "d" || e.key === "D") summonWingman();
-      if (e.key === "s" || e.key === "S") fireLaser();
+      const km = keymapRef.current;
+      if (e.code === km.vulcan) g.firingVulcan = true;
+      if (e.code === km.boost) g.boosting = true;
+      if (e.code === km.missile) fireMissile();
+      if (e.code === km.chaff) deployChaff();
+      if (e.code === km.wingman) summonWingman();
+      if (e.code === km.laser) fireLaser();
+      if (e.code === km.barrier) activateBarrier();
+      if (e.code === km.bomb) fireBomb();
     }
     function onKeyUp(e: KeyboardEvent) {
       const g = gameRef.current;
       if (!g) return;
       g.keys[e.key] = false;
-      if (e.key === "x" || e.key === "X") g.firingVulcan = false;
+      const km = keymapRef.current;
+      if (e.code === km.vulcan) g.firingVulcan = false;
+      if (e.code === km.boost) g.boosting = false;
     }
     window.addEventListener("keydown", onKeyDown);
     window.addEventListener("keyup", onKeyUp);
@@ -1194,7 +1403,7 @@ export default function AirCombatGame({ dataSource }: { dataSource: DataSourceSe
 
   function fireMissile() {
     const g = gameRef.current;
-    if (!g || (g.phase !== "playing" && g.phase !== "boss") || g.paused) return;
+    if (!g || (g.phase !== "playing" && g.phase !== "boss") || g.paused || !gateAnsweredRef.current) return;
     const now = performance.now();
     if (now - g.lastMissile < MISSILE_COOLDOWN_MS) return;
     if (g.playerMissilesLeft <= 0) return;
@@ -1218,38 +1427,26 @@ export default function AirCombatGame({ dataSource }: { dataSource: DataSourceSe
     playMissileLaunch(audioCtxRef);
   }
 
-  /** Laser beam (phím S): an instant hitscan shot across the screen at the
-   * player's current altitude — up to LASER_HITS_TO_KILL hits destroys a
-   * regular enemy, it also chips away at a boss's own laser threshold, and
-   * it detonates any enemy missile it passes through in one hit. */
-  function fireLaser() {
-    const g = gameRef.current;
-    if (!g || (g.phase !== "playing" && g.phase !== "boss") || g.paused) return;
-    const now = performance.now();
-    if (now - g.lastLaser < LASER_COOLDOWN_MS) return;
-    if (g.laserAmmo <= 0) return;
-
-    g.lastLaser = now;
-    g.laserAmmo -= 1;
-    g.laserBeams.push({ y: g.player.y, until: now + LASER_BEAM_FADE_MS });
-    playVulcanShot(audioCtxRef);
-    setHud((h) => ({ ...h, laserAmmo: g.laserAmmo }));
-
-    const aligned = (y: number) => Math.abs(y - g.player.y) <= ALIGN_TOLERANCE;
+  /** Resolves an instant hitscan laser sweep fired from (x, y): destroys any
+   * enemy missile it passes through, chips at aligned regular enemies (dead
+   * at LASER_HITS_TO_KILL hits) and at a boss's own laser threshold. Shared
+   * by the player's own laser and every wingman's. */
+  function laserSweep(g: NonNullable<typeof gameRef.current>, x: number, y: number) {
+    const aligned = (yy: number) => Math.abs(yy - y) <= ALIGN_TOLERANCE;
     for (const e of [...g.enemies]) {
-      if (e.x > g.player.x && aligned(e.y)) {
+      if (e.x > x && aligned(e.y)) {
         e.laserHits += 1;
         if (e.laserHits >= LASER_HITS_TO_KILL) handleHit(e);
       }
     }
     for (let i = g.enemyMissiles.length - 1; i >= 0; i--) {
       const m = g.enemyMissiles[i];
-      if (m.x > g.player.x && aligned(m.y)) {
+      if (m.x > x && aligned(m.y)) {
         g.enemyMissiles.splice(i, 1);
         playExplosion(audioCtxRef);
       }
     }
-    if (g.boss && g.boss.x > g.player.x && aligned(g.boss.y)) {
+    if (g.boss && g.boss.x > x && aligned(g.boss.y)) {
       const boss = g.boss;
       if (applyBossHit(boss, "laser")) {
         playExplosion(audioCtxRef);
@@ -1258,13 +1455,30 @@ export default function AirCombatGame({ dataSource }: { dataSource: DataSourceSe
     }
   }
 
+  /** Laser beam (phím S): an instant hitscan shot across the screen at the
+   * player's current altitude. */
+  function fireLaser() {
+    const g = gameRef.current;
+    if (!g || (g.phase !== "playing" && g.phase !== "boss") || g.paused || !gateAnsweredRef.current) return;
+    const now = performance.now();
+    if (now - g.lastLaser < LASER_COOLDOWN_MS) return;
+    if (g.laserAmmo <= 0) return;
+
+    g.lastLaser = now;
+    g.laserAmmo -= 1;
+    g.laserBeams.push({ y: g.player.y, until: now + LASER_BEAM_FADE_MS, fromX: g.player.x });
+    playVulcanShot(audioCtxRef);
+    setHud((h) => ({ ...h, laserAmmo: g.laserAmmo }));
+    laserSweep(g, g.player.x, g.player.y);
+  }
+
   /** Chaff/flare: always fires immediately on button press (no cooldown) —
    * scatters a burst of short-lived particles around the player; any enemy
    * missile that touches one while it's still burning explodes against it
    * (see the collision check in the main loop). */
   function deployChaff() {
     const g = gameRef.current;
-    if (!g || (g.phase !== "playing" && g.phase !== "boss") || g.paused) return;
+    if (!g || (g.phase !== "playing" && g.phase !== "boss") || g.paused || !gateAnsweredRef.current) return;
     const now = performance.now();
     for (let i = 0; i < CHAFF_PARTICLE_COUNT; i++) {
       const angle = (Math.PI * 2 * i) / CHAFF_PARTICLE_COUNT + Math.random() * 0.4;
@@ -1284,7 +1498,7 @@ export default function AirCombatGame({ dataSource }: { dataSource: DataSourceSe
    * down; each press adds one more to the formation, up to WINGMAN_MAX. */
   function summonWingman() {
     const g = gameRef.current;
-    if (!g || (g.phase !== "playing" && g.phase !== "boss") || g.paused) return;
+    if (!g || (g.phase !== "playing" && g.phase !== "boss") || g.paused || !gateAnsweredRef.current) return;
     if (g.wingmen.length >= WINGMAN_MAX) return;
     const now = performance.now();
     const prev = g.wingmen[g.wingmen.length - 1];
@@ -1295,6 +1509,34 @@ export default function AirCombatGame({ dataSource }: { dataSource: DataSourceSe
     const g = gameRef.current;
     if (!g || (g.phase !== "playing" && g.phase !== "boss")) return;
     g.paused = !g.paused;
+  }
+
+  /** Barrier (phím B): one use per stage — blocks every attack from every
+   * direction (enemy vulcan, enemy/boss missiles, the kaiju's beam) for
+   * BARRIER_DURATION_MS. */
+  function activateBarrier() {
+    const g = gameRef.current;
+    if (!g || (g.phase !== "playing" && g.phase !== "boss") || g.paused || !gateAnsweredRef.current) return;
+    if (g.barrierUsed) return;
+    const now = performance.now();
+    g.barrierUsed = true;
+    g.barrierUntil = now + BARRIER_DURATION_MS;
+  }
+
+  /** Bomb (phím V): a rare anti-kaiju weapon — only usable while fighting
+   * the final boss. Homes toward it; landing all BOMB_COUNT defeats it
+   * outright, independent of the usual per-weapon thresholds. */
+  function fireBomb() {
+    const g = gameRef.current;
+    if (!g || (g.phase !== "playing" && g.phase !== "boss") || g.paused || !gateAnsweredRef.current) return;
+    if (!g.boss || g.boss.kind !== "final") return;
+    const now = performance.now();
+    if (now - g.lastBomb < BOMB_COOLDOWN_MS) return;
+    if (g.bombAmmo <= 0) return;
+    g.lastBomb = now;
+    g.bombAmmo -= 1;
+    g.bombs.push({ x: g.player.x + 26, y: g.player.y, vx: BOMB_SPEED, vy: 0 });
+    playMissileLaunch(audioCtxRef);
   }
 
   /** Boss defeated: mid-boss clears the stage as usual; the final boss
@@ -1336,6 +1578,10 @@ export default function AirCombatGame({ dataSource }: { dataSource: DataSourceSe
     g.missiles = [];
     g.enemyBullets = [];
     g.enemyMissiles = [];
+    g.bombs = [];
+    // Bombs (phím V) are only meaningful against the final boss — a fresh
+    // set of BOMB_COUNT is issued whenever that fight begins.
+    g.bombAmmo = g.pendingBossKind === "final" ? BOMB_COUNT : 0;
     g.boss = spawnBoss(g.pendingBossKind, performance.now());
     g.phase = "boss";
     setHud((h) => ({ ...h, phase: "boss" }));
@@ -1347,7 +1593,7 @@ export default function AirCombatGame({ dataSource }: { dataSource: DataSourceSe
     g.keys[key] = down;
   }
 
-  function draw(ctx: CanvasRenderingContext2D, g: NonNullable<typeof gameRef.current>, now: number) {
+  function draw(ctx: CanvasRenderingContext2D, g: NonNullable<typeof gameRef.current>, now: number, km: Keymap) {
     // Sky
     const sky = ctx.createLinearGradient(0, 0, 0, H);
     sky.addColorStop(0, "#8FCBEE");
@@ -1391,6 +1637,20 @@ export default function AirCombatGame({ dataSource }: { dataSource: DataSourceSe
       ctx.ellipse(6, 0, 5, 3, 0, 0, Math.PI * 2);
       ctx.fill();
       ctx.restore();
+    }
+
+    // Barrier (phím B): a glowing shield ring while active.
+    if (now < g.barrierUntil) {
+      const barrierLeft = (g.barrierUntil - now) / 1000;
+      ctx.strokeStyle = `rgba(90,200,240,${0.5 + 0.3 * Math.sin(now / 60)})`;
+      ctx.lineWidth = 3;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, 34, 0, Math.PI * 2);
+      ctx.stroke();
+      ctx.font = "11px sans-serif";
+      ctx.textAlign = "center";
+      ctx.fillStyle = "#2C5A70";
+      ctx.fillText(`${barrierLeft.toFixed(1)}s`, p.x, p.y - 40);
     }
 
     // Vulcan ammo count, small, at the player's upper-right.
@@ -1630,15 +1890,15 @@ export default function AirCombatGame({ dataSource }: { dataSource: DataSourceSe
       ctx.restore();
     }
 
-    // Laser beams (phím S) — pink, spans from the player to the screen edge,
-    // fades out quickly.
+    // Laser beams (phím S, or a wingman's own) — pink, span from whoever
+    // fired to the screen edge, fade out quickly.
     for (const beam of g.laserBeams) {
       if (now >= beam.until) continue;
       const alpha = Math.max(0, (beam.until - now) / LASER_BEAM_FADE_MS);
       ctx.strokeStyle = `rgba(240,90,200,${alpha})`;
       ctx.lineWidth = 6;
       ctx.beginPath();
-      ctx.moveTo(p.x, beam.y);
+      ctx.moveTo(beam.fromX, beam.y);
       ctx.lineTo(W, beam.y);
       ctx.stroke();
     }
@@ -1673,6 +1933,20 @@ export default function AirCombatGame({ dataSource }: { dataSource: DataSourceSe
       }
     }
 
+    // Bombs (phím V) — dark anti-kaiju ordnance.
+    ctx.fillStyle = "#2A2A2A";
+    for (const b of g.bombs) {
+      ctx.beginPath();
+      ctx.ellipse(b.x, b.y, 7, 5, 0, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    if (g.boss && g.boss.kind === "final") {
+      ctx.font = "600 14px 'Klee One', serif";
+      ctx.textAlign = "center";
+      ctx.fillStyle = "#4C3A22";
+      ctx.fillText(`爆弾 (${keyCodeLabel(km.bomb)}): ${g.bombAmmo}/${BOMB_COUNT}`, g.player.x, g.player.y + 42);
+    }
+
     // Hit flash
     if (g.flash && now < g.flash.until) {
       ctx.fillStyle = g.flash.color;
@@ -1692,12 +1966,21 @@ export default function AirCombatGame({ dataSource }: { dataSource: DataSourceSe
       ctx.fillText("⏸ Tạm dừng（Space để tiếp tục）", W / 2, H / 2);
     }
 
-    // Wingman formation status (phím D)
+    // Wingman formation status
     ctx.font = "13px sans-serif";
     ctx.textAlign = "left";
     ctx.textBaseline = "alphabetic";
     ctx.fillStyle = g.wingmen.length >= WINGMAN_MAX ? "rgba(76,58,34,0.55)" : "#2C5A70";
-    ctx.fillText(`僚機 (D): ${g.wingmen.length}/${WINGMAN_MAX}`, 12, H - 12);
+    ctx.fillText(`僚機 (${keyCodeLabel(km.wingman)}): ${g.wingmen.length}/${WINGMAN_MAX}`, 12, H - 12);
+
+    // Barrier status
+    ctx.textAlign = "right";
+    ctx.fillStyle = g.barrierUsed && now >= g.barrierUntil ? "rgba(76,58,34,0.55)" : "#2C5A70";
+    ctx.fillText(
+      `Khiên (${keyCodeLabel(km.barrier)}): ${now < g.barrierUntil ? "đang bật" : g.barrierUsed ? "đã dùng" : "sẵn sàng"}`,
+      W - 12,
+      H - 12
+    );
   }
 
   function roundRect(ctx: CanvasRenderingContext2D, x: number, y: number, w: number, h: number, r: number) {
@@ -1716,7 +1999,7 @@ export default function AirCombatGame({ dataSource }: { dataSource: DataSourceSe
       <div className="mb-2 flex flex-wrap items-center justify-between gap-2 text-sm text-sand-600">
         <span className="flex items-center gap-2">
           Màn {hud.stage}/{STAGES_PER_LOOP}（Vòng {hud.loopCount}）
-          <HelpButton title="Không chiến chia động từ" body={HELP_BODY} />
+          <HelpButton title="Không chiến chia động từ" body={buildHelpBody(keymap)} />
           <button
             type="button"
             onClick={() => setMuted((m) => !m)}
@@ -1725,6 +2008,15 @@ export default function AirCombatGame({ dataSource }: { dataSource: DataSourceSe
             className="btn-press rounded-full border border-sand-300 bg-sand-50 px-2 py-1 text-xs text-sand-600 shadow-card hover:bg-sand-200"
           >
             {muted ? "🔇" : "🔊"}
+          </button>
+          <button
+            type="button"
+            onClick={() => setShowKeySettings(true)}
+            aria-label="Cài đặt phím"
+            title="Cài đặt phím"
+            className="btn-press rounded-full border border-sand-300 bg-sand-50 px-2 py-1 text-xs text-sand-600 shadow-card hover:bg-sand-200"
+          >
+            ⚙
           </button>
         </span>
         <span className="rounded-full bg-sand-200 px-3 py-1 font-semibold text-sand-700">
@@ -1777,6 +2069,50 @@ export default function AirCombatGame({ dataSource }: { dataSource: DataSourceSe
             </div>
           </div>
         )}
+
+        {!gateAnswered && (
+          <div className="absolute inset-0 z-20 flex items-center justify-center bg-sand-50/95 p-4">
+            <div className="max-h-full w-full max-w-sm overflow-y-auto rounded-2xl border border-sand-300 bg-sand-50 p-6 text-center shadow-card">
+              {!showGateHelp ? (
+                <>
+                  <p className="mb-4 text-base font-semibold text-sand-700">Bạn đã hiểu cách chơi chưa?</p>
+                  <div className="flex flex-wrap justify-center gap-3">
+                    <button
+                      type="button"
+                      onClick={() => setGateAnswered(true)}
+                      className="btn-press rounded-full bg-sand-600 px-5 py-2 text-sm font-semibold text-sand-50 shadow hover:brightness-95"
+                    >
+                      Rồi, bắt đầu →
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setShowGateHelp(true)}
+                      className="btn-press rounded-full border border-sand-300 bg-sand-100 px-5 py-2 text-sm font-semibold text-sand-700 shadow hover:bg-sand-200"
+                    >
+                      Chưa, xem hướng dẫn
+                    </button>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <p className="mb-2 text-left font-kyokasho text-base text-kanjibrown">Hướng dẫn chơi</p>
+                  <div className="mb-4 space-y-2 text-left text-sm text-sand-700">
+                    {buildHelpBody(keymap).map((line) => (
+                      <p key={line}>{line}</p>
+                    ))}
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => setGateAnswered(true)}
+                    className="btn-press rounded-full bg-sand-600 px-5 py-2 text-sm font-semibold text-sand-50 shadow hover:brightness-95"
+                  >
+                    Tôi đã hiểu, bắt đầu →
+                  </button>
+                </>
+              )}
+            </div>
+          </div>
+        )}
       </div>
 
       <div className="mt-3 flex items-center justify-between gap-4">
@@ -1789,11 +2125,11 @@ export default function AirCombatGame({ dataSource }: { dataSource: DataSourceSe
           <TouchButton label="▶" onDown={() => setDirKey("ArrowRight", true)} onUp={() => setDirKey("ArrowRight", false)} />
         </div>
         <p className="text-center text-[11px] text-sand-500">
-          Di chuyển: ←↑↓→（giữ A để tăng tốc）　Vulcan: giữ X　Tên lửa: Z　Laser: S　Chaff/flare: C　Gọi僚機 hỗ trợ: D　Tạm dừng: Space
+          Di chuyển: ←↑↓→（giữ {keyCodeLabel(keymap.boost)} để tăng tốc）　Vulcan: giữ {keyCodeLabel(keymap.vulcan)}　Tên lửa: {keyCodeLabel(keymap.missile)}　Laser: {keyCodeLabel(keymap.laser)}　Chaff/flare: {keyCodeLabel(keymap.chaff)}　Khiên: {keyCodeLabel(keymap.barrier)}　Bom: {keyCodeLabel(keymap.bomb)}　Gọi僚機 hỗ trợ: {keyCodeLabel(keymap.wingman)}　Tạm dừng: Space
         </p>
-        <div className="flex gap-2">
+        <div className="flex flex-wrap justify-end gap-2">
           <TouchButton
-            label="X"
+            label={keyCodeLabel(keymap.vulcan)}
             wide
             onDown={() => {
               const g = gameRef.current;
@@ -1804,13 +2140,74 @@ export default function AirCombatGame({ dataSource }: { dataSource: DataSourceSe
               if (g) g.firingVulcan = false;
             }}
           />
-          <TouchButton label="Z" wide onDown={fireMissile} onUp={() => {}} />
-          <TouchButton label="S" wide onDown={fireLaser} onUp={() => {}} />
-          <TouchButton label="C" wide onDown={deployChaff} onUp={() => {}} />
-          <TouchButton label="D" wide onDown={summonWingman} onUp={() => {}} />
+          <TouchButton label={keyCodeLabel(keymap.missile)} wide onDown={fireMissile} onUp={() => {}} />
+          <TouchButton label={keyCodeLabel(keymap.laser)} wide onDown={fireLaser} onUp={() => {}} />
+          <TouchButton label={keyCodeLabel(keymap.chaff)} wide onDown={deployChaff} onUp={() => {}} />
+          <TouchButton label={keyCodeLabel(keymap.barrier)} wide onDown={activateBarrier} onUp={() => {}} />
+          <TouchButton label={keyCodeLabel(keymap.bomb)} wide onDown={fireBomb} onUp={() => {}} />
+          <TouchButton label={keyCodeLabel(keymap.wingman)} wide onDown={summonWingman} onUp={() => {}} />
           <TouchButton label="⏸" wide onDown={togglePause} onUp={() => {}} />
         </div>
       </div>
+
+      {showKeySettings && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-kanjibrown/30 p-4"
+          onClick={() => {
+            setShowKeySettings(false);
+            setRebindingAction(null);
+          }}
+        >
+          <div
+            className="flex max-h-[85vh] w-full max-w-sm flex-col rounded-3xl border border-sand-300 bg-sand-50 p-5 shadow-card"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="mb-3 flex shrink-0 items-center justify-between">
+              <h2 className="font-kyokasho text-lg text-kanjibrown">Cài đặt phím</h2>
+              <button
+                type="button"
+                onClick={() => {
+                  setShowKeySettings(false);
+                  setRebindingAction(null);
+                }}
+                aria-label="Đóng"
+                className="btn-press rounded-full px-2 py-1 text-sand-600 hover:bg-sand-200"
+              >
+                ✕
+              </button>
+            </div>
+            <div className="space-y-2 overflow-y-auto text-sm text-sand-700">
+              {KEYMAP_ACTIONS.map(({ id, label }) => (
+                <div key={id} className="flex items-center justify-between gap-2">
+                  <span>{label}</span>
+                  <button
+                    type="button"
+                    onClick={() => setRebindingAction(id)}
+                    className={`btn-press min-w-[64px] rounded-lg border px-3 py-1 text-center font-mono text-xs ${
+                      rebindingAction === id
+                        ? "border-leaf-400 bg-leaf-100 text-kanjibrown"
+                        : "border-sand-300 bg-sand-100 text-sand-700 hover:bg-sand-200"
+                    }`}
+                  >
+                    {rebindingAction === id ? "Nhấn phím…" : keyCodeLabel(keymap[id])}
+                  </button>
+                </div>
+              ))}
+            </div>
+            <button
+              type="button"
+              onClick={() => {
+                setKeymap(DEFAULT_KEYMAP);
+                saveKeymap(DEFAULT_KEYMAP);
+                setRebindingAction(null);
+              }}
+              className="btn-press mt-3 shrink-0 rounded-full border border-sand-300 bg-sand-50 px-4 py-1.5 text-xs font-semibold text-sand-700 shadow-card hover:bg-sand-200"
+            >
+              Đặt lại mặc định
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
