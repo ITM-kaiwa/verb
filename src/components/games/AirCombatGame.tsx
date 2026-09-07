@@ -96,7 +96,7 @@ const HELP_BODY = [
   "Tên lửa (phím Z, bạn có 8 quả, mỗi máy bay địch có 2 quả): khi có vòng khóa mục tiêu màu xanh lá hiện trên địch (trong tầm 2/3 màn hình, ngay phía trước), bắn 1 phát là hạ luôn. Cứ qua 2 màn là được tiếp đạn đầy lại 8 quả.",
   "Laser màu hồng (phím S, 10 phát): bắn xuyên suốt tới tận rìa màn hình theo đúng độ cao của bạn, trúng 2 phát là hạ một máy bay địch; trúng tên lửa địch thì tên lửa nổ ngay lập tức. Thanh ngang nhỏ dưới máy bay của bạn hiện số đạn laser còn lại.",
   "Chaff/flare (phím C): bấm là bắn ngay lập tức, không cần chờ hồi — tỏa ra một chùm mồi bẫy xung quanh máy bay của bạn, chỉ đánh lừa được tên lửa bay tới từ phía sau／trên／dưới. Tên lửa bay thẳng từ chính diện (đối đầu) sẽ không bị mồi bẫy đánh lừa — phải dùng vulcan để bắn hạ loại này. Ngay khi tên lửa của bạn khóa mục tiêu vào một máy bay địch, địch đó có 25% cơ hội tự bắn chaff phòng thủ theo đúng luật tương tự.",
-  "Gọi僚機 hỗ trợ (phím D): một máy bay đồng đội xuất hiện trong 10 giây, tự bay theo ý riêng (không cần bám theo bạn) và tự bắn vào máy bay địch gần nhất trong tầm vulcan giống hệt bạn, không phân biệt đúng/sai — có thể vô tình bắn hạ đúng mục tiêu (được tính vào chuỗi) hoặc bắn nhầm (mất chuỗi). Mỗi lần bạn bắn hạ đúng mục tiêu, một僚機 mới cũng tự động được điều đến (không cần chờ hồi).",
+  "Gọi僚機 hỗ trợ (phím D): một máy bay đồng đội gia nhập đội hình, tự bay theo ý riêng (không cần bám theo bạn) và tự bắn vào máy bay địch gần nhất trong tầm vulcan giống hệt bạn, không phân biệt đúng/sai — có thể vô tình bắn hạ đúng mục tiêu (được tính vào chuỗi) hoặc bắn nhầm (mất chuỗi). Mỗi lần bạn bắn hạ đúng mục tiêu, thêm một僚機 mới gia nhập. Mỗi lần bấm D (hoặc mỗi lần bắn hạ đúng) sẽ thêm 1僚機 vào đội hình, tối đa 5 chiếc cùng lúc.僚機 không tự biến mất — nếu không bị địch bắn hạ trong màn, nó sẽ theo bạn sang màn tiếp theo và được hồi đầy sát thương lẫn đạn dược. Địch cũng có thể nhắm bắn僚機 giống như nhắm bắn bạn (cùng luật vulcan/tên lửa) và có thể bắn hạ nó. Đạn của僚機 có giới hạn nhưng cũng được tiếp đầy mỗi khi sang màn mới.",
   "Địch cũng được trang bị y hệt bạn — chúng sẽ bắn vulcan và tên lửa lại bạn theo đúng luật trên.",
   "Bắn hạ đúng 5 chiếc liên tiếp để qua màn (bắn trúng địch sai sẽ làm mất chuỗi).",
   "Sau màn 5 sẽ xuất hiện trung boss: to lớn, bắn vulcan tứ phía và có 10 quả tên lửa.",
@@ -150,9 +150,12 @@ const PLAYER_VULCAN_AMMO_BASE = 350;
 // Chance an enemy deploys defensive chaff the moment a player missile locks
 // onto it (rolled once per missile — see Missile.chaffRolled).
 const ENEMY_CHAFF_CHANCE = 0.25;
-const WINGMAN_DURATION_MS = 10000;
-const WINGMAN_COOLDOWN_MS = 8000; // starts once the wingman leaves
 const WINGMAN_FIRE_INTERVAL_MS = 260;
+// Wingmen no longer expire on a timer — they persist across stages until
+// shot down, and stack (one more per summon, or per correct kill) up to
+// this cap; a surviving wingman's damage and ammo are restored each stage.
+const WINGMAN_MAX = 5;
+const WINGMAN_AMMO_BASE = 150;
 const LASER_AMMO = 10;
 const LASER_HITS_TO_KILL = 2;
 const LASER_BEAM_FADE_MS = 180;
@@ -240,14 +243,15 @@ interface WingmanBullet {
   vx: number;
   vy: number;
 }
-interface Wingman {
+interface Wingman extends Combatant {
+  id: number;
   x: number;
   y: number;
   vx: number;
   vy: number;
   redirectAt: number;
-  expiresAt: number;
   nextShotAt: number;
+  ammo: number;
 }
 // A scattered chaff/flare speck — any enemy missile that touches one while
 // it's still alive explodes against it.
@@ -287,6 +291,7 @@ interface BossBeam {
 type Phase = "playing" | "stage-clear" | "boss-intro" | "boss" | "game-clear" | "game-over";
 
 let enemySeq = 0;
+let wingmanSeq = 0;
 
 function buildTarget(dataSource: DataSourceSetting) {
   const formMeta = CONJUGATION_FORMS[Math.floor(Math.random() * CONJUGATION_FORMS.length)];
@@ -316,13 +321,16 @@ function spawnEnemy(text: string, correct: boolean, speedMul: number, now: numbe
 
 function spawnWingman(prevX: number | undefined, prevY: number | undefined, now: number): Wingman {
   return {
+    id: wingmanSeq++,
     x: prevX ?? WINGMAN_BOUNDS.minX + Math.random() * (WINGMAN_BOUNDS.maxX - WINGMAN_BOUNDS.minX),
     y: prevY ?? WINGMAN_BOUNDS.minY + Math.random() * (WINGMAN_BOUNDS.maxY - WINGMAN_BOUNDS.minY),
     vx: (Math.random() - 0.5) * 1.6,
     vy: (Math.random() - 0.5) * 1.6,
     redirectAt: now + 500 + Math.random() * 1000,
-    expiresAt: now + WINGMAN_DURATION_MS,
     nextShotAt: now + 300,
+    ammo: WINGMAN_AMMO_BASE,
+    vulcanHits: 0,
+    lastVulcanHitAt: -Infinity,
   };
 }
 
@@ -479,9 +487,8 @@ export default function AirCombatGame({ dataSource }: { dataSource: DataSourceSe
     playerMaxVulcanAmmo: number;
     chaffParticles: ChaffParticle[];
     enemyChaffParticles: ChaffParticle[];
-    wingman: Wingman | null;
+    wingmen: Wingman[];
     wingmanBullets: WingmanBullet[];
-    wingmanNextAvailableAt: number;
     paused: boolean;
     laserBeams: { y: number; until: number }[];
     laserAmmo: number;
@@ -519,6 +526,13 @@ export default function AirCombatGame({ dataSource }: { dataSource: DataSourceSe
       if (stage % 2 === 1) {
         g.playerMissilesLeft = g.playerMaxMissiles;
         g.playerVulcanAmmo = g.playerMaxVulcanAmmo;
+      }
+      // Wingmen that survived the previous stage carry over into this one,
+      // with their accumulated damage and spent ammo fully restored.
+      for (const wm of g.wingmen) {
+        wm.vulcanHits = 0;
+        wm.lastVulcanHitAt = -Infinity;
+        wm.ammo = WINGMAN_AMMO_BASE;
       }
       setHud({
         masuForm: verb.masuForm,
@@ -577,9 +591,8 @@ export default function AirCombatGame({ dataSource }: { dataSource: DataSourceSe
       playerMaxVulcanAmmo: PLAYER_VULCAN_AMMO_BASE,
       chaffParticles: [],
       enemyChaffParticles: [],
-      wingman: null,
+      wingmen: [],
       wingmanBullets: [],
-      wingmanNextAvailableAt: 0,
       paused: false,
       laserBeams: [],
       laserAmmo: LASER_AMMO,
@@ -625,9 +638,12 @@ export default function AirCombatGame({ dataSource }: { dataSource: DataSourceSe
       if (enemy.correct) {
         g.streak += 1;
         g.flash = { text: "Trúng!", color: "#2F7D3C", until: performance.now() + 500 };
-        // A fresh wingman is assigned every time the correct enemy goes
-        // down, regardless of cooldown — replaces any wingman already out.
-        g.wingman = spawnWingman(g.wingman?.x, g.wingman?.y, performance.now());
+        // Every correct kill adds a new wingman to the formation (up to
+        // WINGMAN_MAX) alongside any that already survived earlier stages.
+        if (g.wingmen.length < WINGMAN_MAX) {
+          const prev = g.wingmen[g.wingmen.length - 1];
+          g.wingmen.push(spawnWingman(prev?.x, prev?.y, performance.now()));
+        }
         if (g.streak >= STREAK_GOAL) {
           if (g.stage === MID_BOSS_AT_STAGE || g.stage === FINAL_BOSS_AT_STAGE) {
             g.pendingBossKind = g.stage === FINAL_BOSS_AT_STAGE ? "final" : "mid";
@@ -696,7 +712,8 @@ export default function AirCombatGame({ dataSource }: { dataSource: DataSourceSe
         }
 
         // Enemies: wander + occasional direction change, bounce on bounds; also
-        // return fire at the player with the same weapons/ranges the player has.
+        // return fire — at the player, or at whichever wingman is nearest and
+        // aligned, if one is closer — with the same weapons/ranges the player has.
         for (const e of g.enemies) {
           if (now > e.redirectAt) {
             e.vx = -(0.4 + Math.random() * 0.9) * e.speedMul;
@@ -710,17 +727,41 @@ export default function AirCombatGame({ dataSource }: { dataSource: DataSourceSe
           e.x = Math.min(ENEMY_BOUNDS.maxX, Math.max(ENEMY_BOUNDS.minX, e.x));
           e.y = Math.min(ENEMY_BOUNDS.maxY, Math.max(ENEMY_BOUNDS.minY, e.y));
 
-          const dx = e.x - p.x;
-          const alignedWithPlayer = Math.abs(e.y - p.y) <= ALIGN_TOLERANCE && dx > 0;
-          if (now > e.nextVulcanAt && alignedWithPlayer && dx <= VULCAN_RANGE) {
+          let hasTarget = false;
+          let targetDx = Infinity;
+          let targetKind: "player" | "wingman" = "player";
+          let targetWingmanId = -1;
+          const playerDx = e.x - p.x;
+          if (playerDx > 0 && Math.abs(e.y - p.y) <= ALIGN_TOLERANCE) {
+            hasTarget = true;
+            targetDx = playerDx;
+            targetKind = "player";
+          }
+          for (const wm of g.wingmen) {
+            const wmDx = e.x - wm.x;
+            if (wmDx > 0 && Math.abs(e.y - wm.y) <= ALIGN_TOLERANCE && wmDx < targetDx) {
+              hasTarget = true;
+              targetDx = wmDx;
+              targetKind = "wingman";
+              targetWingmanId = wm.id;
+            }
+          }
+
+          if (hasTarget && now > e.nextVulcanAt && targetDx <= VULCAN_RANGE) {
             e.nextVulcanAt = now + VULCAN_COOLDOWN_MS + Math.random() * 40;
             g.enemyBullets.push({ x: e.x - 26, y: e.y, vx: -VULCAN_SPEED });
             playVulcanShot(audioCtxRef);
           }
-          if (now > e.nextMissileAt && alignedWithPlayer && dx <= MISSILE_RANGE && e.missilesLeft > 0) {
+          if (hasTarget && now > e.nextMissileAt && targetDx <= MISSILE_RANGE && e.missilesLeft > 0) {
             e.nextMissileAt = now + MISSILE_COOLDOWN_MS + Math.random() * 600;
             e.missilesLeft -= 1;
-            g.enemyMissiles.push({ x: e.x - 26, y: e.y, vx: -MISSILE_SPEED, vy: 0, homing: "player" });
+            g.enemyMissiles.push({
+              x: e.x - 26,
+              y: e.y,
+              vx: -MISSILE_SPEED,
+              vy: 0,
+              homing: targetKind === "player" ? "player" : targetWingmanId,
+            });
             playMissileLaunch(audioCtxRef);
           }
         }
@@ -803,50 +844,46 @@ export default function AirCombatGame({ dataSource }: { dataSource: DataSourceSe
         }
         g.enemyBullets = g.enemyBullets.filter((b) => b.x > -20 && b.x < W + 20 && b.y > -20 && b.y < H + 20);
 
-        // Wingman (S key, or auto-assigned on every correct kill): wanders
-        // on its own (not locked to the player's position) and fires
-        // indiscriminately at the nearest enemy within its own vulcan range.
-        if (g.wingman) {
-          if (now > g.wingman.expiresAt) {
-            g.wingman = null;
-            g.wingmanNextAvailableAt = now + WINGMAN_COOLDOWN_MS;
-          } else {
-            const wm = g.wingman;
-            if (now > wm.redirectAt) {
-              wm.vx = (Math.random() - 0.5) * 1.8;
-              wm.vy = (Math.random() - 0.5) * 1.8;
-              wm.redirectAt = now + 700 + Math.random() * 1300;
-            }
-            wm.x += wm.vx;
-            wm.y += wm.vy;
-            if (wm.x < WINGMAN_BOUNDS.minX || wm.x > WINGMAN_BOUNDS.maxX) wm.vx *= -1;
-            if (wm.y < WINGMAN_BOUNDS.minY || wm.y > WINGMAN_BOUNDS.maxY) wm.vy *= -1;
-            wm.x = Math.min(WINGMAN_BOUNDS.maxX, Math.max(WINGMAN_BOUNDS.minX, wm.x));
-            wm.y = Math.min(WINGMAN_BOUNDS.maxY, Math.max(WINGMAN_BOUNDS.minY, wm.y));
+        // Wingmen (D key, or auto-added on every correct kill, up to
+        // WINGMAN_MAX): each wanders on its own (not locked to the player's
+        // position) and fires indiscriminately at the nearest enemy within
+        // its own vulcan range, until its ammo runs out or it's shot down.
+        for (const wm of g.wingmen) {
+          if (now > wm.redirectAt) {
+            wm.vx = (Math.random() - 0.5) * 1.8;
+            wm.vy = (Math.random() - 0.5) * 1.8;
+            wm.redirectAt = now + 700 + Math.random() * 1300;
+          }
+          wm.x += wm.vx;
+          wm.y += wm.vy;
+          if (wm.x < WINGMAN_BOUNDS.minX || wm.x > WINGMAN_BOUNDS.maxX) wm.vx *= -1;
+          if (wm.y < WINGMAN_BOUNDS.minY || wm.y > WINGMAN_BOUNDS.maxY) wm.vy *= -1;
+          wm.x = Math.min(WINGMAN_BOUNDS.maxX, Math.max(WINGMAN_BOUNDS.minX, wm.x));
+          wm.y = Math.min(WINGMAN_BOUNDS.maxY, Math.max(WINGMAN_BOUNDS.minY, wm.y));
 
-            if (now > wm.nextShotAt && g.enemies.length > 0) {
-              let nearest: Enemy | null = null;
-              let bestDist = Infinity;
-              for (const e of g.enemies) {
-                const d = Math.hypot(e.x - wm.x, e.y - wm.y);
-                if (d < bestDist) {
-                  bestDist = d;
-                  nearest = e;
-                }
+          if (now > wm.nextShotAt && wm.ammo > 0 && g.enemies.length > 0) {
+            let nearest: Enemy | null = null;
+            let bestDist = Infinity;
+            for (const e of g.enemies) {
+              const d = Math.hypot(e.x - wm.x, e.y - wm.y);
+              if (d < bestDist) {
+                bestDist = d;
+                nearest = e;
               }
-              if (nearest && bestDist <= VULCAN_RANGE) {
-                wm.nextShotAt = now + WINGMAN_FIRE_INTERVAL_MS;
-                const dx = nearest.x - wm.x;
-                const dy = nearest.y - wm.y;
-                const dist = Math.hypot(dx, dy) || 1;
-                g.wingmanBullets.push({
-                  x: wm.x,
-                  y: wm.y,
-                  vx: (dx / dist) * VULCAN_SPEED,
-                  vy: (dy / dist) * VULCAN_SPEED,
-                });
-                playVulcanShot(audioCtxRef);
-              }
+            }
+            if (nearest && bestDist <= VULCAN_RANGE) {
+              wm.nextShotAt = now + WINGMAN_FIRE_INTERVAL_MS;
+              wm.ammo -= 1;
+              const dx = nearest.x - wm.x;
+              const dy = nearest.y - wm.y;
+              const dist = Math.hypot(dx, dy) || 1;
+              g.wingmanBullets.push({
+                x: wm.x,
+                y: wm.y,
+                vx: (dx / dist) * VULCAN_SPEED,
+                vy: (dy / dist) * VULCAN_SPEED,
+              });
+              playVulcanShot(audioCtxRef);
             }
           }
         }
@@ -879,7 +916,8 @@ export default function AirCombatGame({ dataSource }: { dataSource: DataSourceSe
         }
         g.missiles = g.missiles.filter((m) => m.x < W + 20 && m.x > -20 && m.y > -20 && m.y < H + 20);
 
-        // Enemy missiles: home toward the player.
+        // Enemy missiles: home toward the player, or toward whichever
+        // wingman they locked onto (see the enemy-targeting logic above).
         for (const m of g.enemyMissiles) {
           if (m.homing === "player") {
             const dx = p.x - m.x;
@@ -887,6 +925,15 @@ export default function AirCombatGame({ dataSource }: { dataSource: DataSourceSe
             const dist = Math.hypot(dx, dy) || 1;
             m.vx = (dx / dist) * MISSILE_SPEED;
             m.vy = (dy / dist) * MISSILE_SPEED;
+          } else if (typeof m.homing === "number") {
+            const wm = g.wingmen.find((w) => w.id === m.homing);
+            if (wm) {
+              const dx = wm.x - m.x;
+              const dy = wm.y - m.y;
+              const dist = Math.hypot(dx, dy) || 1;
+              m.vx = (dx / dist) * MISSILE_SPEED;
+              m.vy = (dy / dist) * MISSILE_SPEED;
+            }
           }
           m.x += m.vx;
           m.y += m.vy;
@@ -1032,35 +1079,42 @@ export default function AirCombatGame({ dataSource }: { dataSource: DataSourceSe
           }
         }
 
-        // Collisions: enemy missiles vs player (instant kill)
-        if (now > g.playerHitUntil && (g.phase === "playing" || g.phase === "boss")) {
-          for (let i = g.enemyMissiles.length - 1; i >= 0; i--) {
+        // Collisions: enemy missiles vs player (instant kill) or vs a wingman
+        // (instant kill for the wingman only — no game-over).
+        if (g.phase === "playing" || g.phase === "boss") {
+          outerEnemyMissileHits: for (let i = g.enemyMissiles.length - 1; i >= 0; i--) {
             const m = g.enemyMissiles[i];
-            if (Math.hypot(m.x - p.x, m.y - p.y) < HIT_RADIUS) {
+            if (now > g.playerHitUntil && Math.hypot(m.x - p.x, m.y - p.y) < HIT_RADIUS) {
               g.enemyMissiles.splice(i, 1);
               playExplosion(audioCtxRef);
               g.phase = "game-over";
               setHud((h) => ({ ...h, phase: "game-over" }));
-              break;
+              continue outerEnemyMissileHits;
+            }
+            for (const wm of g.wingmen) {
+              if (Math.hypot(m.x - wm.x, m.y - wm.y) < HIT_RADIUS) {
+                g.enemyMissiles.splice(i, 1);
+                g.wingmen = g.wingmen.filter((w) => w.id !== wm.id);
+                playExplosion(audioCtxRef);
+                continue outerEnemyMissileHits;
+              }
             }
           }
         }
         // Enemy vulcan: can shoot down the player's outgoing missile in one
-        // hit, otherwise chips away at the player's sustained-fire threshold.
+        // hit, otherwise chips away at the player's or a wingman's
+        // sustained-fire threshold (a wingman is destroyed once it's hit).
         if (g.phase === "playing" || g.phase === "boss") {
-          for (let i = g.enemyBullets.length - 1; i >= 0; i--) {
+          outerEnemyBullets: for (let i = g.enemyBullets.length - 1; i >= 0; i--) {
             const b = g.enemyBullets[i];
-            let consumed = false;
             for (let j = g.missiles.length - 1; j >= 0; j--) {
               if (Math.hypot(b.x - g.missiles[j].x, b.y - g.missiles[j].y) < HIT_RADIUS) {
                 g.missiles.splice(j, 1);
                 g.enemyBullets.splice(i, 1);
                 playExplosion(audioCtxRef);
-                consumed = true;
-                break;
+                continue outerEnemyBullets;
               }
             }
-            if (consumed) continue;
             if (now > g.playerHitUntil && Math.hypot(b.x - p.x, b.y - p.y) < HIT_RADIUS) {
               g.enemyBullets.splice(i, 1);
               g.playerHitUntil = now + 120;
@@ -1069,7 +1123,17 @@ export default function AirCombatGame({ dataSource }: { dataSource: DataSourceSe
                 g.phase = "game-over";
                 setHud((h) => ({ ...h, phase: "game-over" }));
               }
-              break;
+              continue outerEnemyBullets;
+            }
+            for (const wm of g.wingmen) {
+              if (Math.hypot(b.x - wm.x, b.y - wm.y) < HIT_RADIUS) {
+                g.enemyBullets.splice(i, 1);
+                if (registerVulcanHit(wm, now, ENEMY_VULCAN_HITS_TO_KILL, false)) {
+                  g.wingmen = g.wingmen.filter((w) => w.id !== wm.id);
+                  playExplosion(audioCtxRef);
+                }
+                continue outerEnemyBullets;
+              }
             }
           }
         }
@@ -1215,15 +1279,16 @@ export default function AirCombatGame({ dataSource }: { dataSource: DataSourceSe
     }
   }
 
-  /** Wingman: a support jet that shows up for a while and fires at whatever
-   * enemy is nearest, indiscriminately (correct or not — same handleHit path
-   * as the player's own kills, so it can help or accidentally cost a streak). */
+  /** Wingman: a support jet that fires at whatever enemy is nearest,
+   * indiscriminately (correct or not). Persists across stages until shot
+   * down; each press adds one more to the formation, up to WINGMAN_MAX. */
   function summonWingman() {
     const g = gameRef.current;
     if (!g || (g.phase !== "playing" && g.phase !== "boss") || g.paused) return;
+    if (g.wingmen.length >= WINGMAN_MAX) return;
     const now = performance.now();
-    if (g.wingman || now < g.wingmanNextAvailableAt) return;
-    g.wingman = spawnWingman(undefined, undefined, now);
+    const prev = g.wingmen[g.wingmen.length - 1];
+    g.wingmen.push(spawnWingman(prev?.x, prev?.y, now));
   }
 
   function togglePause() {
@@ -1344,10 +1409,11 @@ export default function AirCombatGame({ dataSource }: { dataSource: DataSourceSe
     ctx.fillStyle = "#F05AC8";
     ctx.fillRect(p.x - 15, p.y + 21, 30 * laserPct, 3);
 
-    // Wingman (S key): a smaller jet in a lighter, distinct color
-    if (g.wingman) {
+    // Wingmen (D key): smaller jets in a lighter, distinct color, each with
+    // its own sustained-fire exposure ring so you can see one about to fall.
+    for (const wm of g.wingmen) {
       ctx.save();
-      ctx.translate(g.wingman.x, g.wingman.y);
+      ctx.translate(wm.x, wm.y);
       ctx.scale(0.75, 0.75);
       ctx.fillStyle = "#6FA8C4";
       ctx.strokeStyle = "#2C5A70";
@@ -1366,6 +1432,13 @@ export default function AirCombatGame({ dataSource }: { dataSource: DataSourceSe
       ctx.fill();
       ctx.stroke();
       ctx.restore();
+      if (wm.vulcanHits > 0) {
+        ctx.strokeStyle = "rgba(193,68,58,0.7)";
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.arc(wm.x, wm.y, 15, -Math.PI / 2, -Math.PI / 2 + (wm.vulcanHits / ENEMY_VULCAN_HITS_TO_KILL) * Math.PI * 2);
+        ctx.stroke();
+      }
     }
 
     // Sustained-fire exposure ring on the player
@@ -1619,20 +1692,12 @@ export default function AirCombatGame({ dataSource }: { dataSource: DataSourceSe
       ctx.fillText("⏸ Tạm dừng（Space để tiếp tục）", W / 2, H / 2);
     }
 
-    // Wingman status (phím S)
+    // Wingman formation status (phím D)
     ctx.font = "13px sans-serif";
     ctx.textAlign = "left";
     ctx.textBaseline = "alphabetic";
-    if (g.wingman) {
-      ctx.fillStyle = "#2C5A70";
-      ctx.fillText(`僚機 (D): còn ${Math.ceil((g.wingman.expiresAt - now) / 1000)}s`, 12, H - 12);
-    } else if (now < g.wingmanNextAvailableAt) {
-      ctx.fillStyle = "rgba(76,58,34,0.55)";
-      ctx.fillText(`僚機 (D): hồi ${Math.ceil((g.wingmanNextAvailableAt - now) / 1000)}s`, 12, H - 12);
-    } else {
-      ctx.fillStyle = "#4C3A22";
-      ctx.fillText("僚機 (D): sẵn sàng", 12, H - 12);
-    }
+    ctx.fillStyle = g.wingmen.length >= WINGMAN_MAX ? "rgba(76,58,34,0.55)" : "#2C5A70";
+    ctx.fillText(`僚機 (D): ${g.wingmen.length}/${WINGMAN_MAX}`, 12, H - 12);
   }
 
   function roundRect(ctx: CanvasRenderingContext2D, x: number, y: number, w: number, h: number, r: number) {
