@@ -94,7 +94,7 @@ const HELP_BODY = [
   "Di chuyển bằng 4 phím mũi tên ←↑↓→. Giữ phím A để tăng tốc độ di chuyển gấp đôi.",
   "Vulcan (giữ phím X, 350 viên đạn, tiếp đạn đầy mỗi 2 màn): tầm bắn ngắn (~1/3 màn hình). Số đạn còn lại hiện nhỏ ở góc trên bên phải máy bay của bạn. Sát thương lên máy bay địch được cộng dồn vĩnh viễn (không hồi phục) — chỉ cần đủ ~2 giây bắn trúng tính gộp là hạ được, kể cả bắn ngắt quãng. Máy bay của bạn thì ngược lại: phải bị bắn trúng liên tục ~3 giây không ngắt quãng mới nổ. Bắn trúng tên lửa (của cả 2 bên) thì hạ ngay lập tức bất kể bên nào bắn.",
   "Tên lửa (phím Z, bạn có 8 quả, mỗi máy bay địch có 2 quả): khi có vòng khóa mục tiêu màu xanh lá hiện trên địch (trong tầm 2/3 màn hình, ngay phía trước), bắn 1 phát là hạ luôn. Cứ qua 2 màn là được tiếp đạn đầy lại 8 quả.",
-  "Laser màu hồng (phím S, 10 phát): bắn xuyên suốt tới tận rìa màn hình theo đúng độ cao của bạn, trúng 2 phát là hạ một máy bay địch. Thanh ngang nhỏ dưới máy bay của bạn hiện số đạn laser còn lại.",
+  "Laser màu hồng (phím S, 10 phát): bắn xuyên suốt tới tận rìa màn hình theo đúng độ cao của bạn, trúng 2 phát là hạ một máy bay địch; trúng tên lửa địch thì tên lửa nổ ngay lập tức. Thanh ngang nhỏ dưới máy bay của bạn hiện số đạn laser còn lại.",
   "Chaff/flare (phím C): bấm là bắn ngay lập tức, không cần chờ hồi — tỏa ra một chùm mồi bẫy xung quanh máy bay của bạn, chỉ đánh lừa được tên lửa bay tới từ phía sau／trên／dưới. Tên lửa bay thẳng từ chính diện (đối đầu) sẽ không bị mồi bẫy đánh lừa — phải dùng vulcan để bắn hạ loại này. Ngay khi tên lửa của bạn khóa mục tiêu vào một máy bay địch, địch đó có 25% cơ hội tự bắn chaff phòng thủ theo đúng luật tương tự.",
   "Gọi僚機 hỗ trợ (phím D): một máy bay đồng đội xuất hiện trong 10 giây, tự bay theo ý riêng (không cần bám theo bạn) và tự bắn vào máy bay địch gần nhất trong tầm vulcan giống hệt bạn, không phân biệt đúng/sai — có thể vô tình bắn hạ đúng mục tiêu (được tính vào chuỗi) hoặc bắn nhầm (mất chuỗi). Mỗi lần bạn bắn hạ đúng mục tiêu, một僚機 mới cũng tự động được điều đến (không cần chờ hồi).",
   "Địch cũng được trang bị y hệt bạn — chúng sẽ bắn vulcan và tên lửa lại bạn theo đúng luật trên.",
@@ -1156,7 +1156,8 @@ export default function AirCombatGame({ dataSource }: { dataSource: DataSourceSe
 
   /** Laser beam (phím S): an instant hitscan shot across the screen at the
    * player's current altitude — up to LASER_HITS_TO_KILL hits destroys a
-   * regular enemy, and it also chips away at a boss's own laser threshold. */
+   * regular enemy, it also chips away at a boss's own laser threshold, and
+   * it detonates any enemy missile it passes through in one hit. */
   function fireLaser() {
     const g = gameRef.current;
     if (!g || (g.phase !== "playing" && g.phase !== "boss") || g.paused) return;
@@ -1175,6 +1176,13 @@ export default function AirCombatGame({ dataSource }: { dataSource: DataSourceSe
       if (e.x > g.player.x && aligned(e.y)) {
         e.laserHits += 1;
         if (e.laserHits >= LASER_HITS_TO_KILL) handleHit(e);
+      }
+    }
+    for (let i = g.enemyMissiles.length - 1; i >= 0; i--) {
+      const m = g.enemyMissiles[i];
+      if (m.x > g.player.x && aligned(m.y)) {
+        g.enemyMissiles.splice(i, 1);
+        playExplosion(audioCtxRef);
       }
     }
     if (g.boss && g.boss.x > g.player.x && aligned(g.boss.y)) {
