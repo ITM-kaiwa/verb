@@ -279,7 +279,7 @@ export default function AirCombatGame({ dataSource }: { dataSource: DataSourceSe
   const rafRef = useRef<number | null>(null);
   const audioCtxRef = useRef<AudioContext | null>(null);
   const bgmRef = useRef<HTMLAudioElement | null>(null);
-  const [muted, setMuted] = useState(false);
+  const [muted, setMuted] = useState(true);
 
   const [hud, setHud] = useState({
     masuForm: "",
