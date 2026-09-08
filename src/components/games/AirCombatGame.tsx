@@ -159,7 +159,7 @@ function buildHelpBody(km: Keymap): string[] {
     "Cứ bắn hạ đúng 2 chiếc là vulcan／tên lửa／laser／chaff đều được tiếp đầy trở lại.",
     `Khiên chắn (phím ${k("barrier")}): dùng được 1 lần mỗi màn, kích hoạt trong 5 giây và chặn TOÀN BỘ đòn tấn công từ mọi hướng trong lúc đó.`,
     `Bom chống quái vật (phím ${k("bomb")}): chỉ dùng được khi đang chiến đấu với quái vật cuối cùng (kaiju), có 4 quả — nếu cả 4 quả đều trúng thì hạ gục nó ngay lập tức, bất kể các mốc sát thương khác.`,
-    `Gọi僚機 hỗ trợ (phím ${k("wingman")}): một máy bay đồng đội gia nhập đội hình, tự bay theo ý riêng (không cần bám theo bạn) và mang vũ trang vulcan (bắn thẳng liên tục cùng tầm bắn với bạn) và tên lửa khóa mục tiêu — không mang laser — không phân biệt đúng/sai nên có thể vô tình bắn hạ đúng mục tiêu (được tính vào chuỗi) hoặc bắn nhầm (mất chuỗi). Mỗi僚機 tự nhắm vào một máy bay địch khác nhau để bắn tên lửa/laser (không dồn hết vào một chiếc). Mỗi lần bấm ${k("wingman")} (hoặc mỗi lần bắn hạ đúng mục tiêu) sẽ thêm 1僚機 vào đội hình, tối đa 5 chiếc cùng lúc.僚機 không tự biến mất — nếu không bị địch bắn hạ trong màn, nó sẽ theo bạn sang màn tiếp theo và được hồi đầy sát thương lẫn toàn bộ đạn dược. Địch cũng có thể nhắm bắn僚機 giống như nhắm bắn bạn (cùng luật vulcan/tên lửa) và có thể bắn hạ nó.`,
+    `Gọi僚機 hỗ trợ (phím ${k("wingman")}): một máy bay đồng đội gia nhập đội hình, tự bay theo ý riêng (không cần bám theo bạn) và mang vũ trang vulcan (bắn thẳng liên tục cùng tầm bắn với bạn) và tên lửa khóa mục tiêu — không mang laser — không phân biệt đúng/sai nên có thể vô tình bắn hạ đúng mục tiêu (được tính vào chuỗi) hoặc bắn nhầm (mất chuỗi). Khi bị tên lửa địch khóa mục tiêu, 僚機 cũng có 25% cơ hội tự bắn chaff phòng thủ giống hệt luật của địch. Mỗi僚機 tự nhắm vào một máy bay địch khác nhau để bắn tên lửa/laser (không dồn hết vào một chiếc). Mỗi lần bấm ${k("wingman")} (hoặc mỗi lần bắn hạ đúng mục tiêu) sẽ thêm 1僚機 vào đội hình, tối đa 5 chiếc cùng lúc.僚機 không tự biến mất — nếu không bị địch bắn hạ trong màn, nó sẽ theo bạn sang màn tiếp theo và được hồi đầy sát thương lẫn toàn bộ đạn dược. Địch cũng có thể nhắm bắn僚機 giống như nhắm bắn bạn (cùng luật vulcan/tên lửa) và có thể bắn hạ nó.`,
     "Địch cũng được trang bị y hệt bạn — chúng sẽ bắn vulcan và tên lửa lại bạn theo đúng luật trên.",
     "Điểm số: bắn hạ 1 máy bay địch được 5 điểm, bắn hạ đúng mục tiêu được 10 điểm, hạ trung boss được 30 điểm, hạ quái vật cuối cùng được 100 điểm. Cứ đủ 50 điểm là được thưởng thêm 1 phát laser.",
     "Bắn hạ đúng 2 chiếc liên tiếp để qua màn (bắn trúng địch sai sẽ làm mất chuỗi).",
@@ -312,9 +312,12 @@ interface Missile {
   y: number;
   vx: number;
   vy: number;
-  homing: "player" | number; // "player", or an enemy id
-  chaffRolled?: boolean; // player missiles only: has the target enemy's
-  // 25%-chance defensive-chaff roll already happened for this missile?
+  homing: "player" | number; // "player", or an enemy/wingman id depending on
+  // which pool this missile lives in (g.missiles targets enemies by id;
+  // g.enemyMissiles targets "player" or a wingman by id)
+  chaffRolled?: boolean; // has the one-time defensive-chaff roll already
+  // happened for this missile? (player missiles vs. their enemy target,
+  // and enemy missiles vs. their wingman target — see both roll sites below)
 }
 interface Cloud {
   x: number;
@@ -624,6 +627,7 @@ export default function AirCombatGame({ dataSource }: { dataSource: DataSourceSe
     beamBonusTiers: number; // how many SCORE_BONUS_BEAM_STEP bonuses already granted
     chaffParticles: ChaffParticle[];
     enemyChaffParticles: ChaffParticle[];
+    wingmanChaffParticles: ChaffParticle[];
     wingmen: Wingman[];
     wingmanBullets: WingmanBullet[];
     paused: boolean;
@@ -740,6 +744,7 @@ export default function AirCombatGame({ dataSource }: { dataSource: DataSourceSe
       beamBonusTiers: 0,
       chaffParticles: [],
       enemyChaffParticles: [],
+      wingmanChaffParticles: [],
       wingmen: [],
       wingmanBullets: [],
       paused: false,
@@ -1170,6 +1175,45 @@ export default function AirCombatGame({ dataSource }: { dataSource: DataSourceSe
           // Dead-ahead missiles see through the chaff — only vulcan stops those.
           if (isFrontalAttack(true, m.x - p.x, m.y - p.y)) continue;
           const hitParticle = g.chaffParticles.some((c) => Math.hypot(m.x - c.x, m.y - c.y) < HIT_RADIUS);
+          if (hitParticle) {
+            g.enemyMissiles.splice(i, 1);
+            playExplosion(audioCtxRef);
+          }
+        }
+
+        // The moment an enemy missile locks onto a wingman, that wingman gets
+        // the same one-time chance to auto-deploy defensive chaff that an
+        // enemy gets against a player missile (see ENEMY_CHAFF_CHANCE below).
+        for (const m of g.enemyMissiles) {
+          if (m.chaffRolled || typeof m.homing !== "number") continue;
+          m.chaffRolled = true;
+          const wm = g.wingmen.find((w) => w.id === m.homing);
+          if (!wm || Math.random() >= ENEMY_CHAFF_CHANCE) continue;
+          for (let i = 0; i < CHAFF_PARTICLE_COUNT; i++) {
+            const angle = (Math.PI * 2 * i) / CHAFF_PARTICLE_COUNT + Math.random() * 0.4;
+            const dist = 10 + Math.random() * CHAFF_SCATTER_RADIUS;
+            g.wingmanChaffParticles.push({
+              x: wm.x + Math.cos(angle) * dist,
+              y: wm.y + Math.sin(angle) * dist,
+              vx: Math.cos(angle) * 0.4,
+              vy: Math.sin(angle) * 0.4,
+              expiresAt: now + CHAFF_PARTICLE_LIFETIME_MS,
+            });
+          }
+        }
+        for (const c of g.wingmanChaffParticles) {
+          c.x += c.vx;
+          c.y += c.vy;
+        }
+        g.wingmanChaffParticles = g.wingmanChaffParticles.filter((c) => now < c.expiresAt);
+        for (let i = g.enemyMissiles.length - 1; i >= 0; i--) {
+          const m = g.enemyMissiles[i];
+          if (typeof m.homing !== "number") continue;
+          const wm = g.wingmen.find((w) => w.id === m.homing);
+          if (!wm) continue;
+          // Dead-ahead missiles see through the chaff — only vulcan stops those.
+          if (isFrontalAttack(true, m.x - wm.x, m.y - wm.y)) continue;
+          const hitParticle = g.wingmanChaffParticles.some((c) => Math.hypot(m.x - c.x, m.y - c.y) < HIT_RADIUS);
           if (hitParticle) {
             g.enemyMissiles.splice(i, 1);
             playExplosion(audioCtxRef);
@@ -1777,6 +1821,13 @@ export default function AirCombatGame({ dataSource }: { dataSource: DataSourceSe
     for (const c of g.enemyChaffParticles) {
       const lifeLeft = (c.expiresAt - now) / CHAFF_PARTICLE_LIFETIME_MS;
       ctx.fillStyle = `rgba(240,200,180,${Math.max(0, Math.min(1, lifeLeft))})`;
+      ctx.beginPath();
+      ctx.arc(c.x, c.y, 4, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    for (const c of g.wingmanChaffParticles) {
+      const lifeLeft = (c.expiresAt - now) / CHAFF_PARTICLE_LIFETIME_MS;
+      ctx.fillStyle = `rgba(180,220,240,${Math.max(0, Math.min(1, lifeLeft))})`;
       ctx.beginPath();
       ctx.arc(c.x, c.y, 4, 0, Math.PI * 2);
       ctx.fill();
