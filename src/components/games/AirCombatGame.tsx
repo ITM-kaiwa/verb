@@ -154,7 +154,7 @@ function buildHelpBody(km: Keymap): string[] {
     `Di chuyển bằng 4 phím mũi tên ←↑↓→. Giữ phím ${k("boost")} để tăng tốc độ di chuyển gấp đôi.`,
     `Vulcan (giữ phím ${k("vulcan")}, 250 viên đạn): tầm bắn ngắn (~1/3 màn hình). Số đạn còn lại hiện nhỏ ở góc trên bên phải máy bay của bạn. Sát thương lên máy bay địch được cộng dồn vĩnh viễn (không hồi phục) — chỉ cần đủ ~2 giây bắn trúng tính gộp là hạ được, kể cả bắn ngắt quãng. Máy bay của bạn thì ngược lại: phải bị bắn trúng liên tục ~3 giây không ngắt quãng mới nổ. Bắn trúng tên lửa (của cả 2 bên) thì hạ ngay lập tức bất kể bên nào bắn.`,
     `Tên lửa (phím ${k("missile")}, bạn có 8 quả, mỗi máy bay địch có 2 quả): khi có vòng khóa mục tiêu màu xanh lá hiện trên địch (trong tầm 2/3 màn hình, ngay phía trước), bắn 1 phát là hạ luôn.`,
-    `Laser màu hồng (phím ${k("laser")}, 10 phát): bắn xuyên suốt tới tận rìa màn hình theo đúng độ cao của bạn, trúng 2 phát là hạ một máy bay địch; trúng tên lửa địch thì tên lửa nổ ngay lập tức. Thanh ngang nhỏ dưới máy bay của bạn hiện số đạn laser còn lại.`,
+    `Laser màu hồng (phím ${k("laser")}, 6 phát): bắn xuyên suốt tới tận rìa màn hình theo đúng độ cao của bạn, trúng 2 phát là hạ một máy bay địch; trúng tên lửa địch thì tên lửa nổ ngay lập tức. Thanh ngang nhỏ dưới máy bay của bạn hiện số đạn laser còn lại.`,
     `Chaff/flare (phím ${k("chaff")}, 15 lượt): bấm là bắn ngay lập tức, không cần chờ hồi — tỏa ra một chùm mồi bẫy xung quanh máy bay của bạn, chỉ đánh lừa được tên lửa bay tới từ phía sau／trên／dưới. Tên lửa bay thẳng từ chính diện (đối đầu) sẽ không bị mồi bẫy đánh lừa — phải dùng vulcan để bắn hạ loại này. Ngay khi tên lửa của bạn khóa mục tiêu vào một máy bay địch, địch đó có 25% cơ hội tự bắn chaff phòng thủ theo đúng luật tương tự.`,
     "Cứ bắn hạ đúng 2 chiếc là vulcan／tên lửa／laser／chaff đều được tiếp đầy trở lại.",
     `Khiên chắn (phím ${k("barrier")}): dùng được 1 lần mỗi màn, kích hoạt trong 5 giây và chặn TOÀN BỘ đòn tấn công từ mọi hướng trong lúc đó.`,
@@ -162,7 +162,7 @@ function buildHelpBody(km: Keymap): string[] {
     `Gọi僚機 hỗ trợ (phím ${k("wingman")}): một máy bay đồng đội gia nhập đội hình, tự bay theo ý riêng (không cần bám theo bạn) và mang vũ trang như bạn — vulcan bắn thẳng liên tục cùng tầm bắn với bạn, tên lửa khóa mục tiêu, và laser (chỉ 3 phát) — không phân biệt đúng/sai nên có thể vô tình bắn hạ đúng mục tiêu (được tính vào chuỗi) hoặc bắn nhầm (mất chuỗi). Mỗi僚機 tự nhắm vào một máy bay địch khác nhau để bắn tên lửa/laser (không dồn hết vào một chiếc). Mỗi lần bấm ${k("wingman")} (hoặc mỗi lần bắn hạ đúng mục tiêu) sẽ thêm 1僚機 vào đội hình, tối đa 5 chiếc cùng lúc.僚機 không tự biến mất — nếu không bị địch bắn hạ trong màn, nó sẽ theo bạn sang màn tiếp theo và được hồi đầy sát thương lẫn toàn bộ đạn dược. Địch cũng có thể nhắm bắn僚機 giống như nhắm bắn bạn (cùng luật vulcan/tên lửa) và có thể bắn hạ nó.`,
     "Địch cũng được trang bị y hệt bạn — chúng sẽ bắn vulcan và tên lửa lại bạn theo đúng luật trên.",
     "Điểm số: bắn hạ 1 máy bay địch được 5 điểm, bắn hạ đúng mục tiêu được 10 điểm, hạ trung boss được 30 điểm, hạ quái vật cuối cùng được 100 điểm. Cứ đủ 50 điểm là được thưởng thêm 1 phát laser.",
-    "Bắn hạ đúng 5 chiếc liên tiếp để qua màn (bắn trúng địch sai sẽ làm mất chuỗi).",
+    "Bắn hạ đúng 2 chiếc liên tiếp để qua màn (bắn trúng địch sai sẽ làm mất chuỗi).",
     "Sau màn 5 sẽ xuất hiện trung boss: to lớn, bắn vulcan tứ phía và có 10 quả tên lửa.",
     "Sau màn 10 sẽ xuất hiện quái vật cuối cùng (kaiju): đứng dưới đất, thỉnh thoảng nhảy lên nhưng không tiến tới, thỉnh thoảng phun tia sáng nhắm thẳng vào bạn — dính 3 lần là bạn bị hạ. Nó chỉ gục ngã khi đạt MỘT trong các mốc: 100 phát vulcan, 5 quả tên lửa, 5 phát laser, hoặc cả 4 quả bom.",
     "Đánh bại quái vật cuối cùng sẽ quay lại màn 1 với nâng cấp vĩnh viễn: thêm 4 quả tên lửa, thêm 10 phát laser, tầm bắn vulcan xa hơn, và đạn vulcan tăng gấp đôi (500 viên).",
@@ -174,7 +174,9 @@ function buildHelpBody(km: Keymap): string[] {
 // CSS while physics/positions stay in this coordinate space.
 const W = 960;
 const H = 450;
-const STREAK_GOAL = 5;
+// One "stage" is cleared by shooting down 2 correct-answer enemies (in a
+// row — a wrong kill resets the streak).
+const STREAK_GOAL = 2;
 // Scoring: any enemy kill scores, the correct one scores more; bosses score
 // a lot more. Every SCORE_BONUS_BEAM_STEP points earns one bonus laser shot.
 const SCORE_WRONG_KILL = 5;
@@ -228,7 +230,7 @@ const ENEMY_CHAFF_CHANCE = 0.25;
 // this cap; a surviving wingman's damage and ammo are restored each stage.
 const WINGMAN_MAX = 5;
 const WINGMAN_AMMO_BASE = 150;
-const LASER_AMMO = 10;
+const LASER_AMMO = 6;
 const LASER_HITS_TO_KILL = 2;
 const LASER_BEAM_FADE_MS = 180;
 const LASER_COOLDOWN_MS = 260;
@@ -804,7 +806,8 @@ export default function AirCombatGame({ dataSource }: { dataSource: DataSourceSe
           const prev = g.wingmen[g.wingmen.length - 1];
           g.wingmen.push(spawnWingman(prev?.x, prev?.y, performance.now()));
         }
-        // Every 2 correct kills fully resupplies vulcan/missile/laser/chaff.
+        // Every 2 correct kills fully resupplies vulcan/missile/laser/chaff,
+        // for both the player and every wingman currently in the formation.
         g.correctKills += 1;
         let ammoUpdate: Partial<typeof hud> = {};
         if (g.correctKills % 2 === 0) {
@@ -812,6 +815,13 @@ export default function AirCombatGame({ dataSource }: { dataSource: DataSourceSe
           g.playerVulcanAmmo = g.playerMaxVulcanAmmo;
           g.laserAmmo = g.maxLaserAmmo;
           g.chaffAmmo = CHAFF_AMMO_BASE;
+          for (const wm of g.wingmen) {
+            wm.vulcanHits = 0;
+            wm.lastVulcanHitAt = -Infinity;
+            wm.ammo = WINGMAN_AMMO_BASE;
+            wm.missileAmmo = WINGMAN_MISSILE_AMMO_BASE;
+            wm.laserAmmo = WINGMAN_LASER_AMMO_BASE;
+          }
           ammoUpdate = {
             missilesLeft: g.playerMissilesLeft,
             vulcanAmmo: g.playerVulcanAmmo,
