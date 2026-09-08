@@ -159,7 +159,7 @@ function buildHelpBody(km: Keymap): string[] {
     "Cứ bắn hạ đúng 2 chiếc là vulcan／tên lửa／laser／chaff đều được tiếp đầy trở lại.",
     `Khiên chắn (phím ${k("barrier")}): dùng được 1 lần mỗi màn, kích hoạt trong 5 giây và chặn TOÀN BỘ đòn tấn công từ mọi hướng trong lúc đó.`,
     `Bom chống quái vật (phím ${k("bomb")}): chỉ dùng được khi đang chiến đấu với quái vật cuối cùng (kaiju), có 4 quả — nếu cả 4 quả đều trúng thì hạ gục nó ngay lập tức, bất kể các mốc sát thương khác.`,
-    `Gọi僚機 hỗ trợ (phím ${k("wingman")}): một máy bay đồng đội gia nhập đội hình, tự bay theo ý riêng (không cần bám theo bạn) và mang vũ trang như bạn — vulcan bắn thẳng liên tục cùng tầm bắn với bạn, tên lửa khóa mục tiêu, và laser (chỉ 3 phát) — không phân biệt đúng/sai nên có thể vô tình bắn hạ đúng mục tiêu (được tính vào chuỗi) hoặc bắn nhầm (mất chuỗi). Mỗi僚機 tự nhắm vào một máy bay địch khác nhau để bắn tên lửa/laser (không dồn hết vào một chiếc). Mỗi lần bấm ${k("wingman")} (hoặc mỗi lần bắn hạ đúng mục tiêu) sẽ thêm 1僚機 vào đội hình, tối đa 5 chiếc cùng lúc.僚機 không tự biến mất — nếu không bị địch bắn hạ trong màn, nó sẽ theo bạn sang màn tiếp theo và được hồi đầy sát thương lẫn toàn bộ đạn dược. Địch cũng có thể nhắm bắn僚機 giống như nhắm bắn bạn (cùng luật vulcan/tên lửa) và có thể bắn hạ nó.`,
+    `Gọi僚機 hỗ trợ (phím ${k("wingman")}): một máy bay đồng đội gia nhập đội hình, tự bay theo ý riêng (không cần bám theo bạn) và mang vũ trang vulcan (bắn thẳng liên tục cùng tầm bắn với bạn) và tên lửa khóa mục tiêu — không mang laser — không phân biệt đúng/sai nên có thể vô tình bắn hạ đúng mục tiêu (được tính vào chuỗi) hoặc bắn nhầm (mất chuỗi). Mỗi僚機 tự nhắm vào một máy bay địch khác nhau để bắn tên lửa/laser (không dồn hết vào một chiếc). Mỗi lần bấm ${k("wingman")} (hoặc mỗi lần bắn hạ đúng mục tiêu) sẽ thêm 1僚機 vào đội hình, tối đa 5 chiếc cùng lúc.僚機 không tự biến mất — nếu không bị địch bắn hạ trong màn, nó sẽ theo bạn sang màn tiếp theo và được hồi đầy sát thương lẫn toàn bộ đạn dược. Địch cũng có thể nhắm bắn僚機 giống như nhắm bắn bạn (cùng luật vulcan/tên lửa) và có thể bắn hạ nó.`,
     "Địch cũng được trang bị y hệt bạn — chúng sẽ bắn vulcan và tên lửa lại bạn theo đúng luật trên.",
     "Điểm số: bắn hạ 1 máy bay địch được 5 điểm, bắn hạ đúng mục tiêu được 10 điểm, hạ trung boss được 30 điểm, hạ quái vật cuối cùng được 100 điểm. Cứ đủ 50 điểm là được thưởng thêm 1 phát laser.",
     "Bắn hạ đúng 2 chiếc liên tiếp để qua màn (bắn trúng địch sai sẽ làm mất chuỗi).",
@@ -234,11 +234,9 @@ const LASER_AMMO = 6;
 const LASER_HITS_TO_KILL = 2;
 const LASER_BEAM_FADE_MS = 180;
 const LASER_COOLDOWN_MS = 260;
-// Wingmen carry the exact same armament as the player: vulcan, missiles,
-// and laser — vulcan ammo uses WINGMAN_AMMO_BASE above; missile ammo
-// mirrors the player's own, but laser ammo is deliberately much lower.
+// Wingmen carry only vulcan and missiles — no laser — vulcan ammo uses
+// WINGMAN_AMMO_BASE above; missile ammo mirrors the player's own.
 const WINGMAN_MISSILE_AMMO_BASE = PLAYER_MISSILE_AMMO;
-const WINGMAN_LASER_AMMO_BASE = 3;
 const BOSS_MAX_HP = 40;
 const BOSS_VULCAN_DAMAGE = 1;
 const BOSS_MISSILE_DAMAGE = 8;
@@ -345,8 +343,6 @@ interface Wingman extends Combatant {
   ammo: number; // vulcan ammo
   nextMissileAt: number;
   missileAmmo: number;
-  nextLaserAt: number;
-  laserAmmo: number;
 }
 // A scattered chaff/flare speck — any enemy missile that touches one while
 // it's still alive explodes against it.
@@ -435,8 +431,6 @@ function spawnWingman(prevX: number | undefined, prevY: number | undefined, now:
     ammo: WINGMAN_AMMO_BASE,
     nextMissileAt: now + 800 + Math.random() * 800,
     missileAmmo: WINGMAN_MISSILE_AMMO_BASE,
-    nextLaserAt: now + 1000 + Math.random() * 1000,
-    laserAmmo: WINGMAN_LASER_AMMO_BASE,
     vulcanHits: 0,
     lastVulcanHitAt: -Infinity,
   };
@@ -674,14 +668,13 @@ export default function AirCombatGame({ dataSource }: { dataSource: DataSourceSe
       // Missiles/vulcan/laser/chaff resupply every 2 correct kills — see the
       // counter in handleHit(), not tied to stage transitions here.
       // Wingmen that survived the previous stage carry over into this one,
-      // with their accumulated damage and all ammo (vulcan/missile/laser)
+      // with their accumulated damage and all ammo (vulcan/missile)
       // fully restored.
       for (const wm of g.wingmen) {
         wm.vulcanHits = 0;
         wm.lastVulcanHitAt = -Infinity;
         wm.ammo = WINGMAN_AMMO_BASE;
         wm.missileAmmo = WINGMAN_MISSILE_AMMO_BASE;
-        wm.laserAmmo = WINGMAN_LASER_AMMO_BASE;
       }
       setHud({
         masuForm: verb.masuForm,
@@ -774,6 +767,14 @@ export default function AirCombatGame({ dataSource }: { dataSource: DataSourceSe
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // Stage-clear is a brief semi-transparent message, not a click-through
+  // gate — it shows for 1s then auto-advances to the next stage.
+  useEffect(() => {
+    if (hud.phase !== "stage-clear") return;
+    const t = setTimeout(() => initStage(hud.stage + 1), 1000);
+    return () => clearTimeout(t);
+  }, [hud.phase, hud.stage, initStage]);
+
   // Background music: start on mount (best-effort — browsers may block
   // autoplay until the user interacts with the page), stop on unmount.
   useEffect(() => {
@@ -820,7 +821,6 @@ export default function AirCombatGame({ dataSource }: { dataSource: DataSourceSe
             wm.lastVulcanHitAt = -Infinity;
             wm.ammo = WINGMAN_AMMO_BASE;
             wm.missileAmmo = WINGMAN_MISSILE_AMMO_BASE;
-            wm.laserAmmo = WINGMAN_LASER_AMMO_BASE;
           }
           ammoUpdate = {
             missilesLeft: g.playerMissilesLeft,
@@ -1072,15 +1072,6 @@ export default function AirCombatGame({ dataSource }: { dataSource: DataSourceSe
               g.missiles.push({ x: wm.x + 26, y: wm.y, vx: MISSILE_SPEED, vy: 0, homing: target.id });
               playMissileLaunch(audioCtxRef);
             }
-          }
-
-          // Laser: instant hitscan sweep at this wingman's own altitude.
-          if (now > wm.nextLaserAt && wm.laserAmmo > 0) {
-            wm.nextLaserAt = now + LASER_COOLDOWN_MS;
-            wm.laserAmmo -= 1;
-            g.laserBeams.push({ y: wm.y, until: now + LASER_BEAM_FADE_MS, fromX: wm.x });
-            playVulcanShot(audioCtxRef);
-            laserSweep(g, wm.x, wm.y);
           }
         });
         for (const b of g.wingmanBullets) {
@@ -1476,8 +1467,8 @@ export default function AirCombatGame({ dataSource }: { dataSource: DataSourceSe
 
   /** Resolves an instant hitscan laser sweep fired from (x, y): destroys any
    * enemy missile it passes through, chips at aligned regular enemies (dead
-   * at LASER_HITS_TO_KILL hits) and at a boss's own laser threshold. Shared
-   * by the player's own laser and every wingman's. */
+   * at LASER_HITS_TO_KILL hits) and at a boss's own laser threshold. Only
+   * the player fires this — wingmen carry vulcan and missiles only. */
   function laserSweep(g: NonNullable<typeof gameRef.current>, x: number, y: number) {
     const aligned = (yy: number) => Math.abs(yy - y) <= ALIGN_TOLERANCE;
     for (const e of [...g.enemies]) {
@@ -1882,8 +1873,10 @@ export default function AirCombatGame({ dataSource }: { dataSource: DataSourceSe
       ctx.save();
       ctx.translate(boss.x, boss.y);
       if (boss.kind === "mid") {
-        ctx.fillStyle = "#6B3A5A";
-        ctx.strokeStyle = "#3A1E30";
+        // Same color as regular enemies — all enemy aircraft/creatures share
+        // one unified color.
+        ctx.fillStyle = "#8A4A46";
+        ctx.strokeStyle = "#4A2418";
         ctx.lineWidth = 2;
         ctx.beginPath();
         ctx.moveTo(-60, 0);
@@ -1899,8 +1892,10 @@ export default function AirCombatGame({ dataSource }: { dataSource: DataSourceSe
         ctx.fill();
         ctx.stroke();
       } else {
-        ctx.fillStyle = "#3E5B3A";
-        ctx.strokeStyle = "#20301E";
+        // Same color as regular enemies — all enemy aircraft/creatures share
+        // one unified color.
+        ctx.fillStyle = "#8A4A46";
+        ctx.strokeStyle = "#4A2418";
         ctx.lineWidth = 2;
         ctx.beginPath();
         ctx.moveTo(-70, 40);
@@ -1956,8 +1951,8 @@ export default function AirCombatGame({ dataSource }: { dataSource: DataSourceSe
       ctx.restore();
     }
 
-    // Laser beams (phím S, or a wingman's own) — pink, span from whoever
-    // fired to the screen edge, fade out quickly.
+    // Laser beams (phím S, player only) — pink, span from the player to the
+    // screen edge, fade out quickly.
     for (const beam of g.laserBeams) {
       if (now >= beam.until) continue;
       const alpha = Math.max(0, (beam.until - now) / LASER_BEAM_FADE_MS);
@@ -2107,11 +2102,18 @@ export default function AirCombatGame({ dataSource }: { dataSource: DataSourceSe
 
         <canvas ref={canvasRef} width={W} height={H} className="block w-full" />
 
-        {hud.phase !== "playing" && hud.phase !== "boss" && (
+        {hud.phase === "stage-clear" && (
+          <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
+            <p className="rounded-xl bg-sand-50/60 px-6 py-3 text-lg font-semibold text-sand-700 shadow">
+              {`Qua màn ${hud.stage}!`}
+            </p>
+          </div>
+        )}
+
+        {hud.phase !== "playing" && hud.phase !== "boss" && hud.phase !== "stage-clear" && (
           <div className="absolute inset-0 flex items-center justify-center bg-sand-50/90">
             <div className="space-y-3 rounded-2xl border border-sand-300 bg-sand-50 p-6 text-center shadow-card">
               <p className="text-lg font-semibold text-sand-700">
-                {hud.phase === "stage-clear" && `Qua màn ${hud.stage}!`}
                 {hud.phase === "boss-intro" &&
                   (gameRef.current?.pendingBossKind === "final"
                     ? "Quái vật cuối cùng xuất hiện! 🦖"
@@ -2122,14 +2124,12 @@ export default function AirCombatGame({ dataSource }: { dataSource: DataSourceSe
               <button
                 type="button"
                 onClick={() => {
-                  if (hud.phase === "stage-clear") initStage(hud.stage + 1);
-                  else if (hud.phase === "boss-intro") startBoss();
+                  if (hud.phase === "boss-intro") startBoss();
                   else if (hud.phase === "game-clear") initStage(1);
                   else restart();
                 }}
                 className="btn-press rounded-full bg-sand-600 px-5 py-2 text-sm font-semibold text-sand-50 shadow hover:brightness-95"
               >
-                {hud.phase === "stage-clear" && "Màn tiếp theo →"}
                 {hud.phase === "boss-intro" && "Bắt đầu chiến đấu →"}
                 {hud.phase === "game-clear" && "Vòng tiếp theo →"}
                 {hud.phase === "game-over" && "Chơi lại"}
