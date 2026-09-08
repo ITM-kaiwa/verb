@@ -152,20 +152,20 @@ function buildHelpBody(km: Keymap): string[] {
     "Phía trên hiển thị động từ thể ます và tên thể chia cần bắn hạ (ví dụ「て形」).",
     "4 máy bay địch bay bên phải, mỗi chiếc mang một thể chia khác nhau — chỉ 1 chiếc là đúng.",
     `Di chuyển bằng 4 phím mũi tên ←↑↓→. Giữ phím ${k("boost")} để tăng tốc độ di chuyển gấp đôi.`,
-    `Vulcan (giữ phím ${k("vulcan")}, 350 viên đạn): tầm bắn ngắn (~1/3 màn hình). Số đạn còn lại hiện nhỏ ở góc trên bên phải máy bay của bạn. Sát thương lên máy bay địch được cộng dồn vĩnh viễn (không hồi phục) — chỉ cần đủ ~2 giây bắn trúng tính gộp là hạ được, kể cả bắn ngắt quãng. Máy bay của bạn thì ngược lại: phải bị bắn trúng liên tục ~3 giây không ngắt quãng mới nổ. Bắn trúng tên lửa (của cả 2 bên) thì hạ ngay lập tức bất kể bên nào bắn.`,
+    `Vulcan (giữ phím ${k("vulcan")}, 250 viên đạn): tầm bắn ngắn (~1/3 màn hình). Số đạn còn lại hiện nhỏ ở góc trên bên phải máy bay của bạn. Sát thương lên máy bay địch được cộng dồn vĩnh viễn (không hồi phục) — chỉ cần đủ ~2 giây bắn trúng tính gộp là hạ được, kể cả bắn ngắt quãng. Máy bay của bạn thì ngược lại: phải bị bắn trúng liên tục ~3 giây không ngắt quãng mới nổ. Bắn trúng tên lửa (của cả 2 bên) thì hạ ngay lập tức bất kể bên nào bắn.`,
     `Tên lửa (phím ${k("missile")}, bạn có 8 quả, mỗi máy bay địch có 2 quả): khi có vòng khóa mục tiêu màu xanh lá hiện trên địch (trong tầm 2/3 màn hình, ngay phía trước), bắn 1 phát là hạ luôn.`,
     `Laser màu hồng (phím ${k("laser")}, 10 phát): bắn xuyên suốt tới tận rìa màn hình theo đúng độ cao của bạn, trúng 2 phát là hạ một máy bay địch; trúng tên lửa địch thì tên lửa nổ ngay lập tức. Thanh ngang nhỏ dưới máy bay của bạn hiện số đạn laser còn lại.`,
     `Chaff/flare (phím ${k("chaff")}, 15 lượt): bấm là bắn ngay lập tức, không cần chờ hồi — tỏa ra một chùm mồi bẫy xung quanh máy bay của bạn, chỉ đánh lừa được tên lửa bay tới từ phía sau／trên／dưới. Tên lửa bay thẳng từ chính diện (đối đầu) sẽ không bị mồi bẫy đánh lừa — phải dùng vulcan để bắn hạ loại này. Ngay khi tên lửa của bạn khóa mục tiêu vào một máy bay địch, địch đó có 25% cơ hội tự bắn chaff phòng thủ theo đúng luật tương tự.`,
     "Cứ bắn hạ đúng 2 chiếc là vulcan／tên lửa／laser／chaff đều được tiếp đầy trở lại.",
     `Khiên chắn (phím ${k("barrier")}): dùng được 1 lần mỗi màn, kích hoạt trong 5 giây và chặn TOÀN BỘ đòn tấn công từ mọi hướng trong lúc đó.`,
     `Bom chống quái vật (phím ${k("bomb")}): chỉ dùng được khi đang chiến đấu với quái vật cuối cùng (kaiju), có 4 quả — nếu cả 4 quả đều trúng thì hạ gục nó ngay lập tức, bất kể các mốc sát thương khác.`,
-    `Gọi僚機 hỗ trợ (phím ${k("wingman")}): một máy bay đồng đội gia nhập đội hình, tự bay theo ý riêng (không cần bám theo bạn) và mang vũ trang giống hệt bạn — vulcan bắn thẳng liên tục, tên lửa khóa mục tiêu, và cả laser — không phân biệt đúng/sai nên có thể vô tình bắn hạ đúng mục tiêu (được tính vào chuỗi) hoặc bắn nhầm (mất chuỗi). Mỗi僚機 tự nhắm vào một máy bay địch khác nhau để bắn tên lửa/laser (không dồn hết vào một chiếc). Mỗi lần bấm ${k("wingman")} (hoặc mỗi lần bắn hạ đúng mục tiêu) sẽ thêm 1僚機 vào đội hình, tối đa 5 chiếc cùng lúc.僚機 không tự biến mất — nếu không bị địch bắn hạ trong màn, nó sẽ theo bạn sang màn tiếp theo và được hồi đầy sát thương lẫn toàn bộ đạn dược. Địch cũng có thể nhắm bắn僚機 giống như nhắm bắn bạn (cùng luật vulcan/tên lửa) và có thể bắn hạ nó.`,
+    `Gọi僚機 hỗ trợ (phím ${k("wingman")}): một máy bay đồng đội gia nhập đội hình, tự bay theo ý riêng (không cần bám theo bạn) và mang vũ trang như bạn — vulcan bắn thẳng liên tục cùng tầm bắn với bạn, tên lửa khóa mục tiêu, và laser (chỉ 3 phát) — không phân biệt đúng/sai nên có thể vô tình bắn hạ đúng mục tiêu (được tính vào chuỗi) hoặc bắn nhầm (mất chuỗi). Mỗi僚機 tự nhắm vào một máy bay địch khác nhau để bắn tên lửa/laser (không dồn hết vào một chiếc). Mỗi lần bấm ${k("wingman")} (hoặc mỗi lần bắn hạ đúng mục tiêu) sẽ thêm 1僚機 vào đội hình, tối đa 5 chiếc cùng lúc.僚機 không tự biến mất — nếu không bị địch bắn hạ trong màn, nó sẽ theo bạn sang màn tiếp theo và được hồi đầy sát thương lẫn toàn bộ đạn dược. Địch cũng có thể nhắm bắn僚機 giống như nhắm bắn bạn (cùng luật vulcan/tên lửa) và có thể bắn hạ nó.`,
     "Địch cũng được trang bị y hệt bạn — chúng sẽ bắn vulcan và tên lửa lại bạn theo đúng luật trên.",
     "Điểm số: bắn hạ 1 máy bay địch được 5 điểm, bắn hạ đúng mục tiêu được 10 điểm, hạ trung boss được 30 điểm, hạ quái vật cuối cùng được 100 điểm. Cứ đủ 50 điểm là được thưởng thêm 1 phát laser.",
     "Bắn hạ đúng 5 chiếc liên tiếp để qua màn (bắn trúng địch sai sẽ làm mất chuỗi).",
     "Sau màn 5 sẽ xuất hiện trung boss: to lớn, bắn vulcan tứ phía và có 10 quả tên lửa.",
     "Sau màn 10 sẽ xuất hiện quái vật cuối cùng (kaiju): đứng dưới đất, thỉnh thoảng nhảy lên nhưng không tiến tới, thỉnh thoảng phun tia sáng nhắm thẳng vào bạn — dính 3 lần là bạn bị hạ. Nó chỉ gục ngã khi đạt MỘT trong các mốc: 100 phát vulcan, 5 quả tên lửa, 5 phát laser, hoặc cả 4 quả bom.",
-    "Đánh bại quái vật cuối cùng sẽ quay lại màn 1 với nâng cấp vĩnh viễn: thêm 4 quả tên lửa, thêm 10 phát laser, tầm bắn vulcan xa hơn, và đạn vulcan tăng gấp đôi (700 viên).",
+    "Đánh bại quái vật cuối cùng sẽ quay lại màn 1 với nâng cấp vĩnh viễn: thêm 4 quả tên lửa, thêm 10 phát laser, tầm bắn vulcan xa hơn, và đạn vulcan tăng gấp đôi (500 viên).",
     "Nhấn phím Space bất cứ lúc nào để tạm dừng／tiếp tục. Có thể đổi tất cả các phím trên bằng nút cài đặt (⚙) ở góc trên bên phải.",
   ];
 }
@@ -219,7 +219,7 @@ const CHAFF_SCATTER_RADIUS = 60; // how far particles start from the player
 const CHAFF_AMMO_BASE = 15;
 const PLAYER_MISSILE_AMMO = 8;
 const ENEMY_MISSILE_AMMO = 2;
-const PLAYER_VULCAN_AMMO_BASE = 350;
+const PLAYER_VULCAN_AMMO_BASE = 250;
 // Chance an enemy deploys defensive chaff the moment a player missile locks
 // onto it (rolled once per missile — see Missile.chaffRolled).
 const ENEMY_CHAFF_CHANCE = 0.25;
@@ -233,10 +233,10 @@ const LASER_HITS_TO_KILL = 2;
 const LASER_BEAM_FADE_MS = 180;
 const LASER_COOLDOWN_MS = 260;
 // Wingmen carry the exact same armament as the player: vulcan, missiles,
-// and laser — vulcan ammo uses WINGMAN_AMMO_BASE above; these mirror the
-// player's own missile/laser ammo pools.
+// and laser — vulcan ammo uses WINGMAN_AMMO_BASE above; missile ammo
+// mirrors the player's own, but laser ammo is deliberately much lower.
 const WINGMAN_MISSILE_AMMO_BASE = PLAYER_MISSILE_AMMO;
-const WINGMAN_LASER_AMMO_BASE = LASER_AMMO;
+const WINGMAN_LASER_AMMO_BASE = 3;
 const BOSS_MAX_HP = 40;
 const BOSS_VULCAN_DAMAGE = 1;
 const BOSS_MISSILE_DAMAGE = 8;
@@ -330,6 +330,7 @@ interface WingmanBullet {
   y: number;
   vx: number;
   vy: number;
+  originX: number; // firing wingman's x at launch, for range-limiting
 }
 interface Wingman extends Combatant {
   id: number;
@@ -1045,7 +1046,7 @@ export default function AirCombatGame({ dataSource }: { dataSource: DataSourceSe
           if (now > wm.nextShotAt && wm.ammo > 0) {
             wm.nextShotAt = now + VULCAN_COOLDOWN_MS;
             wm.ammo -= 1;
-            g.wingmanBullets.push({ x: wm.x + 26, y: wm.y, vx: VULCAN_SPEED, vy: 0 });
+            g.wingmanBullets.push({ x: wm.x + 26, y: wm.y, vx: VULCAN_SPEED, vy: 0, originX: wm.x });
             playVulcanShot(audioCtxRef);
           }
 
@@ -1076,7 +1077,10 @@ export default function AirCombatGame({ dataSource }: { dataSource: DataSourceSe
           b.x += b.vx;
           b.y += b.vy;
         }
-        g.wingmanBullets = g.wingmanBullets.filter((b) => b.x > -20 && b.x < W + 20 && b.y > -20 && b.y < H + 20);
+        // Same vulcan range as the player (including any loop upgrade bonus).
+        g.wingmanBullets = g.wingmanBullets.filter(
+          (b) => b.x - (b.originX + 26) < vulcanRange && b.x < W && b.y > -20 && b.y < H + 20
+        );
 
         // Player missiles: home toward their locked enemy, or the boss if
         // one is active (see fireMissile() — regular enemies are always
@@ -1792,7 +1796,9 @@ export default function AirCombatGame({ dataSource }: { dataSource: DataSourceSe
     for (const e of g.enemies) {
       ctx.save();
       ctx.translate(e.x, e.y);
-      ctx.fillStyle = e.correct ? "#B5544A" : "#8A4A46";
+      // Correct and wrong enemies are visually identical on purpose — the
+      // player has to read the verb form, not just spot a color difference.
+      ctx.fillStyle = "#8A4A46";
       ctx.strokeStyle = "#4A2418";
       ctx.lineWidth = 1.5;
       ctx.beginPath();
@@ -2167,8 +2173,8 @@ export default function AirCombatGame({ dataSource }: { dataSource: DataSourceSe
         )}
       </div>
 
-      <div className="mt-3 flex items-center justify-between gap-4">
-        <div className="grid w-28 grid-cols-3 grid-rows-2 gap-1">
+      <div className="mt-3 flex flex-wrap items-center justify-center gap-4 sm:justify-between">
+        <div className="grid w-28 shrink-0 grid-cols-3 grid-rows-2 gap-1">
           <div />
           <TouchButton label="▲" onDown={() => setDirKey("ArrowUp", true)} onUp={() => setDirKey("ArrowUp", false)} />
           <div />
@@ -2176,10 +2182,7 @@ export default function AirCombatGame({ dataSource }: { dataSource: DataSourceSe
           <TouchButton label="▼" onDown={() => setDirKey("ArrowDown", true)} onUp={() => setDirKey("ArrowDown", false)} />
           <TouchButton label="▶" onDown={() => setDirKey("ArrowRight", true)} onUp={() => setDirKey("ArrowRight", false)} />
         </div>
-        <p className="text-center text-[11px] text-sand-500">
-          Di chuyển: ←↑↓→（giữ {keyCodeLabel(keymap.boost)} để tăng tốc）　Vulcan: giữ {keyCodeLabel(keymap.vulcan)}　Tên lửa: {keyCodeLabel(keymap.missile)}　Laser: {keyCodeLabel(keymap.laser)}　Chaff/flare: {keyCodeLabel(keymap.chaff)}　Khiên: {keyCodeLabel(keymap.barrier)}　Bom: {keyCodeLabel(keymap.bomb)}　Gọi僚機 hỗ trợ: {keyCodeLabel(keymap.wingman)}　Tạm dừng: Space
-        </p>
-        <div className="flex flex-wrap justify-end gap-2">
+        <div className="flex flex-wrap justify-center gap-2">
           <TouchButton
             label={keyCodeLabel(keymap.vulcan)}
             wide
